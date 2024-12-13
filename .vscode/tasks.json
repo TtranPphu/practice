@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run main.py",
+            "type": "shell",
+            "command": "python3 python/main.py",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run test.py",
+            "type": "shell",
+            "command": "python3 python/test.py -v",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run leetcode.py",
+            "type": "shell",
+            "command": "python3 python/leetcode.py -v",
+            "problemMatcher": []
+        }
+    ]
+}
