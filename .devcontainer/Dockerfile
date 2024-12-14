@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y
 RUN apt install sudo zsh git vim zip -y
-RUN apt install build-essential python3-pip wget -y
+RUN apt install build-essential cmake python3-pip wget -y
 RUN apt install bpytop -y
 
 RUN mkdir /usr/share/fonts/truetype/meslo

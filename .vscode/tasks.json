@@ -4,22 +4,69 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run main.py",
+            "label": "Config (Cpp)",
             "type": "shell",
-            "command": "python3 python/main.py",
+            "command": "mkdir cpp/build | true && (cd cpp/build; cmake ..)",
             "problemMatcher": []
         },
         {
-            "label": "Run test.py",
+            "label": "Build (Cpp)",
+            "group": "build",
             "type": "shell",
-            "command": "python3 python/test.py -v",
+            "command": "make",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
             "problemMatcher": []
         },
         {
-            "label": "Run leetcode.py",
+            "label": "Run (Cpp)",
             "type": "shell",
-            "command": "python3 python/leetcode.py -v",
+            "command": "./practice",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
             "problemMatcher": []
+        },
+        {
+            "label": "Clean (Cpp)",
+            "type": "shell",
+            "command": "rm -rf cpp/build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Python)",
+            "type": "shell",
+            "command": "python3 python/${input:run_file}",
+            "problemMatcher": []
+        },
+        {
+            "label": "Test (Python)",
+            "group": "test",
+            "type": "shell",
+            "command": "python3 python/${input:test_file} -v",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "run_file",
+            "description": "Pick a file to run",
+            "type": "pickString",
+            "options": [
+                "main.py"
+            ],
+            "default": "main.py",
+        },
+        {
+            "id": "test_file",
+            "description": "Pick a file to test",
+            "type": "pickString",
+            "options": [
+                "test.py",
+                "leetcode.py"
+            ],
+            "default": "test.py",
         }
     ]
 }
