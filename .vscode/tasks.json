@@ -4,12 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Config (Cpp)",
-            "type": "shell",
-            "command": "mkdir cpp/build | true && (cd cpp/build; cmake ..)",
-            "problemMatcher": []
-        },
-        {
             "label": "Build (Cpp)",
             "group": "build",
             "type": "shell",
@@ -26,12 +20,6 @@
             "options": {
                 "cwd": "${workspaceFolder}/cpp/build"
             },
-            "problemMatcher": []
-        },
-        {
-            "label": "Clean (Cpp)",
-            "type": "shell",
-            "command": "rm -rf cpp/build",
             "problemMatcher": []
         },
         {
@@ -63,8 +51,7 @@
             "description": "Pick a file to test",
             "type": "pickString",
             "options": [
-                "test.py",
-                "leetcode.py"
+                "test.py"
             ],
             "default": "test.py",
         }
