@@ -1,15 +1,15 @@
 import unittest
-from leetcode.LengthOfLongestSubstring import Solution
+from leetcode.length_of_longest_substring import Solution
 
 
 class TestLengthOfLongestSubstring(unittest.TestCase):
     solution = Solution()
 
-    def test_ex1(self):
+    def test_001(self):
         self.assertEqual(self.solution.lengthOfLongestSubstring(s="abcabcbb"), 3)
 
-    def test_ex2(self):
+    def test_002(self):
         self.assertEqual(self.solution.lengthOfLongestSubstring(s="bbbbb"), 1)
 
-    def test_ex3(self):
+    def test_003(self):
         self.assertEqual(self.solution.lengthOfLongestSubstring(s="pwwkew"), 3)
