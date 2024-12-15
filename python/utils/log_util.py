@@ -19,7 +19,8 @@ stream_handler.setLevel(DEBUG)
 
 if not path.exists("python/utils/log.log"):
     mknod("python/utils/log.log")
-file_handler = RotatingFileHandler("python/utils/log.log", "a", 1024)
+# file_handler = RotatingFileHandler("python/utils/log.log", "a", 1024)
+file_handler = TimedRotatingFileHandler("python/utils/log.log", when="midnight")
 file_handler.setFormatter(local_formater)
 file_handler.setLevel(INFO)
 

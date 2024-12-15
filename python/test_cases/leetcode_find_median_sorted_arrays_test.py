@@ -2,7 +2,7 @@ import unittest
 from leetcode.find_median_sorted_arrays import Solution
 
 
-class TestFindMedianSortedArrays(unittest.TestCase):
+class LeetcodeFindMedianSortedArraysTest(unittest.TestCase):
     solution = Solution()
 
     def test_001(self):

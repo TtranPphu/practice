@@ -1,9 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt update && apt upgrade -y
-RUN apt install sudo zsh git vim zip -y
-RUN apt install build-essential cmake python3-pip wget -y
-RUN apt install bpytop -y
+RUN apt update && apt upgrade -y && apt install sudo zsh git vim zip build-essential cmake python3-pip wget bpytop -y
 
 RUN mkdir /usr/share/fonts/truetype/meslo
 RUN wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf \

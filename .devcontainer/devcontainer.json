@@ -39,7 +39,8 @@
                 "medo64.render-crlf",
                 "mechatroner.rainbow-csv",
                 "PKief.material-icon-theme",
-                "PKief.material-product-icons"
+                "PKief.material-product-icons",
+                "emeraldwalk.runonsave"
             ]
         }
     }

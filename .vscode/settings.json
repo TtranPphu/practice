@@ -83,7 +83,18 @@
         "numbers": "cpp",
         "__memory": "cpp",
         "semaphore": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "any": "cpp",
+        "cfenv": "cpp",
+        "charconv": "cpp",
+        "codecvt": "cpp",
+        "complex": "cpp",
+        "regex": "cpp",
+        "source_location": "cpp",
+        "iostream": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "typeindex": "cpp"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
@@ -99,5 +110,6 @@
     },
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_style": "Google",
-    "cmake.sourceDirectory": "/workspaces/practice/cpp"
+    "cmake.sourceDirectory": "/workspaces/practice/cpp",
+    "cmake.buildDirectory": "${workspaceFolder}/cpp/build"
 }

@@ -1,7 +1,10 @@
+gersemi
 ipykernel
-colorama
+nbconvert
+
 pandas
 matplotlib
 openpyxl
+
+colorama
 tqdm
-nbconvert

@@ -2,7 +2,7 @@ import unittest
 from leetcode.length_of_longest_substring import Solution
 
 
-class TestLengthOfLongestSubstring(unittest.TestCase):
+class LeetcodeLengthOfLongestSubstringTest(unittest.TestCase):
     solution = Solution()
 
     def test_001(self):

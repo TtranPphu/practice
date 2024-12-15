@@ -1,3 +1,6 @@
 [submodule "cpp/3rd_party/simple_logger"]
 	path = cpp/3rd_party/simple_logger
 	url = https://github.com/Timothy-Liuxf/simple_logger.git
+[submodule "cpp/3rd_party/spdlog"]
+	path = cpp/3rd_party/spdlog
+	url = https://github.com/gabime/spdlog.git

@@ -4,25 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build (Cpp)",
-            "group": "build",
-            "type": "shell",
-            "command": "make",
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Run (Cpp)",
-            "type": "shell",
-            "command": "./practice",
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Run (Python)",
             "type": "shell",
             "command": "python3 python/${input:run_file}",
