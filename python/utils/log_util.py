@@ -1,7 +1,7 @@
-from logging import *
-from logging.handlers import *
-from sys import *
-from os import *
+from logging import getLogger, DEBUG, INFO, WARNING, Formatter, StreamHandler
+from logging.handlers import TimedRotatingFileHandler, SysLogHandler
+from sys import stdout
+from os import path, mknod
 
 local_logger = getLogger("local")
 local_logger.setLevel(DEBUG)
@@ -17,10 +17,12 @@ stream_handler = StreamHandler(stdout)
 stream_handler.setFormatter(local_formater)
 stream_handler.setLevel(DEBUG)
 
-if not path.exists("python/utils/log.log"):
-    mknod("python/utils/log.log")
-# file_handler = RotatingFileHandler("python/utils/log.log", "a", 1024)
-file_handler = TimedRotatingFileHandler("python/utils/log.log", when="midnight")
+this_path = path.dirname(__file__)
+log_path = path.join(this_path, "log.log")
+if not path.exists(log_path):
+    mknod(log_path)
+# file_handler = RotatingFileHandler(log_path, "a", 1024)
+file_handler = TimedRotatingFileHandler(log_path, when="midnight")
 file_handler.setFormatter(local_formater)
 file_handler.setLevel(INFO)
 

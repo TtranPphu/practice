@@ -6,14 +6,26 @@
         {
             "label": "Run (Python)",
             "type": "shell",
-            "command": "python3 python/${input:run_file}",
+            "command": "python3 ${input:run_file}",
+            "options": {
+                "cwd": "${workspaceFolder}/python"
+            },
             "problemMatcher": []
         },
         {
             "label": "Test (Python)",
             "group": "test",
             "type": "shell",
-            "command": "python3 python/${input:test_file} -v",
+            "command": "python3 ${input:test_file} -v",
+            "options": {
+                "cwd": "${workspaceFolder}/python"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Rust)",
+            "type": "shell",
+            "command": "cargo run --package ${input:test_file} --bin ${input:test_file}",
             "problemMatcher": []
         }
     ],
