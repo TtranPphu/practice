@@ -37,10 +37,13 @@
                 "eriklynd.json-tools",
                 "chekweitan.compare-view",
                 "medo64.render-crlf",
-                "mechatroner.rainbow-csv",
+                "mechatroner.rainbow-csv", 
                 "PKief.material-icon-theme",
                 "PKief.material-product-icons",
-                "emeraldwalk.runonsave"
+                "emeraldwalk.runonsave",
+                "rust-lang.rust-analyzer",
+                "vadimcn.vscode-lldb",
+                "tamasfe.even-better-toml"
             ]
         }
     }

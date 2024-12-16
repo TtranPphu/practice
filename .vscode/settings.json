@@ -111,5 +111,8 @@
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_style": "Google",
     "cmake.sourceDirectory": "/workspaces/practice/cpp",
-    "cmake.buildDirectory": "${workspaceFolder}/cpp/build"
+    "cmake.buildDirectory": "${workspaceFolder}/cpp/build",
+    "cmake.automaticReconfigure": true,
+    "cmake.configureOnEdit": true,
+    "cmake.configureOnOpen": false
 }
