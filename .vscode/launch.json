@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++: Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cpp/build/practice",
+            "args": [],
+            "environment": [],
+            "cwd": "${workspaceFolder}/cpp",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "stopAtEntry": true
+        },
+        {
+            "name": "Python: Debug Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "internalConsole",
+            "justMyCode": false,
+            "stopOnEntry": true
+        }
+    ]
+}

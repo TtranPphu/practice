@@ -6,7 +6,7 @@
         {
             "label": "Run (Python)",
             "type": "shell",
-            "command": "python3 ${input:run_file}",
+            "command": "python3 main.py",
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
@@ -16,7 +16,7 @@
             "label": "Test (Python)",
             "group": "test",
             "type": "shell",
-            "command": "python3 ${input:test_file} -v",
+            "command": "python3 test.py -v",
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
@@ -25,13 +25,18 @@
         {
             "label": "Run (Rust)",
             "type": "shell",
-            "command": "cargo run --package ${input:test_file} --bin ${input:test_file}",
-            "problemMatcher": []
+            "command": "cargo run --package practice --bin practice",
+            "options": {
+                "cwd": "${workspaceFolder}/rust/target/debug"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
         }
     ],
     "inputs": [
         {
-            "id": "run_file",
+            "id": "py_run_file",
             "description": "Pick a file to run",
             "type": "pickString",
             "options": [
@@ -40,13 +45,22 @@
             "default": "main.py",
         },
         {
-            "id": "test_file",
+            "id": "py_test_file",
             "description": "Pick a file to test",
             "type": "pickString",
             "options": [
                 "test.py"
             ],
             "default": "test.py",
+        },
+        {
+            "id": "ps_run_file",
+            "description": "Pick a file to file",
+            "type": "pickString",
+            "options": [
+                "practice"
+            ],
+            "default": "practice",
         }
     ]
 }
