@@ -4,6 +4,15 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Test (C++)",
+            "type": "shell",
+            "command": "ctest -R ${input:cpp_test_case}",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Run (Python)",
             "type": "shell",
             "command": "python3 main.py",
@@ -35,6 +44,11 @@
         }
     ],
     "inputs": [
+        {
+            "id": "cpp_test_case",
+            "description": "Pick a case to test",
+            "type": "promptString",
+        },
         {
             "id": "py_run_file",
             "description": "Pick a file to run",
