@@ -7,9 +7,9 @@ class Deck:
     suits = list("♠♣♦♥")
 
     class Card:
-        def __init__(self, rank, suit):
-            self.rank = rank
-            self.suit = suit
+        def __init__(self, rank_suit):
+            self.rank = rank_suit[:-1]
+            self.suit = rank_suit[-1]
 
         def value(self) -> int:
             return Deck.ranks.index(self.rank) * 4 + Deck.suits.index(self.suit)
@@ -25,7 +25,7 @@ class Deck:
 
     def __init__(self):
         self._cards = [
-            Deck.Card(rank, suit) for rank in self.ranks for suit in self.suits
+            Deck.Card(rank + suit) for rank in self.ranks for suit in self.suits
         ]
 
     def __len__(self):
@@ -45,7 +45,7 @@ class Deck:
 
     def deal(self, no_hands=4, per_hands=6):
         return [
-            (self[n : per_hands * no_hands : no_hands]) for n in range(0, no_hands)
+            (self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
         ], self[per_hands * no_hands : :]
 
 
@@ -58,19 +58,34 @@ class VCDeck(Deck):
 
     def __init__(self):
         self._cards = [
-            VCDeck.VCCard(rank, suit) for rank in self.ranks for suit in self.suits
+            VCDeck.VCCard(rank + suit) for rank in self.ranks for suit in self.suits
         ]
 
     def deal(self, no_hands=4, per_hands=13):
         return super().deal(no_hands, per_hands)
 
 
+class BJDeck(Deck):
+    def __init__(self):
+        self._cards = [
+            Deck.Card(rank + suit)
+            for rank in self.ranks
+            for suit in self.suits
+            for _ in range(4)
+        ]
+
+    def deal(self, no_hands=6, per_hands=2):
+        return super().deal(no_hands, per_hands)
+
+
 def demo():
-    deck = VCDeck()
+    deck = BJDeck()
     random.shuffle(deck)
     combined_logger.debug(f"Deck: {deck} ({len(deck)} cards)")
 
-    hands, leftover = deck.deal(no_hands=3)
+    hands, leftover = deck.deal()
     for i, hand in enumerate(hands):
-        combined_logger.debug(f"Player {i} hand: {sorted(hand)} ({len(hand)} cards)")
+        combined_logger.debug(
+            f"{('Player '+str(i) if i else 'Host'):<8} hand: {sorted(hand)} ({len(hand)} cards)"
+        )
     combined_logger.debug(f"Leftover: {leftover} ({len(leftover)} cards)")
