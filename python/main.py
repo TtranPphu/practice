@@ -1,9 +1,5 @@
-from utils.log_util import combined_logger
-
-
-def main():
-    combined_logger.debug("main() start")
+from deck_of_cards.deck_of_cards import demo
 
 
 if __name__ == "__main__":
-    main()
+    demo()

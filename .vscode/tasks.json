@@ -3,15 +3,15 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Test (C++)",
-            "type": "shell",
-            "command": "ctest -R ${input:cpp_test_case}",
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": []
-        },
+        // {
+        //     "label": "Test (C++)",
+        //     "type": "shell",
+        //     "command": "ctest -R ${input:cpp_test_case}",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/cpp/build"
+        //     },
+        //     "problemMatcher": []
+        // },
         {
             "label": "Create problem (Python)",
             "type": "shell",
@@ -40,50 +40,23 @@
             },
             "problemMatcher": []
         },
-        {
-            "label": "Run (Rust)",
-            "type": "shell",
-            "command": "cargo run --package practice --bin practice",
-            "options": {
-                "cwd": "${workspaceFolder}/rust/target/debug"
-            },
-            "problemMatcher": [
-                "$rustc"
-            ]
-        }
+        // {
+        //     "label": "Run (Rust)",
+        //     "type": "shell",
+        //     "command": "cargo run --package practice --bin practice",
+        //     "options": {
+        //         "cwd": "${workspaceFolder}/rust/target/debug"
+        //     },
+        //     "problemMatcher": [
+        //         "$rustc"
+        //     ]
+        // }
     ],
     "inputs": [
         {
             "id": "cpp_test_case",
             "description": "Pick a case to test",
             "type": "promptString",
-        },
-        {
-            "id": "py_run_file",
-            "description": "Pick a file to run",
-            "type": "pickString",
-            "options": [
-                "main.py"
-            ],
-            "default": "main.py",
-        },
-        {
-            "id": "py_test_file",
-            "description": "Pick a file to test",
-            "type": "pickString",
-            "options": [
-                "test.py"
-            ],
-            "default": "test.py",
-        },
-        {
-            "id": "ps_run_file",
-            "description": "Pick a file to file",
-            "type": "pickString",
-            "options": [
-                "practice"
-            ],
-            "default": "practice",
         },
         {
             "id": "problem_name",
