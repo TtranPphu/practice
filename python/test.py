@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import unittest
 
 from test_cases import *
