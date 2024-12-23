@@ -2,9 +2,4 @@ gersemi
 ipykernel
 nbconvert
 
-pandas
-matplotlib
-openpyxl
-
-colorama
-tqdm
+json5

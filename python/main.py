@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from deck_of_cards.deck_of_cards import demo
-from utils.log_util import combined_logger
+from utils.log_util import default_logger
 import math
 
 
@@ -29,12 +29,13 @@ def main():
     v1 = Vector(2, 3)
     v2 = Vector(1, 1)
     v3 = v1 + v2
-    combined_logger.debug(f"{v3!r}")
-    combined_logger.debug(f"{abs(v3)}")
+    default_logger.debug(f"{v3!r}")
+    default_logger.debug(f"{abs(v3)}")
     v4 = v3 * 3
-    combined_logger.debug(f"{v4!r}")
-    combined_logger.debug(f"{abs(v3*3)}")
+    default_logger.debug(f"{v4!r}")
+    default_logger.debug(f"{abs(v3*3)}")
 
 
 if __name__ == "__main__":
-    demo()
+    # demo()
+    main()

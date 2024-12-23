@@ -1,4 +1,4 @@
-from utils.log_util import combined_logger
+from utils.log_util import default_logger
 import random
 
 
@@ -81,11 +81,11 @@ class BJDeck(Deck):
 def demo():
     deck = BJDeck()
     random.shuffle(deck)
-    combined_logger.debug(f"Deck: {deck} ({len(deck)} cards)")
+    default_logger.debug(f"Deck: {deck} ({len(deck)} cards)")
 
     hands, leftover = deck.deal()
     for i, hand in enumerate(hands):
-        combined_logger.debug(
+        default_logger.debug(
             f"{('Player '+str(i) if i else 'Host'):<8} hand: {sorted(hand)} ({len(hand)} cards)"
         )
-    combined_logger.debug(f"Leftover: {leftover} ({len(leftover)} cards)")
+    default_logger.debug(f"Leftover: {leftover} ({len(leftover)} cards)")
