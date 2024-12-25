@@ -15,103 +15,106 @@ class PKDeck(Deck):
     straight_ref = [set(Deck.ranks[i : i + 5 :]) for i in range(0, 9)]
     default_logger.debug(f"straight_ref: {straight_ref}")
 
-    def comb_value(comb):
-        ranks = [card.rank for card in comb]
-        suits = [card.suit for card in comb]
-        values = [card.value for card in comb]
-        comb_base_value = 0
-        for v in reversed(values):
-            comb_base_value *= 13
-            comb_base_value += v
+    def combination_value(combination):
+        ranks = [card.rank for card in combination]
+        suits = [card.suit for card in combination]
+        values = [card.value for card in combination]
+
+        def value(set_value, values, indexes=[-1, -2, -3, -4, -5]):
+            result = set_value
+            for i in indexes:
+                result = result * 13 + values[i]
+            return result
+
+        STRAIGHT_FLUSH = 8
+        FOUR_OF_A_KIND = 7
+        FULL_HOUSE = 6
+        FLUSH = 5
+        STRAIGHT = 4
+        THREE_OF_A_KIND = 3
+        TWO_PAIRS = 2
+        PAIR = 1
+        HIGH_CARD = 0
+
         straight = set(ranks) in PKDeck.straight_ref
+        mini_straight = set(ranks) == set("A2345")
         flush = len(set(suits)) == 1
         if straight and flush:
-            return 8 * (13**5) + comb_base_value
+            return value(STRAIGHT_FLUSH, values)
+        if mini_straight and flush:
+            return value(STRAIGHT_FLUSH, values, [-2, -3, -4, -5, -1])
         unique_ranks = len(set(ranks))
+
         # FoaK or FH
         if unique_ranks == 2:
             if ranks[0] != ranks[1]:
-                return 7 * (13**5) + comb_base_value
-            if ranks[1] != ranks[2]:
-                return 6 * (13**5) + comb_base_value
-            rcomb_base_value = 0
-            for v in values:
-                rcomb_base_value *= 13
-                rcomb_base_value += v
+                return value(FOUR_OF_A_KIND, values)
             if ranks[-1] != ranks[-2]:
-                return 7 * (13**5) + rcomb_base_value
+                return value(FOUR_OF_A_KIND, values, range(5))
+
+            if ranks[1] != ranks[2]:
+                return value(FULL_HOUSE, values)
             if ranks[-2] != ranks[-3]:
-                return 6 * (13**5) + rcomb_base_value
+                return value(FULL_HOUSE, values, range(5))
         if flush:
-            return 5 * (13**5) + comb_base_value
+            return value(FLUSH, values)
         if straight:
-            return 4 * (13**5) + comb_base_value
+            return value(STRAIGHT, values)
+        if mini_straight:
+            return value(STRAIGHT_FLUSH, values, [-2, -3, -4, -5, -1])
+
         # ToaK or 2P
         if unique_ranks == 3:
             if ranks[-1] == ranks[-2] and ranks[-2] == ranks[-3]:
-                return 3 * (13**5) + comb_base_value
+                return value(THREE_OF_A_KIND, values)
             if ranks[-2] == ranks[-3] and ranks[-3] == ranks[-4]:
-                comb_spec_value = 0
-                comb_spec_value = comb_base_value * 13 + values[-2]
-                comb_spec_value = comb_base_value * 13 + values[-3]
-                comb_spec_value = comb_base_value * 13 + values[-4]
-                comb_spec_value = comb_base_value * 13 + values[-1]
-                comb_spec_value = comb_base_value * 13 + values[-5]
-                return 3 * (13**5) + comb_spec_value
+                return value(THREE_OF_A_KIND, values, [-2, -3, -4, -1, -5])
             if ranks[-3] == ranks[-4] and ranks[-5] == ranks[-4]:
-                comb_spec_value = 0
-                comb_spec_value = comb_base_value * 13 + values[-3]
-                comb_spec_value = comb_base_value * 13 + values[-4]
-                comb_spec_value = comb_base_value * 13 + values[-5]
-                comb_spec_value = comb_base_value * 13 + values[-1]
-                comb_spec_value = comb_base_value * 13 + values[-2]
-                return 3 * (13**5) + comb_spec_value
+                return value(THREE_OF_A_KIND, values, [-3, -4, -5, -1, -2])
             if ranks[0] != ranks[1]:
-                return 2 * (13**5) + comb_base_value
+                return value(TWO_PAIRS, values)
             if ranks[-1] != ranks[-2]:
-                comb_spec_value = 0
-                comb_spec_value = comb_base_value * 13 + values[-2]
-                comb_spec_value = comb_base_value * 13 + values[-3]
-                comb_spec_value = comb_base_value * 13 + values[-4]
-                comb_spec_value = comb_base_value * 13 + values[-5]
-                comb_spec_value = comb_base_value * 13 + values[-1]
-                return 2 * (13**5) + comb_spec_value
+                return value(TWO_PAIRS, values, [-2, -3, -4, -5, -1])
             if ranks[-2] != ranks[-3] and ranks[1] != ranks[2]:
-                comb_spec_value = 0
-                comb_spec_value = comb_base_value * 13 + values[-1]
-                comb_spec_value = comb_base_value * 13 + values[-2]
-                comb_spec_value = comb_base_value * 13 + values[-4]
-                comb_spec_value = comb_base_value * 13 + values[-5]
-                comb_spec_value = comb_base_value * 13 + values[-3]
-                return 2 * (13**5) + comb_spec_value
+                return value(TWO_PAIRS, values, [-1, -2, -4, -5, -3])
+        # 1P
         if unique_ranks == 4:
-            return 1 * (13**5) + comb_base_value
-        return comb_base_value
+            if ranks[-1] != ranks[-2]:
+                return value(PAIR, values)
+            if ranks[-2] != ranks[-3]:
+                return value(PAIR, values, [-2, -3, -1, -4, -5])
+            if ranks[-3] != ranks[-4]:
+                return value(PAIR, values, [-3, -4, -1, -2, -5])
+            if ranks[-4] != ranks[-5]:
+                return value(PAIR, values, [-4, -5, -1, -2, -3])
+
+        return value(HIGH_CARD, values)
 
     @staticmethod
     def hand_value(hand: list[Card]):
-        combs = list(combinations(hand, 5))
+        sets = list(combinations(hand, 5))
         result = 0
-        best_comb = list()
-        for comb in combs:
-            comb_value = PKDeck.comb_value(comb)
-            if comb_value > result:
-                result = comb_value
-                best_comb = comb
-        return result, comb
+        best_combination = list()
+        for combination in sets:
+            combination_value = PKDeck.combination_value(combination)
+            if combination_value > result:
+                result = combination_value
+                best_combination = combination
+        return result, best_combination
 
 
 def demo():
     deck = PKDeck()
-    random.shuffle(deck)
+    seed = random.random()
+    # seed = 0.6031394415898326
+    # seed = 0.9360802594385335  # straight A 2 3 4 5
+    default_logger.debug(f"Seed: {seed}")
+    random.shuffle(deck, lambda: seed)
     default_logger.debug(f"Deck: {deck}")
 
     hands, leftover = deck.deal()
 
     default_logger.debug(f"Board: {leftover}")
     for i, hand in enumerate(hands):
-        hand_value, comb = PKDeck.hand_value(sorted(hand+leftover))
-        default_logger.debug(
-            f"Player {i} hand:"
-            f" {sorted(hand)} (Best comb: {comb}, {hand_value} in value)"
-        )
+        hand_value, comb = PKDeck.hand_value(sorted(hand + leftover))
+        default_logger.debug(f"Player {i}:" f" {hand} (Best: {comb} @ {hand_value})")

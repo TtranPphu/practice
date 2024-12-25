@@ -14,14 +14,22 @@
             "stopAtEntry": true
         },
         {
+            "name": "Python: Main",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "main.py",
+            "cwd": "${workspaceFolder}/python",
+            "console": "internalConsole",
+            "justMyCode": false
+        },
+        {
             "name": "Python: Debug Current File",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "cwd": "${workspaceFolder}/python",
             "console": "internalConsole",
-            "justMyCode": false,
-            "stopOnEntry": true
+            "justMyCode": false
         }
     ]
 }

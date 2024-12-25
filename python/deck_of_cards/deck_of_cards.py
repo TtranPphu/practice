@@ -96,7 +96,8 @@ class BJDeck(Deck):
 
 def demo():
     deck = CTDeck()
-    random.shuffle(deck)
+    seed = random.random()
+    random.shuffle(deck, lambda: seed)
     default_logger.debug(f"Deck: {deck}")
 
     hands, leftover = deck.deal()
