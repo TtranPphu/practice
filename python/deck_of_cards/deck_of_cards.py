@@ -1,31 +1,38 @@
+from abc import ABC, abstractmethod
+
 from utils.log_util import default_logger
 import random
 
 
-class Deck:
+class Card:
+    def __init__(self, rank_suit, value):
+        self.rank = rank_suit[:-1]
+        self.suit = rank_suit[-1]
+        self.value = value
+
+    def __repr__(self):
+        return f"{(self.rank+self.suit)!r}"
+
+    def __eq__(self, other):
+        return self.value == other.value
+
+    def __lt__(self, other):
+        return self.value < other.value
+
+
+class Deck(ABC):
     ranks = [str(r) for r in range(2, 11)] + list("JQKA")
     suits = list("♠♣♦♥")
-
-    class Card:
-        def __init__(self, rank_suit):
-            self.rank = rank_suit[:-1]
-            self.suit = rank_suit[-1]
-
-        def value(self) -> int:
-            return Deck.ranks.index(self.rank) * 4 + Deck.suits.index(self.suit)
-
-        def __repr__(self):
-            return f"{(self.rank+self.suit)!r}"
-
-        def __eq__(self, other):
-            return self.value() == other.value()
-
-        def __lt__(self, other):
-            return self.value() < other.value()
+    _card: list[Card]
 
     def __init__(self):
         self._cards = [
-            Deck.Card(rank + suit) for rank in self.ranks for suit in self.suits
+            Card(
+                rank + suit,
+                self.ranks.index(rank),
+            )
+            for rank in self.ranks
+            for suit in self.suits
         ]
 
     def __len__(self):
@@ -43,22 +50,28 @@ class Deck:
     def __len__(self):
         return len(self._cards)
 
-    def deal(self, no_hands=4, per_hands=6):
+    def deal(self, no_hands, per_hands):
         return [
             (self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
         ], self[per_hands * no_hands : :]
 
 
+class CTDeck(Deck):
+    def deal(self, no_hands=4, per_hands=6):
+        return super().deal(no_hands, per_hands)
+
+
 class VCDeck(Deck):
     ranks = [str(r) for r in range(3, 11)] + list("JQKA2")
 
-    class VCCard(Deck.Card):
-        def value(self):
-            return VCDeck.ranks.index(self.rank) * 4 + VCDeck.suits.index(self.suit)
-
     def __init__(self):
         self._cards = [
-            VCDeck.VCCard(rank + suit) for rank in self.ranks for suit in self.suits
+            Card(
+                rank + suit,
+                self.ranks.index(rank) * len(self.suits) + self.suits.index(suit),
+            )
+            for rank in self.ranks
+            for suit in self.suits
         ]
 
     def deal(self, no_hands=4, per_hands=13):
@@ -68,7 +81,10 @@ class VCDeck(Deck):
 class BJDeck(Deck):
     def __init__(self):
         self._cards = [
-            Deck.Card(rank + suit)
+            Card(
+                rank + suit,
+                self.ranks.index(rank),
+            )
             for rank in self.ranks
             for suit in self.suits
             for _ in range(4)
@@ -79,13 +95,12 @@ class BJDeck(Deck):
 
 
 def demo():
-    deck = BJDeck()
+    deck = CTDeck()
     random.shuffle(deck)
-    default_logger.debug(f"Deck: {deck} ({len(deck)} cards)")
+    default_logger.debug(f"Deck: {deck}")
 
     hands, leftover = deck.deal()
+
     for i, hand in enumerate(hands):
-        default_logger.debug(
-            f"{('Player '+str(i) if i else 'Host'):<8} hand: {sorted(hand)} ({len(hand)} cards)"
-        )
-    default_logger.debug(f"Leftover: {leftover} ({len(leftover)} cards)")
+        default_logger.debug(f"Player {i} hand: {sorted(hand)}")
+    default_logger.debug(f"Leftover: {leftover}")
