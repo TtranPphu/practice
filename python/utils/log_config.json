@@ -5,9 +5,21 @@
         "papertrail_formatter": {
             "format": "| %(filename)s:%(lineno)s | %(message)s"
         },
+        "json_formatter": {
+            "()": "utils.log_json_formatter.JsonFormatter",
+            "fmt_dict": {
+                "level": "levelname",
+                "message": "message",
+                "logger": "name"
+            },
+            "time_format": "%Y-%m-%d %H:%M:%S %z"
+        },
         "default_formatter": {
-            "format": "%(asctime)s | [%(levelname)s] | %(filename)s:%(lineno)s | %(message)s",
+            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S %z"
+        },
+        "debug_formatter": {
+            "format": "%(levelname)s | %(message)s | %(filename)s:%(lineno)s"
         }
     },
     "handlers": {
@@ -27,10 +39,17 @@
             "formatter": "default_formatter",
             "filename": "utils/log.log"
         },
+        "json_file_handler": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "when": "midnight",
+            "level": "DEBUG",
+            "formatter": "json_formatter",
+            "filename": "utils/log.jsonl"
+        },
         "steam_handler": {
             "class": "logging.StreamHandler",
             "level": "DEBUG",
-            "formatter": "default_formatter",
+            "formatter": "debug_formatter",
             "stream": "ext://sys.stderr"
         }
     },
@@ -40,6 +59,7 @@
             "handlers": [
                 "papertrail_handler",
                 "file_handler",
+                "json_file_handler",
                 "steam_handler"
             ]
         }

@@ -3,18 +3,18 @@ from deck_of_cards.deck_of_cards import *
 from itertools import combinations
 
 from utils.log_util import default_logger
-import random
 
 
 class PKDeck(Deck):
-    def deal(self, no_hands=5, per_hands=2):
+    def deal(self, no_hands=2, per_hands=2):
         return [
-            (self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
+            self[n : per_hands * no_hands : no_hands] for n in range(no_hands)
         ], self[per_hands * no_hands : per_hands * no_hands + 5 :]
 
     straight_ref = [set(Deck.ranks[i : i + 5 :]) for i in range(0, 9)]
     default_logger.debug(f"straight_ref: {straight_ref}")
 
+    @staticmethod
     def combination_value(combination):
         ranks = [card.rank for card in combination]
         suits = [card.suit for card in combination]
@@ -104,13 +104,8 @@ class PKDeck(Deck):
 
 
 def demo():
-    deck = PKDeck()
-    seed = random.random()
-    # seed = 0.6031394415898326
-    # seed = 0.9360802594385335  # straight A 2 3 4 5
-    default_logger.debug(f"Seed: {seed}")
-    random.shuffle(deck, lambda: seed)
-    default_logger.debug(f"Deck: {deck}")
+    deck = PKDeck().shuffle()
+    default_logger.debug(deck.json_string())
 
     hands, leftover = deck.deal()
 

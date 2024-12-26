@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
 from utils.log_util import default_logger
+import json
+
 import random
 
 
@@ -13,6 +15,9 @@ class Card:
     def __repr__(self):
         return f"{(self.rank+self.suit)!r}"
 
+    def __str__(self):
+        return f"{self.rank+self.suit}"
+
     def __eq__(self, other):
         return self.value == other.value
 
@@ -23,17 +28,21 @@ class Card:
 class Deck(ABC):
     ranks = [str(r) for r in range(2, 11)] + list("JQKA")
     suits = list("♠♣♦♥")
+    # suits = list("SCDH")
     _card: list[Card]
 
-    def __init__(self):
-        self._cards = [
-            Card(
-                rank + suit,
-                self.ranks.index(rank),
-            )
-            for rank in self.ranks
-            for suit in self.suits
-        ]
+    def __init__(self, cards: list[Card] | None = None):
+        if cards:
+            self._cards = cards
+        else:
+            self._cards = [
+                Card(
+                    rank + suit,
+                    self.ranks.index(rank),
+                )
+                for rank in self.ranks
+                for suit in self.suits
+            ]
 
     def __len__(self):
         return len(self._cards)
@@ -50,10 +59,24 @@ class Deck(ABC):
     def __len__(self):
         return len(self._cards)
 
+    def json(self, name="Deck"):
+        return {name: [str(card) for card in self._cards]}
+
+    def json_string(self, name="Deck"):
+        return json.dumps(self.json(name), ensure_ascii=False)
+
+    def shuffle(self):
+        seed = random.random()
+        default_logger.debug(json.dumps({"Seed": seed}))
+        random.shuffle(self._cards, lambda: seed)
+        random.shuffle(self._cards, lambda: seed)
+        random.shuffle(self._cards, lambda: seed)
+        return self
+
     def deal(self, no_hands, per_hands):
         return [
-            (self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
-        ], self[per_hands * no_hands : :]
+            Deck(self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
+        ], Deck(self[per_hands * no_hands : :])
 
 
 class CTDeck(Deck):
@@ -78,27 +101,9 @@ class VCDeck(Deck):
         return super().deal(no_hands, per_hands)
 
 
-class BJDeck(Deck):
-    def __init__(self):
-        self._cards = [
-            Card(
-                rank + suit,
-                self.ranks.index(rank),
-            )
-            for rank in self.ranks
-            for suit in self.suits
-            for _ in range(4)
-        ]
-
-    def deal(self, no_hands=6, per_hands=2):
-        return super().deal(no_hands, per_hands)
-
-
 def demo():
-    deck = CTDeck()
-    seed = random.random()
-    random.shuffle(deck, lambda: seed)
-    default_logger.debug(f"Deck: {deck}")
+    deck = CTDeck().shuffle()
+    default_logger.debug(deck.json_string())
 
     hands, leftover = deck.deal()
 
