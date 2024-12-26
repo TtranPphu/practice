@@ -51,11 +51,24 @@
             "level": "DEBUG",
             "formatter": "debug_formatter",
             "stream": "ext://sys.stderr"
-        }
+        },
+        // "queue_handler": {
+        //     "class": "logging.handlers.CustomQueueHandler",
+        //     "handlers": [
+        //         "papertrail_handler",
+        //         "file_handler",
+        //         "json_file_handler",
+        //         "steam_handler"
+        //     ],
+        //     "respect_handler_level": true
+        // }
     },
     "loggers": {
         "root": {
             "level": "DEBUG",
+            // "handlers": [
+            //     "queue_handler"
+            // ]
             "handlers": [
                 "papertrail_handler",
                 "file_handler",

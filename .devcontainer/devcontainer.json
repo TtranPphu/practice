@@ -6,6 +6,9 @@
     "mounts": [
         "source=/home/ttranpphu/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
     ],
+    "containerEnv": {
+        "UV_LINK_MODE": "copy"
+    },
     "postCreateCommand": "sh .devcontainer/post-create.sh",
     "customizations": {
         "vscode": {

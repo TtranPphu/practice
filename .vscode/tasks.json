@@ -24,7 +24,7 @@
         {
             "label": "Run (Python)",
             "type": "shell",
-            "command": "python3 main.py",
+            "command": "uv run main.py",
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
@@ -34,7 +34,7 @@
             "label": "Test (Python)",
             "group": "test",
             "type": "shell",
-            "command": "python3 test.py -v",
+            "command": "uv run test.py -v",
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
