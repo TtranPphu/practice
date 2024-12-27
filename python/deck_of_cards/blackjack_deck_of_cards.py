@@ -1,10 +1,12 @@
 from deck_of_cards.deck_of_cards import *
 
-from utils.log_util import default_logger
+from utils import default_logger
+from typing import override
 import json
 
 
 class BJDeck(Deck):
+    @override
     def deal(self, no_hands=6, per_hands=2):
         return [
             BJDeck(self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)

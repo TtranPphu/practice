@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from deck_of_cards.blackjack_deck_of_cards import demo
-from utils.log_util import default_logger
+from utils import default_logger
 import math
 
 

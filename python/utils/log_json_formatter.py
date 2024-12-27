@@ -73,7 +73,7 @@ class JsonFormatter(logging.Formatter):
         try:
             json_message = json.loads(record.message)
             message_dict["message"] = json_message
-        except:
+        except Exception:
             pass
 
         return json.dumps(message_dict, default=str, ensure_ascii=False)

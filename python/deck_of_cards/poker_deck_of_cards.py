@@ -2,10 +2,12 @@ from deck_of_cards.deck_of_cards import *
 
 from itertools import combinations
 
-from utils.log_util import default_logger
+from utils import default_logger
+from typing import override
 
 
 class PKDeck(Deck):
+    @override
     def deal(self, no_hands=2, per_hands=2):
         return [
             self[n : per_hands * no_hands : no_hands] for n in range(no_hands)

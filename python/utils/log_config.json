@@ -37,14 +37,14 @@
             "when": "midnight",
             "level": "INFO",
             "formatter": "default_formatter",
-            "filename": "utils/log.log"
+            "filename": "logs/log.log"
         },
         "json_file_handler": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "when": "midnight",
             "level": "DEBUG",
             "formatter": "json_formatter",
-            "filename": "utils/log.jsonl"
+            "filename": "logs/log.jsonl"
         },
         "steam_handler": {
             "class": "logging.StreamHandler",
@@ -52,29 +52,29 @@
             "formatter": "debug_formatter",
             "stream": "ext://sys.stderr"
         },
-        // "queue_handler": {
-        //     "class": "logging.handlers.CustomQueueHandler",
-        //     "handlers": [
-        //         "papertrail_handler",
-        //         "file_handler",
-        //         "json_file_handler",
-        //         "steam_handler"
-        //     ],
-        //     "respect_handler_level": true
-        // }
-    },
-    "loggers": {
-        "root": {
-            "level": "DEBUG",
-            // "handlers": [
-            //     "queue_handler"
-            // ]
+        "queue_handler": {
+            "class": "utils.log_custom_queue_handler.CustomQueueHandler",
             "handlers": [
                 "papertrail_handler",
                 "file_handler",
                 "json_file_handler",
                 "steam_handler"
+            ],
+            "respect_handler_level": true
+        }
+    },
+    "loggers": {
+        "root": {
+            "level": "DEBUG",
+            "handlers": [
+                "queue_handler"
             ]
+            // "handlers": [
+            //     "papertrail_handler",
+            //     "file_handler",
+            //     "json_file_handler",
+            //     "steam_handler"
+            // ]
         }
     }
 }

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from utils.log_util import default_logger
+from utils import default_logger
 import json
 
 import random
@@ -32,7 +32,7 @@ class Deck(ABC):
     _card: list[Card]
 
     def __init__(self, cards: list[Card] | None = None):
-        if cards:
+        if cards is not None:
             self._cards = cards
         else:
             self._cards = [
@@ -67,10 +67,12 @@ class Deck(ABC):
 
     def shuffle(self):
         seed = random.random()
+        # seed = 0.8859829181476148
         default_logger.debug(json.dumps({"Seed": seed}))
-        random.shuffle(self._cards, lambda: seed)
-        random.shuffle(self._cards, lambda: seed)
-        random.shuffle(self._cards, lambda: seed)
+        random.seed(seed)
+        random.shuffle(self._cards)
+        random.shuffle(self._cards)
+        random.shuffle(self._cards)
         return self
 
     def deal(self, no_hands, per_hands):

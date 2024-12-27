@@ -1,8 +1,6 @@
 cpp/build
 
 **/__pycache__
-*.log*
-*.jsonl*
 *.lock
 
 rust/target/
