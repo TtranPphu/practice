@@ -4,4 +4,3 @@ cpp/build
 *.lock
 
 rust/target/
-rust/Cargo.lock
