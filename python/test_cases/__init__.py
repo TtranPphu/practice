@@ -7,4 +7,5 @@
 # from .leetcode_is_long_pressed_name_test import LeetcodeIsLongPressedNameTest
 # from .leetcode_two_sum_test import LeetcodeTwoSumTest
 # from .leetcode_can_jump_test import LeetcodeCanJumpTest
-from .leetcode_min_difference_test import LeetcodeMinDifferenceTest
+# from .leetcode_min_difference_test import LeetcodeMinDifferenceTest
+from .leetcode_my_pow_test import LeetcodeMyPowTest

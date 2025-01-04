@@ -23,6 +23,18 @@
             "justMyCode": false
         },
         {
+            "name": "Python: Test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "test.py",
+            "args": [
+                "-v",
+            ],
+            "cwd": "${workspaceFolder}/python",
+            "console": "internalConsole",
+            "justMyCode": false
+        },
+        {
             "name": "Python: Debug Current File",
             "type": "debugpy",
             "request": "launch",

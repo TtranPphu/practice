@@ -25,7 +25,7 @@
     "handlers": {
         "papertrail_handler": {
             "class": "logging.handlers.SysLogHandler",
-            "level": "WARNING",
+            "level": "INFO",
             "formatter": "papertrail_formatter",
             "address": [
                 "logs6.papertrailapp.com",
@@ -35,7 +35,7 @@
         "file_handler": {
             "class": "logging.handlers.TimedRotatingFileHandler",
             "when": "midnight",
-            "level": "INFO",
+            "level": "DEBUG",
             "formatter": "default_formatter",
             "filename": "logs/log.log"
         },
@@ -66,15 +66,15 @@
     "loggers": {
         "root": {
             "level": "DEBUG",
-            // "handlers": [
-            //     "queue_handler"
-            // ]
             "handlers": [
-                "papertrail_handler",
-                "file_handler",
-                "json_file_handler",
-                "steam_handler"
+                "queue_handler"
             ]
+            // "handlers": [
+            //     "papertrail_handler",
+            //     "file_handler",
+            //     "json_file_handler",
+            //     "steam_handler"
+            // ]
         }
     }
 }

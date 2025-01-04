@@ -7,7 +7,7 @@ class JsonFormatter(logging.Formatter):
     Formatter that outputs JSON strings after parsing the LogRecord.
 
     @param dict fmt_dict: Key: logging format attribute pairs.
-        Defaults to {"message": "message"}.
+        Defaults: {"message": "message"}.
     @param str time_format: time.strftime() format string.
         Default: "%Y-%m-%dT%H:%M:%S"
     @param str msec_format: Microsecond formatting. Appended at the end.
