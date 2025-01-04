@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 from utils import default_logger
+import sodoku
 
 
 def main():
@@ -7,4 +8,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sodoku.demo()
