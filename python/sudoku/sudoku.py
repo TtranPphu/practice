@@ -1,13 +1,13 @@
-from utils import default_logger
+from utils import default_logger, benchmark
 
 
 class Cell:
     def __init__(self, value):
         self.value = value
-        if value != 0:
-            self.valid = set()
-        else:
-            self.valid = set(range(1, 10))
+        self.valid = {v for v in range(1, 10) if not value}
+
+    def invalidate(self, v):
+        self.valid.discard(v)
 
 
 class Grid:
@@ -18,34 +18,43 @@ class Grid:
                 if self.__grid[i][j].value:
                     self.__update_valid(i, j)
 
+    def __mini_grid(self, i, j):
+        return [
+            self.__grid[(i // 3) * 3 + k][(j // 3) * 3 + l].value
+            for k in range(3)
+            for l in range(3)
+        ]
+
+    @property
+    def grid(self):
+        return [[cell.value for cell in row] for row in self.__grid]
+
     def __update_valid(self, i, j):
         """
         Remove the value of the cell from the valid set of the other cells in the same
         row, column and mini grid
         """
         v = self.__grid[i][j].value
-        self.__grid[i][j].valid.clear()
+        if v:
+            self.__grid[i][j].valid.clear()
         for k in range(9):
-            self.__grid[i][k].valid.discard(v)
-            self.__grid[k][j].valid.discard(v)
-        for k in range(3):
-            for l in range(3):
-                self.__grid[(i // 3) * 3 + k][(j // 3) * 3 + l].valid.discard(v)
+            self.__grid[i][k].invalidate(v)
+            self.__grid[k][j].invalidate(v)
+            self.__grid[(i // 3) * 3 + k // 3][(j // 3) * 3 + k % 3].invalidate(v)
 
     def __set_value(self, i, j, v):
         self.__grid[i][j].value = v
         self.__update_valid(i, j)
 
-    def __check_unique(self, v, i, j):
+    def __check_unique_valid(self, v, i, j):
         """Check if the value v is uniquely valid in the row, column and mini grid"""
         return (
             all(v not in self.__grid[i][k].valid for k in range(9) if k != j)
             or all(v not in self.__grid[k][j].valid for k in range(9) if k != i)
             or all(
-                v not in self.__grid[(i // 3) * 3 + k][(j // 3) * 3 + l].valid
-                for k in range(3)
-                for l in range(3)
-                if k != i % 3 or l != j % 3
+                v not in self.__grid[(i // 3) * 3 + k // 3][(j // 3) * 3 + k % 3].valid
+                for k in range(9)
+                if k != i * 3 + j
             )
         )
 
@@ -62,7 +71,7 @@ class Grid:
                         updated = True
                     else:
                         for v in set(self.__grid[i][j].valid):
-                            if self.__check_unique(v, i, j):
+                            if self.__check_unique_valid(v, i, j):
                                 self.__set_value(i, j, v)
                                 updated = True
                                 break
@@ -73,16 +82,15 @@ class Grid:
             for j in range(9):
                 if self.__grid[i][j].value == 0:
                     for v in self.__grid[i][j].valid:
-                        grid = Grid([[cell.value for cell in row] for row in self.__grid])
-                        grid.__set_value(i, j, v)
+                        clone_grid = Grid(
+                            [[cell.value for cell in row] for row in self.__grid]
+                        )
+                        clone_grid.__set_value(i, j, v)
                         try:
-                        grid.solve()
-                        grid.solve()
-                        if grid.__solved():
-                            grid.solve()
-                        if grid.__solved():
-                            self.__grid = grid.__grid
-                            return
+                            clone_grid.solve()
+                            if clone_grid.__solved():
+                                self.__grid = clone_grid.__grid
+                                return
                         except ValueError:
                             pass
                     raise ValueError("No solution found")
@@ -114,7 +122,7 @@ def demo():
         ]
     )
     try:
-        problem.solve()
-    except ValueError as e:
-        default_logger.debug(e)
+        benchmark(problem.solve)()
+    except ValueError as ev:
+        default_logger.debug(ev)
     default_logger.debug(f"\n{problem}\n")
