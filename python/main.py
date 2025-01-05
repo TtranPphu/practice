@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from utils import default_logger
-import sodoku
+import sudoku
 
 
 def main():
@@ -8,4 +8,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sodoku.demo()
+    sudoku.demo()
