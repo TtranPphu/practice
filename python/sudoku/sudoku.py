@@ -73,15 +73,19 @@ class Grid:
             for j in range(9):
                 if self.__grid[i][j].value == 0:
                     for v in self.__grid[i][j].valid:
-                        grid = Grid(
-                            [[cell.value for cell in row] for row in self.__grid]
-                        )
+                        grid = Grid([[cell.value for cell in row] for row in self.__grid])
                         grid.__set_value(i, j, v)
+                        try:
                         grid.solve()
+                        grid.solve()
+                        if grid.__solved():
+                            grid.solve()
                         if grid.__solved():
                             self.__grid = grid.__grid
                             return
-                    raise ValueError("Unsolvable sodoku")
+                        except ValueError:
+                            pass
+                    raise ValueError("No solution found")
 
     def solve(self):
         while self.__apply_basic_strategies():
@@ -109,5 +113,8 @@ def demo():
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
         ]
     )
-    problem.solve()
+    try:
+        problem.solve()
+    except ValueError as e:
+        default_logger.debug(e)
     default_logger.debug(f"\n{problem}\n")
