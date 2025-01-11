@@ -1,1 +1,1 @@
-from .sudoku import Grid
+from .sudoku import Grid, demo

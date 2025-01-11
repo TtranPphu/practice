@@ -8,8 +8,6 @@ include(FetchContent)
 
 add_subdirectory(log_util)
 
-# include_directories()
-
 FetchContent_Declare(
     googletest
     URL

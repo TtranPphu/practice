@@ -1,8 +1,8 @@
 FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y && apt install sudo zsh git vim zip build-essential gdb cmake python3-pip wget curl software-properties-common bpytop -y
-RUN add-apt-repository ppa:deadsnakes/ppa -y
-RUN apt update && apt upgrade -y && DEBIAN_FRONTEND=noninteractive apt install python3.11 python3.12 python3.13 -y
+# RUN add-apt-repository ppa:deadsnakes/ppa -y
+# RUN apt update && apt upgrade -y && DEBIAN_FRONTEND=noninteractive apt install python3.11 python3.12 python3.13 -y
 
 # powerlevel10k
 RUN mkdir /usr/share/fonts/truetype/meslo

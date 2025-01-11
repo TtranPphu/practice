@@ -2,7 +2,6 @@ from deck_of_cards.deck_of_cards import *
 
 from utils import default_logger
 from typing import override
-import json
 
 
 class BJDeck(Deck):

@@ -13,15 +13,6 @@
             "problemMatcher": []
         },
         {
-            "label": "Create problem (Python)",
-            "type": "shell",
-            "command": "touch leetcode/${input:problem_name}.py test_cases/leetcode/${input:problem_name}_test.py",
-            "options": {
-                "cwd": "${workspaceFolder}/python"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Run (Python)",
             "type": "shell",
             "command": "uv",
