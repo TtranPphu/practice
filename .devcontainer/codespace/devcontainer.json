@@ -1,7 +1,7 @@
 {
     "name": "practice-codespace",
     "build": {
-        "dockerfile": "./Dockerfile"
+        "dockerfile": "../Dockerfile"
     },
     "mounts": [
         "source=/home/ttranpphu/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
