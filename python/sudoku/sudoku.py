@@ -3,16 +3,28 @@ from utils import default_logger, benchmark
 
 class Cell:
     def __init__(self, value):
-        self.value = value
-        self.valid = {v for v in range(1, 10) if not value}
+        self.__value = value
+        self.__valid = {v for v in range(1, 10) if not value}
 
     def invalidate(self, v):
-        self.valid.discard(v)
+        self.__valid.discard(v)
+
+    @property
+    def value(self):
+        return self.__value
+
+    @value.setter
+    def value(self, v):
+        self.__value = v
+
+    @property
+    def valid(self):
+        return self.__valid
 
 
 class Grid:
     def __init__(self, grid):
-        self.__grid = [[Cell(value) for value in row] for row in grid]
+        self.__grid: list[list[Cell]] = [[Cell(value) for value in row] for row in grid]
         for i in range(9):
             for j in range(9):
                 if self.__grid[i][j].value:
@@ -20,9 +32,7 @@ class Grid:
 
     def __mini_grid(self, i, j):
         return [
-            self.__grid[(i // 3) * 3 + k][(j // 3) * 3 + l].value
-            for k in range(3)
-            for l in range(3)
+            self.__grid[(i // 3) * 3 + k // 3][(j // 3) * 3 + k % 3] for k in range(9)
         ]
 
     @property
