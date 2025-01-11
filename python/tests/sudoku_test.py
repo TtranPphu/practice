@@ -3,7 +3,7 @@ from .test_util import *
 
 
 @notatest
-def test_solver(cases, solver_cls: type):
+def test_solver(cases: list[dict], solver_cls: type):
     for case in cases:
         expect = case.pop("expect")
         for r, rr in zip(solver_cls(**case).solve().grid, expect):

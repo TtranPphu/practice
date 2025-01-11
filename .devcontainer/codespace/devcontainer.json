@@ -1,7 +1,7 @@
 {
-    "name": "practice-devcontainer",
+    "name": "practice-codespace",
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "./Dockerfile"
     },
     "mounts": [
         "source=/home/ttranpphu/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
@@ -9,7 +9,7 @@
     "containerEnv": {
         "UV_LINK_MODE": "copy"
     },
-    "postCreateCommand": "sh .devcontainer/post-create-default.sh",
+    "postCreateCommand": "sh .devcontainer/codespace/post-create-codespace.sh",
     "customizations": {
         "vscode": {
             "settings": {
