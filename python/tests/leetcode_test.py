@@ -1,32 +1,5 @@
 from leetcode import *
-from math import isclose
-from functools import wraps
-
-
-def notatest(obj):
-    obj.__test__ = False
-    return obj
-
-
-@notatest
-def test_equal(cases, solution):
-    for case in cases:
-        expect = case.pop("expect")
-        assert solution(**case) == expect
-
-
-@notatest
-def test_almost_equal(cases, solution):
-    for case in cases:
-        expect = case.pop("expect")
-        assert isclose(solution(**case), expect)
-
-
-@notatest
-def test_list_equal(cases, solution):
-    for case in cases:
-        expect = case.pop("expect")
-        assert all(x == y for x, y in zip(solution(**case), expect))
+from .test_util import *
 
 
 def test_bulb_switch():
@@ -68,10 +41,14 @@ def test_find_median_sorted_arrays():
 
 
 def test_height_checker():
-    height_checker = HeightChecker()
-    assert height_checker.heightChecker(heights=[1, 1, 4, 2, 1, 3]) == 3
-    assert height_checker.heightChecker(heights=[5, 1, 2, 3, 4]) == 5
-    assert height_checker.heightChecker(heights=[1, 2, 3, 4, 5]) == 0
+    test_equal(
+        cases=[
+            {"heights": [1, 1, 4, 2, 1, 3], "expect": 3},
+            {"heights": [5, 1, 2, 3, 4], "expect": 5},
+            {"heights": [1, 2, 3, 4, 5], "expect": 0},
+        ],
+        solution=HeightChecker().heightChecker,
+    )
 
 
 def test_is_long_pressed_name():
@@ -90,35 +67,48 @@ def test_is_long_pressed_name():
 
 
 def test_length_of_longest_substring():
-    lols = LengthOfLongestSubstring()
-    assert lols.lengthOfLongestSubstring(s="abcabcbb") == 3
-    assert lols.lengthOfLongestSubstring(s="bbbbb") == 1
-    assert lols.lengthOfLongestSubstring(s="pwwkew") == 3
-    assert lols.lengthOfLongestSubstring(s="") == 0
+    test_equal(
+        cases=[
+            {"s": "abcabcbb", "expect": 3},
+            {"s": "bbbbb", "expect": 1},
+            {"s": "pwwkew", "expect": 3},
+            {"s": "", "expect": 0},
+        ],
+        solution=LengthOfLongestSubstring().lengthOfLongestSubstring,
+    )
 
 
 def test_min_difference():
-    min_difference = MinDifference()
-    assert min_difference.minDifference(nums=[5, 3, 2, 4]) == 0
-    assert min_difference.minDifference(nums=[1, 5, 0, 10, 14]) == 1
-    assert min_difference.minDifference(nums=[3, 100, 20]) == 0
-    assert min_difference.minDifference(nums=[6, 6, 0, 1, 1, 4, 6]) == 2
+    test_equal(
+        cases=[
+            {"nums": [5, 3, 2, 4], "expect": 0},
+            {"nums": [1, 5, 0, 10, 14], "expect": 1},
+            {"nums": [3, 100, 20], "expect": 0},
+            {"nums": [6, 6, 0, 1, 1, 4, 6], "expect": 2},
+        ],
+        solution=MinDifference().minDifference,
+    )
 
 
 def test_my_pow():
-    my_pow = MyPow()
-    assert isclose(my_pow.myPow(x=2.00000, n=10), 1024.00000)
-    assert isclose(my_pow.myPow(x=2.10000, n=3), 9.26100)
-    assert isclose(my_pow.myPow(x=2.00000, n=-2), 0.25000)
-    assert isclose(my_pow.myPow(x=2.00000, n=0), 1)
-    assert isclose(my_pow.myPow(x=2.00000, n=1), 2)
+    test_almost_equal(
+        cases=[
+            {"x": 2.0, "n": 10, "expect": 1024},
+            {"x": 2.1, "n": 3, "expect": 9.261},
+            {"x": 2.0, "n": -2, "expect": 0.25},
+            {"x": 2.0, "n": 0, "expect": 1},
+            {"x": 2.0, "n": 1, "expect": 2},
+        ],
+        solution=MyPow().myPow,
+    )
 
 
 def test_two_sum():
-    solution = TwoSum().twoSum
-    cases = [
-        {"nums": [2, 7, 11, 15], "target": 9, "expect": [0, 1]},
-        {"nums": [3, 2, 4], "target": 6, "expect": [1, 2]},
-        {"nums": [3, 3], "target": 6, "expect": [0, 1]},
-    ]
-    test_list_equal(cases=cases, solution=solution)
+    test_sorted_list_equal(
+        cases=[
+            {"nums": [2, 7, 11, 15], "target": 9, "expect": [0, 1]},
+            {"nums": [3, 2, 4], "target": 6, "expect": [1, 2]},
+            {"nums": [3, 3], "target": 6, "expect": [0, 1]},
+        ],
+        solution=TwoSum().twoSum,
+    )

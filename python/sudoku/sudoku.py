@@ -100,6 +100,7 @@ class Grid:
             pass
         if not self.__solved():
             self.__brute_force()
+        return self
 
     def __str__(self):
         return "\n".join(
