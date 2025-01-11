@@ -3,19 +3,19 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        // {
-        //     "label": "Test (C++)",
-        //     "type": "shell",
-        //     "command": "ctest -R ${input:cpp_test_case}",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/cpp/build"
-        //     },
-        //     "problemMatcher": []
-        // },
+        {
+            "label": "Test (C++)",
+            "type": "shell",
+            "command": "ctest -R ${input:cpp_test_case}",
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "problemMatcher": []
+        },
         {
             "label": "Create problem (Python)",
             "type": "shell",
-            "command": "touch leetcode/${input:problem_name}.py test_cases/leetcode_${input:problem_name}_test.py",
+            "command": "touch leetcode/${input:problem_name}.py test_cases/leetcode/${input:problem_name}_test.py",
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
@@ -28,7 +28,6 @@
             "args": [
                 "run",
                 "main.py",
-                // "\"user=%7B%22id%22%3A279058397%2C%22first_name%22%3A%22Phu%22%2C%22last_name%22%3A%22Tran%22%2C%22username%22%3A%22ttranpphu%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2F4FPEE4tmP3ATHa57u6MqTDih13LTOiMoKoLDRG4PnSA.svg%22%7D&chat_instance=8134722200314281151&chat_type=private&auth_date=1733584787&hash=2174df5b000556d044f3f020384e879c8efcab55ddea2ced4eb752e93e7080d6&signature=zL-ucjNyREiHDE8aihFwpfR9aggP2xiAo3NSpfe-p7IbCisNlDKlo7Kb6G4D0Ao2mBrSgEk4maLSdv6MLIlADQ\""
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"
@@ -51,37 +50,16 @@
             "problemMatcher": []
         },
         {
-            "label": "Run (Game)",
-            "group": "test",
+            "label": "Run (Rust)",
             "type": "shell",
-            "command": "uvx",
-            "args": [
-                "pygbag",
-                "--PYBUILD",
-                "3.12",
-                "--ume_block",
-                "0",
-                "--template",
-                "noctx.tmpl",
-                "--git",
-                "."
-            ],
+            "command": "cargo run --package practice --bin practice",
             "options": {
-                "cwd": "${workspaceFolder}/python"
+                "cwd": "${workspaceFolder}/rust/target/debug"
             },
-            "problemMatcher": []
-        },
-        // {
-        //     "label": "Run (Rust)",
-        //     "type": "shell",
-        //     "command": "cargo run --package practice --bin practice",
-        //     "options": {
-        //         "cwd": "${workspaceFolder}/rust/target/debug"
-        //     },
-        //     "problemMatcher": [
-        //         "$rustc"
-        //     ]
-        // }
+            "problemMatcher": [
+                "$rustc"
+            ]
+        }
     ],
     "inputs": [
         {

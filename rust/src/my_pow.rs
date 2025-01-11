@@ -18,7 +18,7 @@ pub mod my_pow {
                             result *= x;
                         }
                         x *= x;
-                        n /= 2;
+                        n >>= 1;
                     }
                     result
                 }
