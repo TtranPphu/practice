@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+namespace lols {
 class Solution {
  public:
   int lengthOfLongestSubstring(string s) {
@@ -16,3 +17,4 @@ class Solution {
     return ans;
   }
 };
+}  // namespace lols

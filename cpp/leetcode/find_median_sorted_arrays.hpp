@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+namespace fmsa {
 class Solution {
  public:
   double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -25,3 +26,4 @@ class Solution {
     return (c1 + c2) * 0.5;
   }
 };
+}  // namespace fmsa

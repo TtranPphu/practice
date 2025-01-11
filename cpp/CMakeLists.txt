@@ -25,11 +25,7 @@ target_link_libraries(practice PUBLIC log)
 # GoogleTest
 enable_testing()
 
-add_executable(
-    leetcode_test
-    test_cases/leetcode_length_of_longest_substring_test.cpp
-    test_cases/leetcode_find_median_sorted_arrays_test.cpp
-)
+add_executable(leetcode_test tests/leetcode.cpp)
 target_include_directories(
     leetcode_test
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/leetcode
