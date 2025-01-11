@@ -13,6 +13,23 @@
             "problemMatcher": []
         },
         {
+            "label": "Format (CMake)",
+            "type": "process",
+            "command": "gersemi",
+            "args": [
+                "-i",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Run (Python)",
             "type": "shell",
             "command": "uv",
