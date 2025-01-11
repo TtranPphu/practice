@@ -2,6 +2,7 @@
 
 #include "find_median_sorted_arrays.hpp"
 #include "length_of_longest_substring.hpp"
+#include "max_area.hpp"
 
 namespace {
 
@@ -25,4 +26,17 @@ TEST(LeetcodeTest, LengthOfLongestSubstringTest) {
   EXPECT_EQ(solution.lengthOfLongestSubstring("bbbbb"), 1);
   EXPECT_EQ(solution.lengthOfLongestSubstring("pwwkew"), 3);
 }
+
+TEST(LeetcodeTest, MaxAreaTest) {
+  auto solution = max_area::Solution();
+  {
+    vector<int> height{1, 8, 6, 2, 5, 4, 8, 3, 7};
+    EXPECT_EQ(solution.maxArea(height), 49);
+  }
+  {
+    vector<int> height{1, 1};
+    EXPECT_EQ(solution.maxArea(height), 1);
+  }
+}
+
 }  // namespace
