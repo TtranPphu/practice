@@ -10,9 +10,6 @@
         "UV_LINK_MODE": "copy"
     },
     "postCreateCommand": "sh .devcontainer/post-create.sh",
-    // "dockerComposeFile": "docker-compose.yml",
-    // "service": "devcontainer",
-    // "workspaceFolder": "/workspaces/practice",
     "customizations": {
         "vscode": {
             "settings": {

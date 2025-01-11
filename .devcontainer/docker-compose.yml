@@ -8,7 +8,7 @@ services:
       - /home/ttranpphu/.ssh:/home/practice/.ssh:cached
     environment:
       - UV_LINK_MODE=copy
-
+    command: sleep infinity
   #   network_mode: "service:mongo"
 
   # mongo:
@@ -17,3 +17,4 @@ services:
   #     - 27017:27017
   #   volumes:
   #     - ../mongo/db:/data/db
+  #   command: sleep infinity
