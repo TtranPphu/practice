@@ -1,15 +1,16 @@
-# from .sudoku_test import SudokuTest
+from .sudoku_test import SudokuTest
 
-# from .leetcode.leetcode_find_median_sorted_arrays_test import (
-#     LeetcodeFindMedianSortedArraysTest,
-# )
-# from .leetcode.leetcode_length_of_longest_substring_test import (
-#     LeetcodeLengthOfLongestSubstringTest,
-# )
-# from .leetcode.leetcode_bulb_switch_test import LeetcodeBulbSwitchTest
-# from .leetcode.leetcode_height_checker_test import LeetcodeHeightCheckerTest
-# from .leetcode.leetcode_is_long_pressed_name_test import LeetcodeIsLongPressedNameTest
-# from .leetcode.leetcode_two_sum_test import LeetcodeTwoSumTest
-# from .leetcode.leetcode_can_jump_test import LeetcodeCanJumpTest
-# from .leetcode.leetcode_min_difference_test import LeetcodeMinDifferenceTest
-# from .leetcode.leetcode_my_pow_test import LeetcodeMyPowTest
+from .leetcode.find_median_sorted_arrays_test import (
+    FindMedianSortedArraysTest,
+)
+from .leetcode.length_of_longest_substring_test import (
+    LengthOfLongestSubstringTest,
+)
+from .leetcode.bulb_switch_test import BulbSwitchTest
+from .leetcode.height_checker_test import HeightCheckerTest
+from .leetcode.is_long_pressed_name_test import IsLongPressedNameTest
+from .leetcode.two_sum_test import TwoSumTest
+from .leetcode.can_jump_test import CanJumpTest
+from .leetcode.min_difference_test import MinDifferenceTest
+from .leetcode.my_pow_test import MyPowTest
+from .leetcode.valid_square_test import ValidSquareTest
