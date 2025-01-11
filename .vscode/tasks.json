@@ -41,8 +41,7 @@
             "command": "uv",
             "args": [
                 "run",
-                "test.py",
-                "-v"
+                "pytest"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"

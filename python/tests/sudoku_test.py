@@ -1,4 +1,4 @@
-from sudoku.sudoku import Grid as Solver
+from sudoku import Grid as Solver
 
 
 def test_expert_sudoku():
@@ -26,7 +26,7 @@ def test_expert_sudoku():
     ]
     solver = Solver(expert)
     solver.solve()
-    for r, rr in zip(expert, expect):
+    for r, rr in zip(solver.grid, expect):
         assert all(x == y for x, y in zip(r, rr))
 
 
@@ -55,5 +55,5 @@ def test_extreme_sudoku():
     ]
     solver = Solver(extreme)
     solver.solve()
-    for r, rr in zip(extreme, expect):
+    for r, rr in zip(solver.grid, expect):
         assert all(x == y for x, y in zip(r, rr))

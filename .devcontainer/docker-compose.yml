@@ -1,0 +1,19 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspaces/practice:cached
+      - /home/ttranpphu/.ssh:/home/practice/.ssh:cached
+    environment:
+      - UV_LINK_MODE=copy
+
+  #   network_mode: "service:mongo"
+
+  # mongo:
+  #   image: mongo:latest
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ../mongo/db:/data/db

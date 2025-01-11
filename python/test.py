@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 import unittest
 
-from test_cases import *
+from cases import *
 
 if __name__ == "__main__":
     unittest.main()
