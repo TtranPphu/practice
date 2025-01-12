@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++: Debug",
+            "name": "C++: Practice",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cpp/build/practice",
@@ -11,7 +11,6 @@
             "cwd": "${workspaceFolder}/cpp",
             "MIMode": "gdb",
             "miDebuggerPath": "/usr/bin/gdb",
-            "stopAtEntry": true
         },
         {
             "name": "Python: Main",
@@ -23,13 +22,34 @@
             "justMyCode": false
         },
         {
-            "name": "Python: Debug Current File",
+            "name": "Python: Test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": ".venv/bin/pytest",
+            "args": [
+                "--pdb",
+                "${input:cases}"
+            ],
+            "cwd": "${workspaceFolder}/python",
+            "console": "internalConsole",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: File",
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "cwd": "${workspaceFolder}/python",
             "console": "internalConsole",
             "justMyCode": false
+        }
+    ],
+    "inputs": [
+        {
+            "id": "cases",
+            "description": "Test case(s)",
+            "type": "promptString",
+            "default": ""
         }
     ]
 }

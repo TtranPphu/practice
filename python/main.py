@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from utils import default_logger
-import sudoku
+from containers import tensor_demo as demo
 
 
 def main():
@@ -8,4 +8,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sudoku.demo()
+    demo()

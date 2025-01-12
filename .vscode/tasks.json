@@ -49,7 +49,8 @@
             "command": "uv",
             "args": [
                 "run",
-                "pytest"
+                "pytest",
+                "${input:verbosity}",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"
@@ -78,6 +79,17 @@
             "id": "problem_name",
             "description": "Name the problem",
             "type": "promptString",
+        },
+        {
+            "id": "verbosity",
+            "description": "Set the verbosity level",
+            "type": "pickString",
+            "options": [
+                "",
+                "-v",
+                "-vv"
+            ],
+            "default": ""
         }
     ]
 }

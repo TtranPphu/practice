@@ -2,7 +2,7 @@ from utils import default_logger, benchmark
 
 
 class Cell:
-    def __init__(self, value):
+    def __init__(self, value: int):
         self.__value = value
         self.__valid = {v for v in range(1, 10) if not value}
 
@@ -14,7 +14,7 @@ class Cell:
         return self.__value
 
     @value.setter
-    def value(self, v):
+    def value(self, v: int):
         self.__value = v
 
     @property
@@ -23,17 +23,12 @@ class Cell:
 
 
 class Grid:
-    def __init__(self, grid):
+    def __init__(self, grid: list[list]):
         self.__grid: list[list[Cell]] = [[Cell(value) for value in row] for row in grid]
         for i in range(9):
             for j in range(9):
                 if self.__grid[i][j].value:
                     self.__update_valid(i, j)
-
-    def __mini_grid(self, i, j):
-        return [
-            self.__grid[(i // 3) * 3 + k // 3][(j // 3) * 3 + k % 3] for k in range(9)
-        ]
 
     @property
     def grid(self):
@@ -114,9 +109,9 @@ class Grid:
 
 
 def repr_grid(grid: list[list]):
-    bar = "-------------------------\n"
+    bar = "-" * 25 + "\n"
     line_fmt = "|" + (" {:}" * 3 + " |") * 3 + "\n"
-    board_fmt = bar + (line_fmt * 3 + bar) * 3
+    board_fmt = "\n" + bar + (line_fmt * 3 + bar) * 3
     return board_fmt.format(*[v for row in grid for v in row])
 
 
@@ -142,4 +137,4 @@ def demo():
         )
     except ValueError as ev:
         default_logger.debug(ev)
-    default_logger.debug(f"\n{repr_grid(result)}\n")
+    default_logger.debug(f"{repr_grid(result)}")
