@@ -112,28 +112,34 @@ class Grid:
             self.__brute_force()
         return self
 
-    def __str__(self):
-        return "\n".join(
-            " ".join(str(cell.value) for cell in row) for row in self.__grid
-        )
+
+def repr_grid(grid: list[list]):
+    bar = "-------------------------\n"
+    line_fmt = "|" + (" {:}" * 3 + " |") * 3 + "\n"
+    board_fmt = bar + (line_fmt * 3 + bar) * 3
+    return board_fmt.format(*[v for row in grid for v in row])
+
+
+def solve(grid: list[list]):
+    problem = Grid(grid)
+    return problem.solve().grid
 
 
 def demo():
-    problem = Grid(
-        [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ]
-    )
     try:
-        benchmark(problem.solve)()
+        result = benchmark(solve)(
+            [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ]
+        )
     except ValueError as ev:
         default_logger.debug(ev)
-    default_logger.debug(f"\n{problem}\n")
+    default_logger.debug(f"\n{repr_grid(result)}\n")

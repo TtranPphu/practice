@@ -1,17 +1,9 @@
-from sudoku import Grid as Solver
+from sudoku import solve
 from .test_util import *
 
 
-@notatest
-def test_solver(cases: list[dict], solver_cls: type):
-    for case in cases:
-        expect = case.pop("expect")
-        for r, rr in zip(solver_cls(**case).solve().grid, expect):
-            assert all(x == y for x, y in zip(r, rr)), f"Expect {expect} for {case}"
-
-
-def test_sudoku():
-    test_solver(
+def test_new_sudoku():
+    test_sorted_list_equal(
         cases=[
             {
                 "grid": [
@@ -62,5 +54,5 @@ def test_sudoku():
                 ],
             },
         ],
-        solver_cls=Solver,
+        solution=solve,
     )

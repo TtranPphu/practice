@@ -1,1 +1,1 @@
-from .sudoku import Grid, demo
+from .sudoku import demo, solve
