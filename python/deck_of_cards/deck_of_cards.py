@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from typing import Callable, Self
+from copy import deepcopy
 
 from utils import default_logger
 import json
@@ -7,7 +9,7 @@ import random
 
 
 class Card:
-    def __init__(self, rank_suit, value):
+    def __init__(self, rank_suit: str, value: int):
         self.rank = rank_suit[:-1]
         self.suit = rank_suit[-1]
         self.value = value
@@ -16,7 +18,7 @@ class Card:
         return f"{(self.rank+self.suit)!r}"
 
     def __str__(self):
-        return f"{self.rank+self.suit}"
+        return f"{(self.rank+self.suit)!s}"
 
     def __eq__(self, other):
         return self.value == other.value
@@ -25,60 +27,102 @@ class Card:
         return self.value < other.value
 
 
-class Deck(ABC):
-    ranks = [str(r) for r in range(2, 11)] + list("JQKA")
-    suits = list("♠♣♦♥")
-    # suits = list("SCDH")
-    _card: list[Card]
+class Deck:
+    @property
+    def ranks(self):
+        return self.__ranks
 
-    def __init__(self, cards: list[Card] | None = None):
-        if cards is not None:
-            self._cards = cards
-        else:
-            self._cards = [
-                Card(
-                    rank + suit,
-                    self.ranks.index(rank),
-                )
-                for rank in self.ranks
-                for suit in self.suits
-            ]
+    @property
+    def suits(self):
+        return self.__suits
+
+    @property
+    def cards(self):
+        return self.__cards
+
+    def __init__(self, ranks=None, suits=None, cards=None):
+        self.__ranks = ranks
+        self.__suits = suits
+        self.__cards = deepcopy(cards) if cards else []
+
+    def set_ranks(
+        self, ranks: list[str] = [str(r) for r in range(2, 11)] + list("JQKA")
+    ):
+        self.__ranks = ranks
+        return self
+
+    def set_suits(self, suits: list[str] = list("♠♣♦♥")):
+        self.__suits = suits
+        return self
+
+    @staticmethod
+    def default_value_fn(rank, suit, ranks, suits):
+        return ranks.index(rank)
+
+    def build_deck(
+        self,
+        value_fn: Callable[[str, str, list[str], list[str]], int] = default_value_fn,
+    ):
+        self.__cards = [
+            Card(
+                rank_suit=rank + suit,
+                value=value_fn(rank, suit, self.ranks, self.suits),
+            )
+            for rank in self.ranks
+            for suit in self.suits
+        ]
+        return self
+
+    def build_default_deck(self):
+        return self.set_ranks().set_suits().build_deck()
 
     def __len__(self):
-        return len(self._cards)
+        return len(self.__cards)
 
     def __getitem__(self, position):
-        return self._cards[position]
+        return self.__cards[position]
 
     def __setitem__(self, position, card):
-        self._cards[position] = card
+        self.__cards[position] = card
 
     def __repr__(self):
-        return f"{self._cards!r}"
+        return f"{self.__cards!r}"
+
+    def __str__(self):
+        return f"{self.__cards!s}"
 
     def __len__(self):
-        return len(self._cards)
+        return len(self.__cards)
 
     def json(self, name="Deck"):
-        return {name: [str(card) for card in self._cards]}
+        return {name: [str(card) for card in self.__cards]}
 
     def json_string(self, name="Deck"):
         return json.dumps(self.json(name), ensure_ascii=False)
 
-    def shuffle(self):
+    def shuffle(self) -> Self:
         seed = random.random()
         # seed = 0.8859829181476148
         default_logger.debug(json.dumps({"Seed": seed}))
         random.seed(seed)
-        random.shuffle(self._cards)
-        random.shuffle(self._cards)
-        random.shuffle(self._cards)
+        random.shuffle(self.__cards)
+        random.shuffle(self.__cards)
+        random.shuffle(self.__cards)
         return self
 
-    def deal(self, no_hands, per_hands):
+    def deal(self, no_hands: int, per_hands: int) -> tuple[list[Self], Self]:
         return [
-            Deck(self[n : per_hands * no_hands : no_hands]) for n in range(no_hands)
-        ], Deck(self[per_hands * no_hands : :])
+            Deck(
+                # ranks=self.ranks,
+                # suits=self.suits,
+                cards=self.cards[n : per_hands * no_hands : no_hands],
+            )
+            for n in range(no_hands)
+        ], Deck(
+            # ranks=self.ranks,
+            # suits=self.suits,
+            cards=self.cards[per_hands * no_hands : :],
+        )
 
 
 class CTDeck(Deck):
@@ -87,24 +131,22 @@ class CTDeck(Deck):
 
 
 class VCDeck(Deck):
-    ranks = [str(r) for r in range(3, 11)] + list("JQKA2")
+    def set_ranks(self, ranks=[str(r) for r in range(3, 11)] + list("JQKA2")):
+        return super().set_ranks(ranks)
 
-    def __init__(self):
-        self._cards = [
-            Card(
-                rank + suit,
-                self.ranks.index(rank) * len(self.suits) + self.suits.index(suit),
-            )
-            for rank in self.ranks
-            for suit in self.suits
-        ]
+    @staticmethod
+    def default_value_fn(rank, suit, ranks, suits):
+        return ranks.index(rank) * len(suits) + suits.index(suit)
+
+    def build_deck(self, value_fn=default_value_fn):
+        return super().build_deck(value_fn)
 
     def deal(self, no_hands=4, per_hands=13):
         return super().deal(no_hands, per_hands)
 
 
 def demo():
-    deck = CTDeck().shuffle()
+    deck = VCDeck().build_default_deck().shuffle()
     default_logger.debug(deck.json_string())
 
     hands, leftover = deck.deal()
