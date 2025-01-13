@@ -104,7 +104,7 @@ def test_my_pow():
 
 
 def test_two_sum():
-    test_sorted_list_equal(
+    test_ordered_list_equal(
         cases=[
             {"nums": [2, 7, 11, 15], "target": 9, "expect": [0, 1]},
             {"nums": [3, 2, 4], "target": 6, "expect": [1, 2]},

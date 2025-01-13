@@ -51,6 +51,7 @@
                 "run",
                 "pytest",
                 "${input:verbosity}",
+                "${input:cases}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"
@@ -89,6 +90,12 @@
                 "-v",
                 "-vv"
             ],
+            "default": ""
+        },
+        {
+            "id": "cases",
+            "description": "Test case(s)",
+            "type": "promptString",
             "default": ""
         }
     ]

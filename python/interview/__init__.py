@@ -1,0 +1,1 @@
+from .infect import Solution as Infect

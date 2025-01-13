@@ -3,7 +3,7 @@ from .test_util import *
 
 
 def test_new_sudoku():
-    test_sorted_list_equal(
+    test_ordered_list_equal(
         cases=[
             {
                 "grid": [
