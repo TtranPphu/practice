@@ -1,4 +1,4 @@
-from deck_of_cards.deck_of_cards import Deck
+from .deck_of_cards import Deck
 
 from utils import default_logger
 from typing import override

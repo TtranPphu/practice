@@ -15,7 +15,7 @@ class Card:
         self.value = value
 
     def __repr__(self):
-        return f"{(self.rank+self.suit)!r}"
+        return f"Card({(self.rank+self.suit)!r})"
 
     def __str__(self):
         return f"{(self.rank+self.suit)!s}"
@@ -39,6 +39,10 @@ class Deck:
     @property
     def cards(self):
         return self.__cards
+
+    @cards.setter
+    def cards(self, cards):
+        self.__cards = cards
 
     def __init__(self, ranks=None, suits=None, cards=None):
         self.__ranks = ranks
@@ -89,40 +93,29 @@ class Deck:
         return f"{self.__cards!r}"
 
     def __str__(self):
-        return f"{self.__cards!s}"
+        return f"{[str(card) for card in self.__cards]}"
 
     def __len__(self):
         return len(self.__cards)
 
     def json(self, name="Deck"):
-        return {name: [str(card) for card in self.__cards]}
+        return {name: [repr(card) for card in self.__cards]}
 
     def json_string(self, name="Deck"):
         return json.dumps(self.json(name), ensure_ascii=False)
 
-    def shuffle(self) -> Self:
-        seed = random.random()
-        # seed = 0.8859829181476148
+    def shuffle(self, seed: float = random.random(), times: int = 3) -> Self:
         default_logger.debug(json.dumps({"Seed": seed}))
         random.seed(seed)
-        random.shuffle(self.__cards)
-        random.shuffle(self.__cards)
-        random.shuffle(self.__cards)
+        for _ in range(times):
+            random.shuffle(self.__cards)
         return self
 
-    def deal(self, no_hands: int, per_hands: int) -> tuple[list[Self], Self]:
+    def deal(self, no_hands: int = 0, per_hands: int = 0) -> tuple[list[Self], Self]:
         return [
-            Deck(
-                # ranks=self.ranks,
-                # suits=self.suits,
-                cards=self.cards[n : per_hands * no_hands : no_hands],
-            )
+            Deck(cards=self.cards[n : per_hands * no_hands : no_hands])
             for n in range(no_hands)
-        ], Deck(
-            # ranks=self.ranks,
-            # suits=self.suits,
-            cards=self.cards[per_hands * no_hands : :],
-        )
+        ], Deck(cards=self.cards[per_hands * no_hands : :])
 
 
 class CTDeck(Deck):

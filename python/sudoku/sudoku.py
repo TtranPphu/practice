@@ -109,9 +109,13 @@ class Grid:
 
 
 def repr_grid(grid: list[list]):
-    bar = "-" * 25 + "\n"
-    line_fmt = "|" + (" {:}" * 3 + " |") * 3 + "\n"
-    board_fmt = "\n" + bar + (line_fmt * 3 + bar) * 3
+    top_bar = "╔" + ("═" * 7 + "╤") * 2 + "═" * 7 + "╗\n"
+    middle_bar = "╟" + ("─" * 7 + "┼") * 2 + "─" * 7 + "╢\n"
+    bottom_bar = "╚" + ("═" * 7 + "╧") * 2 + "═" * 7 + "╝\n"
+    line_fmt = "║" + (" {:}" * 3 + " │") * 2 + " {:}" * 3 + " ║\n"
+    board_fmt = (
+        "\n" + top_bar + (line_fmt * 3 + middle_bar) * 2 + line_fmt * 3 + bottom_bar
+    )
     return board_fmt.format(*[v for row in grid for v in row])
 
 

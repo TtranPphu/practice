@@ -1,4 +1,4 @@
-from deck_of_cards.deck_of_cards import Card, Deck
+from .deck_of_cards import Card, Deck
 
 from itertools import combinations
 
@@ -21,7 +21,6 @@ class PKDeck(Deck):
         set(([str(r) for r in range(2, 11)] + list("JQKA"))[i : i + 5 :])
         for i in range(9)
     ]
-    default_logger.debug(f"__STRAIGHT_REF: {__STRAIGHT_REF}")
 
     @staticmethod
     def combination_value(combination: list[Card]):
