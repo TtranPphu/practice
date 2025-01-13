@@ -14,6 +14,30 @@ def test_bulb_switch():
     )
 
 
+def test_can_be_valid():
+    test_equal(
+        cases=[
+            {"s": "))()))", "locked": "010100", "expect": True},
+            {"s": "()()", "locked": "0000", "expect": True},
+            {"s": ")", "locked": "0", "expect": False},
+            {"s": ")(", "locked": "00", "expect": True},
+            {
+                "s": "())()))()(()(((())(()()))))((((()())(())",
+                "locked": "1011101100010001001011000000110010100101",
+                "expect": True,
+            },
+            {
+                "s": "())(()(()(())()())(())((())(()())((())))))(((((((())(()))))(",
+                "locked": (
+                    "100011110110011011010111100111011101111110000101001101001111"
+                ),
+                "expect": False,
+            },
+        ],
+        solution=CanBeValid().canBeValid,
+    )
+
+
 def test_can_jump():
     test_equal(
         cases=[

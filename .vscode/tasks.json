@@ -4,32 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Test (C++)",
-            "type": "shell",
-            "command": "ctest -R ${input:cpp_test_case}",
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Format (CMake)",
-            "type": "process",
-            "command": "gersemi",
-            "args": [
-                "-i",
-                "${file}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "presentation": {
-                "reveal": "never",
-                "focus": false,
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Run (Python)",
             "type": "shell",
             "command": "uv",
@@ -51,10 +25,60 @@
                 "run",
                 "pytest",
                 "${input:verbosity}",
-                "${input:cases}"
+                "${input:python_test_cases}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build (C++)",
+            "type": "shell",
+            "group": "build",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "problemMatcher": [
+                "$gcc",
+            ]
+        },
+        {
+            "label": "Test (C++)",
+            "type": "shell",
+            "command": "ctest",
+            "args": [
+                "-R",
+                "${input:cpp_test_cases}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "dependsOn": [
+                "Build (C++)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Format (CMake)",
+            "type": "process",
+            "command": "gersemi",
+            "args": [
+                "-i",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
             },
             "problemMatcher": []
         },
@@ -72,13 +96,8 @@
     ],
     "inputs": [
         {
-            "id": "cpp_test_case",
-            "description": "Pick a case to test",
-            "type": "promptString",
-        },
-        {
-            "id": "problem_name",
-            "description": "Name the problem",
+            "id": "cpp_test_cases",
+            "description": "Test case(s)",
             "type": "promptString",
         },
         {
@@ -93,7 +112,7 @@
             "default": ""
         },
         {
-            "id": "cases",
+            "id": "python_test_cases",
             "description": "Test case(s)",
             "type": "promptString",
             "default": ""

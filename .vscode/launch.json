@@ -2,11 +2,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++: Practice",
+            "name": "C++: Main",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cpp/build/practice",
             "args": [],
+            "environment": [],
+            "cwd": "${workspaceFolder}/cpp",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+        },
+        {
+            "name": "C++: Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cpp/build/leetcode_test",
+            "args": [
+                "-R",
+                "${input:cpp_test_cases}"
+            ],
             "environment": [],
             "cwd": "${workspaceFolder}/cpp",
             "MIMode": "gdb",
@@ -28,7 +42,7 @@
             "program": ".venv/bin/pytest",
             "args": [
                 "--pdb",
-                "${input:cases}"
+                "${input:python_test_cases}"
             ],
             "cwd": "${workspaceFolder}/python",
             "console": "internalConsole",
@@ -46,7 +60,13 @@
     ],
     "inputs": [
         {
-            "id": "cases",
+            "id": "cpp_test_cases",
+            "description": "Test case(s)",
+            "type": "promptString",
+            "default": ""
+        },
+        {
+            "id": "python_test_cases",
             "description": "Test case(s)",
             "type": "promptString",
             "default": ""

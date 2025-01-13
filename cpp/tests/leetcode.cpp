@@ -1,10 +1,41 @@
 #include <gtest/gtest.h>
 
+#include "can_be_valid.hpp"
 #include "find_median_sorted_arrays.hpp"
 #include "length_of_longest_substring.hpp"
 #include "max_area.hpp"
 
 namespace {
+
+TEST(LeetcodeTest, CanBeValidTest) {
+  auto solution = cbv::Solution();
+  {
+    string s = "))()))";
+    string locked = "010100";
+    EXPECT_TRUE(solution.canBeValid(s, locked));
+  }
+  {
+    string s = "()()";
+    string locked = "0000";
+    EXPECT_TRUE(solution.canBeValid(s, locked));
+  }
+  {
+    string s = ")";
+    string locked = "0";
+    EXPECT_FALSE(solution.canBeValid(s, locked));
+  }
+  {
+    string s = "())()))()(()(((())(()()))))((((()())(())";
+    string locked = "1011101100010001001011000000110010100101";
+    EXPECT_TRUE(solution.canBeValid(s, locked));
+  }
+  {
+    string s = "())(()(()(())()())(())((())(()())((())))))(((((((())(()))))(";
+    string locked =
+        "100011110110011011010111100111011101111110000101001101001111";
+    EXPECT_FALSE(solution.canBeValid(s, locked));
+  }
+}
 
 TEST(LeetcodeTest, FindMedianSortedArraysTest) {
   auto solution = fmsa::Solution();
