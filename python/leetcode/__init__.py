@@ -7,4 +7,5 @@ from .is_long_pressed_name import Solution as IsLongPressedName
 from .length_of_longest_substring import Solution as LengthOfLongestSubstring
 from .min_difference import Solution as MinDifference
 from .my_pow import Solution as MyPow
+from .solve_n_queen import Solution as SolveNQueen
 from .two_sum import Solution as TwoSum

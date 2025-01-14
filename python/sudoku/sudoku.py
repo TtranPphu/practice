@@ -113,9 +113,7 @@ def repr_grid(grid: list[list]):
     middle_bar = "╟" + ("─" * 7 + "┼") * 2 + "─" * 7 + "╢\n"
     bottom_bar = "╚" + ("═" * 7 + "╧") * 2 + "═" * 7 + "╝\n"
     line_fmt = "║" + (" {:}" * 3 + " │") * 2 + " {:}" * 3 + " ║\n"
-    board_fmt = (
-        "\n" + top_bar + (line_fmt * 3 + middle_bar) * 2 + line_fmt * 3 + bottom_bar
-    )
+    board_fmt = top_bar + (line_fmt * 3 + middle_bar) * 2 + line_fmt * 3 + bottom_bar
     return board_fmt.format(*[v for row in grid for v in row])
 
 
@@ -141,4 +139,4 @@ def demo():
         )
     except ValueError as ev:
         default_logger.debug(ev)
-    default_logger.debug(f"{repr_grid(result)}")
+    default_logger.critical(f"{repr_grid(result)}")

@@ -1,5 +1,4 @@
-#include "spdlog/sinks/syslog_sink.h"
-#include "spdlog/spdlog.h"
+#include "log_util.hpp"
 
 int main() {
   spdlog::info("Welcome to spdlog!");

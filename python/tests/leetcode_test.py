@@ -127,6 +127,23 @@ def test_my_pow():
     )
 
 
+def test_solve_n_queen():
+    test_ordered_list_equal(
+        cases=[
+            {
+                "n": 4,
+                "expect": [
+                    [".Q..", "...Q", "Q...", "..Q."],
+                    ["..Q.", "Q...", "...Q", ".Q.."],
+                ],
+            },
+            {"n": 2, "expect": []},
+            {"n": 1, "expect": [["Q"]]},
+        ],
+        solution=SolveNQueen().solveNQueens,
+    )
+
+
 def test_two_sum():
     test_ordered_list_equal(
         cases=[

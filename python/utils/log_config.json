@@ -15,11 +15,11 @@
             "time_format": "%Y-%m-%d %H:%M:%S %z"
         },
         "default_formatter": {
-            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s",
+            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s\n%(message)s",
             "datefmt": "%Y-%m-%d %H:%M:%S %z"
         },
         "debug_formatter": {
-            "format": "%(levelname)s | %(message)s | %(filename)s:%(lineno)s"
+            "format": "%(levelname)s | %(filename)s:%(lineno)s\n%(message)s"
         }
     },
     "handlers": {

@@ -7,6 +7,10 @@ from functools import wraps
 
 
 def run_once(func):
+    """
+    Decorator to ensure that a function is only run once.
+    """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         has_run = False
@@ -19,6 +23,9 @@ def run_once(func):
 
 @run_once
 def init_logging():
+    """
+    Initialize the logging configuration.
+    """
     with open("utils/log_config.json") as file:
         log_config = json.load(file)
 
@@ -32,4 +39,5 @@ def init_logging():
 
 
 init_logging()
+get_logger = getLogger
 default_logger = getLogger("default")

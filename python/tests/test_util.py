@@ -25,7 +25,9 @@ def test_almost_equal(cases: list[dict], solution: Callable[..., float]):
 def test_ordered_list_equal(cases: list[dict], solution: Callable[..., list]):
     for case in cases:
         expect = case.pop("expect")
-        for x, y in zip(solution(**case), expect):
+        result = solution(**case)
+        assert len(result) == len(expect)
+        for x, y in zip(result, expect):
             assert x == y
 
 
