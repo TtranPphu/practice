@@ -4,7 +4,7 @@
 #include "find_median_sorted_arrays.hpp"
 #include "length_of_longest_substring.hpp"
 #include "max_area.hpp"
-#include "solve_n_queen.hpp"
+#include "solve_n_queens.hpp"
 
 namespace {
 
@@ -71,8 +71,8 @@ TEST(LeetcodeTest, MaxAreaTest) {
   }
 }
 
-TEST(LeetcodeTest, SolveNQueenTest) {
-  auto solution = solve_n_queen::Solution();
+TEST(LeetcodeTest, SolveNQueensTest) {
+  auto solution = solve_n_queens::Solution();
   {
     vector<vector<string>> results = solution.solveNQueens(4);
     vector<vector<string>> expected{{".Q..", "...Q", "Q...", "..Q."},

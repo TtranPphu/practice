@@ -127,7 +127,7 @@ def test_my_pow():
     )
 
 
-def test_solve_n_queen():
+def test_solve_n_queens():
     test_ordered_list_equal(
         cases=[
             {
@@ -140,7 +140,7 @@ def test_solve_n_queen():
             {"n": 2, "expect": []},
             {"n": 1, "expect": [["Q"]]},
         ],
-        solution=SolveNQueen().solveNQueens,
+        solution=SolveNQueens().solveNQueens,
     )
 
 

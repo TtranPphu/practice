@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-namespace solve_n_queen {
+namespace solve_n_queens {
 class Solution {
  public:
   vector<vector<string>> solveNQueens(int n) {
