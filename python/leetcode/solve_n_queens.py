@@ -10,7 +10,7 @@ class Solution:
 
         def next(current: list[int], row: int) -> list[list[int]]:
             if row == n:
-                results.append(current)
+                results.append(["." * i + "Q" + "." * (n - i - 1) for i in current])
                 return
             valid_col = [col for col in range(n) if valid(current, row, col)]
             for col in valid_col:
@@ -18,7 +18,4 @@ class Solution:
 
         next([], 0)
 
-        str_results = [
-            ["." * i + "Q" + "." * (n - i - 1) for i in result] for result in results
-        ]
-        return str_results
+        return results

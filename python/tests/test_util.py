@@ -30,4 +30,25 @@ def test_ordered_list_equal(cases: list[dict], solution: Callable[..., list]):
         for x, y in zip(result, expect):
             assert x == y
 
+@notatest
+def list_is_identical(a: list, b: list) -> bool:
+    if len(a) != len(b):
+        return False
+    for x, y in zip(a, b):
+        if isinstance(x, list) and isinstance(y, list) and not list_is_identical(x, y):
+            return False
+        if x != y:
+            return False
+    return True
+
+@notatest
+def list_is_similar(a: list, b: list) -> bool:
+    if len(a) != len(b):
+        return False
+    for x, y in zip(a, b):
+        if isinstance(x, list) and isinstance(y, list) and not list_is_similar(x, y):
+            return False
+        if x != y:
+            return False
+    return True
 

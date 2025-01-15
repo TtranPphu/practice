@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 from utils import default_logger
-from sudoku import demo as demo
+from containers import tensor_demo as demo
 
 
 def main():
