@@ -4,19 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run (Python)",
-            "type": "shell",
-            "command": "uv",
-            "args": [
-                "run",
-                "main.py",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/python"
-            },
-            "problemMatcher": []
-        },
-        {
             "label": "Test (Python)",
             "group": "test",
             "type": "shell",
@@ -26,6 +13,19 @@
                 "pytest",
                 "${input:verbosity}",
                 "${input:python_test_cases}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/python"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Python)",
+            "type": "shell",
+            "command": "uv",
+            "args": [
+                "run",
+                "main.py",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/python"
@@ -66,6 +66,59 @@
             "problemMatcher": []
         },
         {
+            "label": "Build (Rust)",
+            "type": "shell",
+            "group": "build",
+            "command": "cargo",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rust"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "Test (Rust)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "test",
+                "${input:rust_test_cases}",
+                "${input:verbosity}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rust"
+            },
+            "dependsOn": [
+                "Build (Rust)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "Run (Rust)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "run",
+                "--package",
+                "practice",
+                "--bin",
+                "practice",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rust/target/debug"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
             "label": "Format (CMake)",
             "type": "process",
             "command": "gersemi",
@@ -82,21 +135,15 @@
             },
             "problemMatcher": []
         },
-        {
-            "label": "Run (Rust)",
-            "type": "shell",
-            "command": "cargo run --package practice --bin practice",
-            "options": {
-                "cwd": "${workspaceFolder}/rust/target/debug"
-            },
-            "problemMatcher": [
-                "$rustc"
-            ]
-        }
     ],
     "inputs": [
         {
             "id": "cpp_test_cases",
+            "description": "Test case(s)",
+            "type": "promptString",
+        },
+        {
+            "id": "rust_test_cases",
             "description": "Test case(s)",
             "type": "promptString",
         },

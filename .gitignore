@@ -1,3 +1,6 @@
 **/__pycache__
 *.lock
 db/**
+
+**/cpp/build/
+**/rust/target/
