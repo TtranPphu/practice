@@ -1,0 +1,2 @@
+--exclude-dir=__pycache__,.pytest_cache,build,target,.venv,3rd_party
+--include-lang=C++,C/C++ Header,CMake,Python,Rust,Assembly,Dockerfile,JSON,Bourne Shell
