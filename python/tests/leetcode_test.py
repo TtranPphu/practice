@@ -144,6 +144,17 @@ def test_solve_n_queens():
     )
 
 
+def test_total_n_queens():
+    test_equal(
+        cases=[
+            {"n": 4, "expect": 2},
+            {"n": 2, "expect": 0},
+            {"n": 1, "expect": 1},
+        ],
+        solution=TotalNQueens().totalNQueens,
+    )
+
+
 def test_two_sum():
     test_ordered_list_equal(
         cases=[
