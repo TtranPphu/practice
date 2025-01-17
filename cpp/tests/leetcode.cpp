@@ -4,6 +4,7 @@
 #include "find_median_sorted_arrays.hpp"
 #include "length_of_longest_substring.hpp"
 #include "max_area.hpp"
+#include "minimize_xor.hpp"
 #include "solve_n_queens.hpp"
 
 namespace {
@@ -69,6 +70,13 @@ TEST(LeetcodeTest, MaxAreaTest) {
     vector<int> height{1, 1};
     EXPECT_EQ(solution.maxArea(height), 1);
   }
+}
+
+TEST(LeetcodeTest, MinimizeXorTest) {
+  auto solution = minimize_xor::Solution();
+  EXPECT_EQ(solution.minimizeXor(3, 5), 3);
+  EXPECT_EQ(solution.minimizeXor(1, 12), 3);
+  EXPECT_EQ(solution.minimizeXor(25, 72), 24);
 }
 
 TEST(LeetcodeTest, SolveNQueensTest) {
