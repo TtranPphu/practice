@@ -1,5 +1,3 @@
 mod leetcode;
 
-fn main() {
-    leetcode::leetcode();
-}
+fn main() {}

@@ -30,8 +30,16 @@ target_include_directories(
     leetcode_test
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/leetcode
 )
-
 target_link_libraries(leetcode_test GTest::gtest_main)
+
+add_executable(interview_test tests/interview.cpp)
+target_include_directories(
+    interview_test
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/interview
+)
+target_link_libraries(interview_test GTest::gtest_main)
+
 
 include(GoogleTest)
 gtest_discover_tests(leetcode_test)
+gtest_discover_tests(interview_test)

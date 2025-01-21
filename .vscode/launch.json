@@ -16,7 +16,8 @@
             "name": "C++: Test",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/cpp/build/leetcode_test",
+            // "program": "${workspaceFolder}/cpp/build/leetcode_test",
+            "program": "${workspaceFolder}/cpp/build/interview_test",
             "args": [
                 "-R",
                 "${input:cpp_test_cases}"

@@ -120,6 +120,11 @@
             80
         ]
     },
+    "[rust]": {
+        "editor.rulers": [
+            100
+        ]
+    },
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_style": "Google",
     "cmake.sourceDirectory": "/workspaces/practice/cpp",

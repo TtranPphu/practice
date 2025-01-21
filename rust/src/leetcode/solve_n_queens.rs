@@ -2,6 +2,7 @@ pub mod solve_n_queens {
     pub struct Solution;
 
     impl Solution {
+        #[allow(dead_code)]
         pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
             fn valid(result: &Vec<i32>, row: usize, col: usize) -> bool {
                 for (i, &r) in result.iter().enumerate() {

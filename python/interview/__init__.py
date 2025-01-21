@@ -1,0 +1,1 @@
+from .larion_wq import sentenses
