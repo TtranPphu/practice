@@ -114,7 +114,7 @@ def repr_grid(grid: list[list]):
     bottom_bar = "╚" + ("═" * 7 + "╧") * 2 + "═" * 7 + "╝\n"
     line_fmt = "║" + (" {:}" * 3 + " │") * 2 + " {:}" * 3 + " ║\n"
     board_fmt = top_bar + (line_fmt * 3 + middle_bar) * 2 + line_fmt * 3 + bottom_bar
-    return board_fmt.format(*[v for row in grid for v in row])
+    return board_fmt.format(*[v if v else "." for row in grid for v in row])
 
 
 def solve(grid: list[list]):
@@ -126,17 +126,18 @@ def demo():
     try:
         result = benchmark(solve)(
             [
+                [9, 0, 0, 0, 7, 0, 0, 2, 0],
+                [0, 8, 0, 0, 6, 0, 0, 0, 3],
                 [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [4, 0, 0, 0, 0, 0, 0, 0, 1],
+                [2, 0, 0, 0, 4, 6, 3, 0, 0],
+                [6, 0, 0, 0, 9, 0, 0, 0, 8],
+                [0, 5, 0, 0, 3, 0, 0, 0, 7],
+                [0, 0, 0, 4, 0, 1, 0, 0, 0],
+                [0, 9, 0, 7, 0, 0, 1, 0, 0],
             ]
         )
     except ValueError as ev:
         default_logger.debug(ev)
-    default_logger.critical(f"{repr_grid(result)}")
+    else:
+        default_logger.critical(f"{repr_grid(result)}")
