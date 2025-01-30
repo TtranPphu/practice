@@ -1,7 +1,4 @@
 pub mod merge_two_lists {
-    use std::collections::HashSet;
-
-    use macro_utils::comprehension;
 
     // Definition for singly-linked list.
     #[derive(PartialEq, Eq, Clone, Debug)]

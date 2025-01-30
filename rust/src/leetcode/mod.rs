@@ -5,4 +5,5 @@ pub mod minimize_xor;
 pub mod monkey_move;
 pub mod my_atoi;
 pub mod my_pow;
+pub mod reverse;
 pub mod solve_n_queens;
