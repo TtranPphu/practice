@@ -16,15 +16,4 @@ impl Solution {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::Solution;
 
-    #[test]
-    fn test_monkey_move() {
-        assert_eq!(Solution::monkey_move(3), 6);
-        assert_eq!(Solution::monkey_move(4), 14);
-        assert_eq!(Solution::monkey_move(55), 766762394);
-        assert_eq!(Solution::monkey_move(500000004), 0);
-    }
-}

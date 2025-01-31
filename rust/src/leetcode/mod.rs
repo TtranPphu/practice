@@ -1,7 +1,7 @@
 pub mod can_be_valid;
 pub mod cnds;
 pub mod merge_two_lists;
-pub mod minimize_xor;
+pub mod xor;
 pub mod monkey_move;
 pub mod my_atoi;
 pub mod my_pow;

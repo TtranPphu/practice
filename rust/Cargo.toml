@@ -4,5 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-assert_approx_eq = "1.1.0"
 macro_utils = { version = "0.1.0", path = "macro_utils" }
+
+[dev-dependencies]
+assert_approx_eq = "1.1.0"
+divan = "0.1.17"
+
+[[bench]]
+name = "sudoku"
+harness = false

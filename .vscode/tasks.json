@@ -86,8 +86,30 @@
             "command": "cargo",
             "args": [
                 "test",
+                "--test",
+                "${input:rust_test_target}",
                 "${input:rust_test_cases}",
-                "${input:verbosity}"
+                "${input:verbosity}",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rust"
+            },
+            "dependsOn": [
+                "Build (Rust)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "Benchmark (Rust)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "bench",
+                "--bench",
+                "${input:rust_bench_target}",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/rust"
@@ -146,6 +168,23 @@
             "id": "rust_test_cases",
             "description": "Test case(s)",
             "type": "promptString",
+        },
+        {
+            "id": "rust_test_target",
+            "description": "Test target",
+            "type": "pickString",
+            "options": [
+                "leetcode",
+                "sudoku"
+            ],
+        },
+        {
+            "id": "rust_bench_target",
+            "description": "Benchmark target",
+            "type": "pickString",
+            "options": [
+                "sudoku"
+            ],
         },
         {
             "id": "verbosity",
