@@ -1,17 +1,15 @@
-pub mod cnds {
-    pub struct Solution;
+pub struct Solution;
 
-    impl Solution {
-        #[allow(dead_code)]
-        pub fn count_non_decreasing_subarrays(_nums: Vec<i32>, _k: i32) -> i64 {
-            0
-        }
+impl Solution {
+    #[allow(dead_code)]
+    pub fn count_non_decreasing_subarrays(_nums: Vec<i32>, _k: i32) -> i64 {
+        0
     }
 }
 
 #[cfg(test)]
-mod leetcode_test {
-    use crate::leetcode::count_non_decreasing_subarrays::cnds::Solution;
+mod tests {
+    use super::Solution;
 
     #[test]
     fn test_count_non_decreasing_subarrays() {

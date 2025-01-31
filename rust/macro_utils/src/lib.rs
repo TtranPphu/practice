@@ -5,7 +5,6 @@ use quote::quote;
 
 #[proc_macro]
 pub fn comprehension(input: TokenStream) -> TokenStream {
-    use comprehension::comprehension::Comprehension;
-    let comprehension = syn::parse_macro_input!(input as Comprehension);
+    let comprehension: comprehension::Comprehension = syn::parse_macro_input!(input);
     quote! {#comprehension}.into()
 }

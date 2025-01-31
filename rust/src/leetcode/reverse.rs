@@ -1,26 +1,24 @@
-pub mod reverse {
-    pub struct Solution;
+pub struct Solution;
 
-    impl Solution {
-        #[allow(dead_code)]
-        pub fn reverse(x: i32) -> i32 {
-            let mut r: i32 = 0;
-            let mut x: i32 = x;
-            while x != 0 {
-                if r > i32::MAX / 10 || r < i32::MIN / 10 {
-                    return 0;
-                }
-                r = r * 10 + x % 10;
-                x /= 10;
+impl Solution {
+    #[allow(dead_code)]
+    pub fn reverse(x: i32) -> i32 {
+        let mut r: i32 = 0;
+        let mut x: i32 = x;
+        while x != 0 {
+            if r > i32::MAX / 10 || r < i32::MIN / 10 {
+                return 0;
             }
-            r
+            r = r * 10 + x % 10;
+            x /= 10;
         }
+        r
     }
 }
 
 #[cfg(test)]
-mod leetcode_test {
-    use crate::leetcode::reverse::reverse::Solution;
+mod tests {
+    use super::Solution;
 
     #[test]
     fn test_reverse() {

@@ -68,11 +68,11 @@ pub mod does_valid_array_exist {
 }
 
 #[cfg(test)]
-mod leetcode_test {
+mod tests {
 
     #[test]
     fn test_minimize_xor() {
-        use crate::leetcode::minimize_xor::minimize_xor::Solution;
+        use super::minimize_xor::Solution;
         let cases: Vec<(i32, i32, i32)> = vec![(3, 5, 3), (1, 12, 3), (25, 72, 24)];
         for (num1, num2, expected) in cases {
             let result = Solution::minimize_xor(num1, num2);
@@ -82,7 +82,7 @@ mod leetcode_test {
 
     #[test]
     fn test_xor_all_nums() {
-        use crate::leetcode::minimize_xor::xor_all_nums::Solution;
+        use super::xor_all_nums::Solution;
         let cases = vec![
             (vec![2, 1, 3], vec![10, 2, 5, 0], 13),
             (vec![1, 2], vec![3, 4], 0),
@@ -112,7 +112,7 @@ mod leetcode_test {
 
     #[test]
     fn test_does_valid_array_exist() {
-        use crate::leetcode::minimize_xor::does_valid_array_exist::Solution;
+        use super::does_valid_array_exist::Solution;
         let cases = vec![
             (vec![1, 1, 0], true),
             (vec![1, 1], true),

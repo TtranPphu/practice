@@ -1,5 +1,5 @@
 pub mod can_be_valid;
-pub mod count_non_decreasing_subarrays;
+pub mod cnds;
 pub mod merge_two_lists;
 pub mod minimize_xor;
 pub mod monkey_move;
