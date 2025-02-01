@@ -87,17 +87,13 @@
             "args": [
                 "test",
                 "--test",
-                "${input:rust_test_target}",
-                "${input:rust_test_cases}",
+                "${input:rust_target}",
+                "${input:rust_test_case_or_bench}",
                 "${input:verbosity}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust/${input:rust_project}"
+                "cwd": "${workspaceFolder}/rust/${input:rust_target}"
             },
-            "dependsOn": [
-                "Build (Rust)"
-            ],
-            "dependsOrder": "sequence",
             "problemMatcher": [
                 "$rustc"
             ]
@@ -109,10 +105,12 @@
             "args": [
                 "bench",
                 "--bench",
-                "${input:rust_bench_target}",
+                "${input:rust_target}",
+                "${input:rust_test_case_or_bench}",
+                "${input:verbosity}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust/${input:rust_project}"
+                "cwd": "${workspaceFolder}/rust/${input:rust_target}"
             },
             "dependsOn": [
                 "Build (Rust)"
@@ -165,17 +163,7 @@
             "type": "promptString",
         },
         {
-            "id": "rust_project",
-            "description": "Project",
-            "type": "pickString",
-            "options": [
-                "",
-                "sudoku_solver"
-            ],
-            "default": ""
-        },
-        {
-            "id": "rust_test_target",
+            "id": "rust_target",
             "description": "Test target",
             "type": "pickString",
             "options": [
@@ -184,17 +172,9 @@
             ],
         },
         {
-            "id": "rust_test_cases",
-            "description": "Test case(s)",
+            "id": "rust_test_case_or_bench",
+            "description": "Test case(s) or bench(es)",
             "type": "promptString",
-        },
-        {
-            "id": "rust_bench_target",
-            "description": "Benchmark target",
-            "type": "pickString",
-            "options": [
-                "sudoku"
-            ],
         },
         {
             "id": "verbosity",

@@ -1,7 +1,7 @@
 #[test]
-fn test_solve() {
+fn solve() {
     use std::collections::HashMap;
-    use sudoku_solver::solve;
+    use sudoku::solve;
     let mut expert = HashMap::new();
     expert.insert(
         "problem",

@@ -1,11 +1,11 @@
-use sudoku_solver::solve;
-
 fn main() {
     divan::main();
 }
 
+use sudoku::solve;
+
 #[divan::bench]
-fn sudoku_expert_bench() {
+fn expert() {
     let _ = solve(vec![
         vec![9, 0, 0, 0, 7, 0, 0, 2, 0],
         vec![0, 8, 0, 0, 6, 0, 0, 0, 3],
@@ -20,7 +20,7 @@ fn sudoku_expert_bench() {
 }
 
 #[divan::bench]
-fn sudoku_extreme_bench() {
+fn extreme() {
     let _ = solve(vec![
         vec![2, 0, 4, 0, 0, 0, 0, 0, 0],
         vec![1, 0, 7, 0, 9, 0, 0, 0, 2],
@@ -35,7 +35,7 @@ fn sudoku_extreme_bench() {
 }
 
 #[divan::bench]
-fn sudoku_free_bench() {
+fn free() {
     let _ = solve(vec![
         vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
         vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
