@@ -5,11 +5,8 @@ edition = "2021"
 
 [dependencies]
 macro_utils = { version = "0.1.0", path = "macro_utils" }
+sudoku_solver = { version = "0.1.0", path = "sudoku_solver" }
 
 [dev-dependencies]
 assert_approx_eq = "1.1.0"
 divan = "0.1.17"
-
-[[bench]]
-name = "sudoku"
-harness = false

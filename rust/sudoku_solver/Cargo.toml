@@ -1,0 +1,14 @@
+[package]
+name = "sudoku_solver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+macro_utils = { version = "0.1.0", path = "../macro_utils" }
+
+[dev-dependencies]
+divan = "0.1.17"
+
+[[bench]]
+name = "sudoku"
+harness = false

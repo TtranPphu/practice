@@ -1,3 +1,31 @@
+pub fn solve(problem: Vec<Vec<u8>>) -> Result<Grid, Grid> {
+    let mut grid = Grid::new();
+    match grid.init(problem).solve() {
+        Ok(_) => Ok(grid),
+        Err(_) => Err(grid),
+    }
+}
+
+pub fn demo() {
+    let mut board = Grid::new();
+    board.init(vec![
+        vec![9, 0, 0, 0, 7, 0, 0, 2, 0],
+        vec![0, 8, 0, 0, 6, 0, 0, 0, 3],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![4, 0, 0, 0, 0, 0, 0, 0, 1],
+        vec![2, 0, 0, 0, 4, 6, 3, 0, 0],
+        vec![6, 0, 0, 0, 9, 0, 0, 0, 8],
+        vec![0, 5, 0, 0, 3, 0, 0, 0, 7],
+        vec![0, 0, 0, 4, 0, 1, 0, 0, 0],
+        vec![0, 9, 0, 7, 0, 0, 1, 0, 0],
+    ]);
+    println!("Solving...\n{}", board);
+    match board.solve() {
+        Ok(_) => println!("Solved!\n{}", board),
+        Err(_) => println!("Unsolvable!\n{}", board),
+    }
+}
+
 pub struct Grid {
     cells: Vec<Vec<Cell>>,
 }
@@ -88,6 +116,40 @@ impl Grid {
     }
 
     fn brute_force(&mut self) -> Result<(), ()> {
+        let mut row = 0;
+        // find the first unsolved cell
+        if let Ok((i, j, cell)) = 'i: loop {
+            let mut col = 0;
+            loop {
+                let cell = &self.cells[row][col];
+                if cell.value == 0 {
+                    break 'i Ok((row, col, cell));
+                }
+                col += 1;
+                if col == 9 {
+                    break;
+                }
+            }
+            row += 1;
+            if row == 9 {
+                break Err(());
+            }
+        } {
+            // try all posible values
+            for &v in &cell.candidates {
+                let mut clone = self.clone();
+                clone.set_value(i, j, v);
+                if clone.solve().is_ok() && clone.solved() {
+                    *self = clone;
+                    return Ok(());
+                }
+            }
+        }
+        Err(())
+    }
+
+    #[allow(dead_code)]
+    fn brute_force_v1(&mut self) -> Result<(), ()> {
         for i in 0..9 {
             for j in 0..9 {
                 let cell = &self.cells[i][j];
@@ -187,14 +249,5 @@ impl std::fmt::Display for Cell {
         } else {
             write!(f, "{}", self.value)
         }
-    }
-}
-
-#[allow(dead_code)]
-pub fn solve(problem: Vec<Vec<u8>>) -> Result<Grid, Grid> {
-    let mut grid = Grid::new();
-    match grid.init(problem).solve() {
-        Ok(_) => Ok(grid),
-        Err(_) => Err(grid),
     }
 }

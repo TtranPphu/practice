@@ -1,4 +1,6 @@
 mod leetcode;
-mod sudoku;
+use sudoku_solver::demo;
 
-fn main() {}
+fn main() {
+    demo();
+}

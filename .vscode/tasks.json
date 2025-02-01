@@ -92,7 +92,7 @@
                 "${input:verbosity}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust"
+                "cwd": "${workspaceFolder}/rust/${input:rust_project}"
             },
             "dependsOn": [
                 "Build (Rust)"
@@ -112,7 +112,7 @@
                 "${input:rust_bench_target}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust"
+                "cwd": "${workspaceFolder}/rust/${input:rust_project}"
             },
             "dependsOn": [
                 "Build (Rust)"
@@ -165,9 +165,14 @@
             "type": "promptString",
         },
         {
-            "id": "rust_test_cases",
-            "description": "Test case(s)",
-            "type": "promptString",
+            "id": "rust_project",
+            "description": "Project",
+            "type": "pickString",
+            "options": [
+                "",
+                "sudoku_solver"
+            ],
+            "default": ""
         },
         {
             "id": "rust_test_target",
@@ -177,6 +182,11 @@
                 "leetcode",
                 "sudoku"
             ],
+        },
+        {
+            "id": "rust_test_cases",
+            "description": "Test case(s)",
+            "type": "promptString",
         },
         {
             "id": "rust_bench_target",
