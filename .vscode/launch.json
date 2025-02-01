@@ -2,19 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Rust: Main",
-            "type": "lldb",
-            "request": "launch",
-            "preLaunchTask": "Build (Rust)",
-            "program": "${workspaceFolder}/rust/target/debug/practice",
-            "args": [],
-            "cwd": "${workspaceFolder}/rust",
-            "sourceLanguages": [
-                "rust"
-            ]
-
-        },
-        {
             "name": "C++: Main",
             "type": "cppdbg",
             "request": "launch",
@@ -31,8 +18,8 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "Build (C++)",
-            // "program": "${workspaceFolder}/cpp/build/leetcode_test",
-            "program": "${workspaceFolder}/cpp/build/interview_test",
+            "program": "${workspaceFolder}/cpp/build/leetcode_test",
+            // "program": "${workspaceFolder}/cpp/build/interview_test",
             "args": [
                 "-R",
                 "${input:cpp_test_cases}"

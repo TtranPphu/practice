@@ -1,10 +1,10 @@
 services:
   devcontainer:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspaces/practice:cached
+      - ../..:/workspaces/practice:cached
       - /home/ttranpphu/.ssh:/home/practice/.ssh:cached
     environment:
       - UV_LINK_MODE=copy
@@ -19,4 +19,4 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     volumes:
-      - ../db:/data/db:cached
+      - ../../db:/data/db:cached

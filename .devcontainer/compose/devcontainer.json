@@ -1,7 +1,7 @@
 {
     "name": "practice-compose-devcontainer",
-    "postCreateCommand": "sh .devcontainer/post-create.sh",
-    "dockerComposeFile": "../docker-compose.yml",
+    "postCreateCommand": "sh .devcontainer/post-create-default.sh",
+    "dockerComposeFile": "docker-compose.yml",
     "service": "devcontainer",
     "workspaceFolder": "/workspaces/practice",
     "customizations": {
@@ -23,23 +23,24 @@
                 }
             },
             "extensions": [
-                "rioj7.command-variable",
-                "ms-vscode.cpptools",
-                "ms-vscode.cmake-tools",
+                "chekweitan.compare-view",
+                "eriklynd.json-tools",
+                "mechatroner.rainbow-csv",
+                "medo64.render-crlf",
+                "mongodb.mongodb-vscode",
+                "ms-azuretools.vscode-docker",
+                "ms-python.black-formatter",
                 "ms-python.python",
                 "ms-python.vscode-pylance",
-                "ms-python.black-formatter",
                 "ms-toolsai.jupyter",
-                "ms-azuretools.vscode-docker",
-                "eriklynd.json-tools",
-                "chekweitan.compare-view",
-                "medo64.render-crlf",
-                "mechatroner.rainbow-csv",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools",
                 "PKief.material-icon-theme",
                 "PKief.material-product-icons",
+                "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
-                "vadimcn.vscode-lldb",
-                "tamasfe.even-better-toml"
+                "tamasfe.even-better-toml",
+                "vadimcn.vscode-lldb"
             ]
         }
     }
