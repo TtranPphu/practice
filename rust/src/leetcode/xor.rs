@@ -2,7 +2,6 @@ pub mod minimize_xor {
     pub struct Solution;
 
     impl Solution {
-        #[allow(dead_code)]
         pub fn minimize_xor(num1: i32, num2: i32) -> i32 {
             let mut r = num1;
             let nsb1 = num1.count_ones();
@@ -25,7 +24,6 @@ pub mod xor_all_nums {
     pub struct Solution;
 
     impl Solution {
-        #[allow(dead_code)]
         pub fn xor_all_nums(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
             let mut r = 0;
             let if1odd = nums1.len() % 2 != 0;
@@ -39,7 +37,6 @@ pub mod xor_all_nums {
             r
         }
 
-        #[allow(dead_code)]
         pub fn xor_all_nums_v1(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
             let mut r = 0;
             if nums1.len() % 2 != 0 {
@@ -61,7 +58,6 @@ pub mod does_valid_array_exist {
     pub struct Solution;
 
     impl Solution {
-        #[allow(dead_code)]
         pub fn does_valid_array_exist(derived: Vec<i32>) -> bool {
             return derived.into_iter().fold(0, |acc, n| acc ^ n) == 0;
         }

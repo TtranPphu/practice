@@ -10,7 +10,7 @@ impl ListNode {
     fn new(val: i32) -> Self {
         ListNode { next: None, val }
     }
-    #[allow(dead_code)]
+
     pub fn from_vec(vals: Vec<i32>) -> Option<Box<Self>> {
         let mut node: Option<Box<ListNode>> = None;
         for val in vals.into_iter().rev() {
@@ -20,7 +20,7 @@ impl ListNode {
         }
         node
     }
-    #[allow(dead_code)]
+
     pub fn to_vec(&self) -> Vec<i32> {
         let mut node = self;
         let mut vals = Vec::new();
@@ -35,15 +35,15 @@ impl ListNode {
     }
 }
 pub struct Solution;
+
 impl Solution {
-    #[allow(dead_code)]
     pub fn merge_two_lists(
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,
     ) -> Option<Box<ListNode>> {
         return Self::merge_two_lists_v2(list1, list2);
     }
-    #[allow(dead_code)]
+
     pub fn merge_two_lists_v2(
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,
@@ -90,7 +90,7 @@ impl Solution {
         }
         head
     }
-    #[allow(dead_code)]
+
     pub fn merge_two_lists_v1(
         list1: Option<Box<ListNode>>,
         list2: Option<Box<ListNode>>,

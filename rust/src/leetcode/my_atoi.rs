@@ -2,7 +2,6 @@
 pub struct Solution;
 
 impl Solution {
-    #[allow(dead_code)]
     pub fn my_atoi(s: String) -> i32 {
         const BOUND: i32 = i32::MAX / 10;
         const ZERO: i32 = '0' as i32;

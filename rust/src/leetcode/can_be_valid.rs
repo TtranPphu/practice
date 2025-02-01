@@ -1,10 +1,9 @@
 pub struct Solution;
 impl Solution {
-    #[allow(dead_code)]
     pub fn can_be_valid(s: String, locked: String) -> bool {
         Self::can_be_valid_v2(s, locked)
     }
-    #[allow(dead_code)]
+
     pub fn can_be_valid_v2(s: String, locked: String) -> bool {
         if s.len() % 2 == 1 {
             return false;
@@ -27,7 +26,7 @@ impl Solution {
         }
         opens.is_empty()
     }
-    #[allow(dead_code)]
+
     pub fn can_be_valid_v1(s: String, locked: String) -> bool {
         if s.len() & 1 == 1 {
             return false;
@@ -57,4 +56,3 @@ impl Solution {
         true
     }
 }
-

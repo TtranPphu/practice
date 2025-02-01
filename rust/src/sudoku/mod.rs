@@ -1,13 +1,10 @@
-use macro_utils::comprehension as comp;
-use std::collections::HashSet;
-
 pub struct Grid {
     cells: Vec<Vec<Cell>>,
 }
 
 struct Cell {
     value: u8,
-    candidates: HashSet<u8>,
+    candidates: std::collections::HashSet<u8>,
 }
 
 impl Grid {
@@ -137,7 +134,7 @@ impl Cell {
     fn new(value: u8) -> Cell {
         Cell {
             value,
-            candidates: comp!(i for i in 1..10 if i != value).collect(),
+            candidates: macro_utils::comprehension!(i for i in 1..10 if i != value).collect(),
         }
     }
 

@@ -20,6 +20,7 @@ mod leetcode {
             ) == false
         );
     }
+
     // #[test]
     fn test_count_non_decreasing_subarrays() {
         use practice::leetcode::cnds::Solution;
@@ -32,6 +33,7 @@ mod leetcode {
             assert_eq!(result, expected);
         }
     }
+
     #[test]
     fn test_merge_two_lists() {
         use practice::leetcode::merge_two_lists::{ListNode, Solution};
@@ -46,6 +48,7 @@ mod leetcode {
         let expected = vec![1, 1, 2, 3, 4, 4];
         assert_eq!(rr, expected);
     }
+
     #[test]
     fn test_monkey_move() {
         use practice::leetcode::monkey_move::Solution;
@@ -54,6 +57,7 @@ mod leetcode {
         assert_eq!(Solution::monkey_move(55), 766762394);
         assert_eq!(Solution::monkey_move(500000004), 0);
     }
+
     #[test]
     fn test_my_atoi() {
         use practice::leetcode::my_atoi::Solution;
@@ -99,6 +103,7 @@ mod leetcode {
         assert_eq!(Solution::reverse(1534236469), 0);
         assert_eq!(Solution::reverse(-2147483648), 0);
     }
+
     #[test]
     fn test_solve_n_queens() {
         use practice::leetcode::solve_n_queens::Solution;
@@ -117,6 +122,21 @@ mod leetcode {
             assert_eq!(result, expected);
         }
     }
+
+    #[test]
+    fn test_two_sum() {
+        use practice::leetcode::two_sum::Solution;
+        let cases = vec![
+            (vec![2, 7, 11, 15], 9, vec![0, 1]),
+            (vec![3, 2, 4], 6, vec![1, 2]),
+            (vec![3, 3], 6, vec![0, 1]),
+        ];
+        for (nums, target, expected) in cases {
+            let result = Solution::two_sum(nums, target);
+            assert_eq!(result, expected);
+        }
+    }
+
     #[test]
     fn test_minimize_xor() {
         use practice::leetcode::xor::minimize_xor::Solution;

@@ -1,6 +1,5 @@
 pub struct Solution;
 impl Solution {
-    #[allow(dead_code)]
     pub fn monkey_move(n: i32) -> i32 {
         static M: i64 = 1_000_000_007;
         let mut r = 1_i64;

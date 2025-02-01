@@ -1,7 +1,6 @@
 pub struct Solution;
 
 impl Solution {
-    #[allow(dead_code)]
     pub fn my_pow(x: f64, n: i32) -> f64 {
         if n < 0 {
             return Solution::my_pow(1.0 / x, -n);
