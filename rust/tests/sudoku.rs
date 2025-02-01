@@ -1,10 +1,10 @@
-#[cfg(test)]
 mod sudoku {
-    use practice::sudoku::solve;
-    use std::collections::HashMap;
+    #![allow(dead_code)]
 
     #[test]
     fn test_solve() {
+        use practice::sudoku::solve;
+        use std::collections::HashMap;
         let mut expert = HashMap::new();
         expert.insert(
             "problem",

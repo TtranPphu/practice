@@ -38,6 +38,7 @@ pub mod xor_all_nums {
             }
             r
         }
+
         #[allow(dead_code)]
         pub fn xor_all_nums_v1(nums1: Vec<i32>, nums2: Vec<i32>) -> i32 {
             let mut r = 0;

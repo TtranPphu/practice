@@ -1,4 +1,3 @@
-use divan;
 use practice::sudoku::solve;
 
 fn main() {
