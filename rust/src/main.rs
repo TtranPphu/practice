@@ -1,3 +1,4 @@
 fn main() {
-    sudoku::demo();
+    logger::test_log();
+    // sudoku::demo();
 }

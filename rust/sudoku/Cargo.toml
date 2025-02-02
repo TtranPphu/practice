@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-macro_utils = { version = "0.1.0", path = "../macro_utils" }
+macros = { version = "0.1.0", path = "../macros" }
 
 [dev-dependencies]
 divan = "0.1.17"

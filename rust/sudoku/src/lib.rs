@@ -196,7 +196,7 @@ impl Cell {
     fn new(value: u8) -> Cell {
         Cell {
             value,
-            candidates: macro_utils::comprehension!(i for i in 1..10 if i != value).collect(),
+            candidates: macros::comprehension!(i for i in 1..10 if i != value).collect(),
         }
     }
 
