@@ -65,11 +65,27 @@ fn solve() {
         let problem = test.get("problem").unwrap();
         let expected = test.get("expected").unwrap();
         match solve(problem.clone()) {
-            Ok(grid) => assert_eq!(grid.result(), *expected),
+            Ok(grid) => assert_eq!(grid.state(), *expected),
             Err(grid) => {
                 println!("{}", grid);
                 panic!("Unsolvable!")
             }
         }
     }
+}
+
+#[test]
+fn free() {
+    use sudoku::solve;
+    let _ = solve(vec![
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
 }
