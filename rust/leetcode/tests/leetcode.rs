@@ -34,6 +34,19 @@ fn count_non_decreasing_subarrays() {
 }
 
 #[test]
+fn median_sliding_window() {
+    use leetcode::median_sliding_window::Solution;
+    let cases = vec![
+        (vec![1, 3, -1, -3, 5, 3, 6, 7], 3, vec![1.0, -1.0, -1.0, 3.0, 5.0, 6.0]),
+        (vec![1, 2, 3, 4, 2, 3, 1, 4, 2], 3, vec![2.0, 3.0, 3.0, 3.0, 2.0, 3.0, 2.0]),
+    ];
+    for (nums, k, expected) in cases {
+        let result = Solution::median_sliding_window(nums, k);
+        assert_eq!(result, expected);
+    }
+}
+
+#[test]
 fn merge_two_lists() {
     use leetcode::merge_two_lists::{ListNode, Solution};
     let list1 = ListNode::from_vec(vec![1, 2, 4]);

@@ -1,5 +1,6 @@
 pub mod can_be_valid;
 pub mod cnds;
+pub mod median_sliding_window;
 pub mod merge_two_lists;
 pub mod monkey_move;
 pub mod my_atoi;

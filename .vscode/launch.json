@@ -59,6 +59,18 @@
             "cwd": "${workspaceFolder}/python",
             "console": "internalConsole",
             "justMyCode": false
+        },
+        {
+            "name": "Rust: Main",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/rust/target/debug/practice",
+            "args": [],
+            "cwd": "${workspaceFolder}/rust",
+            "preLaunchTask": "Build (Rust)",
+            "sourceLanguages": [
+                "rust"
+            ]
         }
     ],
     "inputs": [

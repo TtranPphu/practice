@@ -13,7 +13,7 @@ pub struct Comprehension {
 
 struct Map(syn::Expr);
 
-struct IteratorFilter {
+pub struct IteratorFilter {
     iterator: Iterator,
     iterable: syn::Expr,
     filters: Vec<Filter>,
@@ -22,7 +22,7 @@ struct IteratorFilter {
 struct Iterator(syn::Pat);
 struct Filter(syn::Expr);
 
-fn parse_some<T: Parse>(input: ParseStream) -> Vec<T> {
+pub fn parse_some<T: Parse>(input: ParseStream) -> Vec<T> {
     let mut r = vec![];
     while let Ok(item) = input.parse() {
         r.push(item);
