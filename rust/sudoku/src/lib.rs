@@ -1,19 +1,19 @@
 #![allow(dead_code)]
 
-pub mod grid;
+pub mod board;
 
-use grid::Grid;
+use board::Board;
 
 pub fn solve(problem: Vec<Vec<u8>>) -> Result<Vec<Vec<u8>>, ()> {
-    let mut grid = Grid::new();
-    grid.init(problem);
-    grid.solve()?;
-    Ok(grid.state().clone())
+    let mut board = Board::new();
+    board.init(problem);
+    board.solve()?;
+    Ok(board.state().clone())
 }
 
 pub fn demo() {
-    let mut grid = Grid::new();
-    grid.init(vec![
+    let mut board = Board::new();
+    board.init(vec![
         vec![0, 6, 0, 0, 0, 3, 0, 0, 7],
         vec![3, 0, 0, 6, 8, 0, 0, 1, 0],
         vec![1, 9, 0, 2, 0, 0, 0, 0, 0],
@@ -24,9 +24,9 @@ pub fn demo() {
         vec![0, 0, 0, 0, 2, 0, 0, 0, 9],
         vec![0, 0, 0, 0, 4, 0, 8, 7, 0],
     ]);
-    print!("Solving...\n{}", grid);
-    match grid.solve() {
-        Ok(_) => println!("Solved!\n{}", grid),
-        Err(_) => println!("No solution found!\n{}", grid),
+    print!("Solving...\n{}", board);
+    match board.solve() {
+        Ok(_) => println!("Solved!\n{}", board),
+        Err(_) => println!("No solution found!\n{}", board),
     }
 }

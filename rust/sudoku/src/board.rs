@@ -1,12 +1,12 @@
 use std::collections::HashSet;
 
 #[derive(Clone)]
-pub struct Grid {
+pub struct Board {
     cells: Vec<Vec<u8>>,
     candidates: Vec<Vec<HashSet<u8>>>,
 }
 
-impl Grid {
+impl Board {
     pub fn new() -> Self {
         Self {
             cells: vec![vec![0; 9]; 9],
@@ -85,7 +85,7 @@ impl Grid {
             for &v in self.candidates[i][j].iter() {
                 let mut grid_clone = self.clone();
                 grid_clone.set_value(i, j, v);
-                if grid_clone.solve().is_ok()  {
+                if grid_clone.solve().is_ok() {
                     *self = grid_clone;
                     return Ok(());
                 }
@@ -130,7 +130,7 @@ impl Grid {
     }
 }
 
-impl std::fmt::Display for Grid {
+impl std::fmt::Display for Board {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "╔═══════╤═══════╤═══════╗")?;
         for (i, row) in self.cells.iter().enumerate() {
