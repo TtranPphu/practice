@@ -4,33 +4,50 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Test (Python)",
-            "group": "test",
+            "label": "Build (Asm)",
             "type": "shell",
-            "command": "uv",
+            "group": "build",
+            "command": "nasm",
             "args": [
-                "run",
-                "pytest",
-                "${input:verbosity}",
-                "${input:python_test_cases}"
+                "-f",
+                "elf64",
+                "-o",
+                "main.o",
+                "main.s"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/python"
+                "cwd": "${workspaceFolder}/assembly"
             },
-            "problemMatcher": []
         },
         {
-            "label": "Run (Python)",
+            "label": "Link (Asm)",
             "type": "shell",
-            "command": "uv",
+            "group": "build",
+            "command": "ld",
             "args": [
-                "run",
-                "main.py",
+                "-o",
+                "main",
+                "main.o"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/python"
+                "cwd": "${workspaceFolder}/assembly"
             },
-            "problemMatcher": []
+            "dependsOn": [
+                "Build (Asm)"
+            ],
+            "dependsOrder": "sequence",
+        },
+        {
+            "label": "Run (Asm)",
+            "type": "shell",
+            "group": "build",
+            "command": "./main",
+            "dependsOn": [
+                "Link (Asm)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/assembly"
+            },
         },
         {
             "label": "Build (C++)",
@@ -66,6 +83,35 @@
             "problemMatcher": []
         },
         {
+            "label": "Test (Python)",
+            "group": "test",
+            "type": "shell",
+            "command": "uv",
+            "args": [
+                "run",
+                "pytest",
+                "${input:verbosity}",
+                "${input:python_test_cases}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/python"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run (Python)",
+            "type": "shell",
+            "command": "uv",
+            "args": [
+                "run",
+                "main.py",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/python"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Build (Rust)",
             "type": "shell",
             "group": "build",
@@ -92,7 +138,7 @@
                 "${input:verbosity}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust/${input:rust_target}"
+                "cwd": "${workspaceFolder}/rust"
             },
             "problemMatcher": [
                 "$rustc"
@@ -110,7 +156,7 @@
                 "${input:verbosity}",
             ],
             "options": {
-                "cwd": "${workspaceFolder}/rust/${input:rust_target}"
+                "cwd": "${workspaceFolder}/rust"
             },
             "dependsOn": [
                 "Build (Rust)"
@@ -168,7 +214,8 @@
             "type": "pickString",
             "options": [
                 "leetcode",
-                "sudoku"
+                "sudoku",
+                "sudoku-pz6"
             ],
         },
         {

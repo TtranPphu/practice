@@ -2,23 +2,3 @@
 name = "sudoku"
 version = "0.1.0"
 edition = "2021"
-
-[dependencies]
-macros = { version = "0.1.0", path = "../macros" }
-
-[dev-dependencies]
-divan = "0.1.17"
-
-[[bench]]
-name = "sudoku"
-harness = false
-
-[[bench]]
-name = "pz6"
-harness = false
-
-[[test]]
-name = "sudoku"
-
-[[test]]
-name = "pz6"

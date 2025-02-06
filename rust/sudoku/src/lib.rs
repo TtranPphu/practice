@@ -36,7 +36,9 @@ pub fn demo() {
         Ok(_) => println!("Solved!\n{}", board),
         Err(_) => println!("No solution found!\n{}", board),
     }
+}
 
+pub fn demo_str() {
     let mut board = Board::new();
     board.from_str(
         "........2..8..91..5......4....9.7.....7.3.8.....8.1.3..4..6...5..97..3..2........",

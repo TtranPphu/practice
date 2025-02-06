@@ -8,7 +8,7 @@ section .text
 _start:
     mov rax, 1                          ; write syscall
     mov rdi, 1                          ; stdout
-    lea rsi, [hello_world]              ; address of hello_world
+    lea rsi, hello_world                ; address of hello_world
     mov rdx, hello_world_len            ; length of hello_world
     syscall                             ; write hello_world to stdout
 

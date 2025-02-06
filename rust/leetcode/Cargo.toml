@@ -2,16 +2,3 @@
 name = "leetcode"
 version = "0.1.0"
 edition = "2021"
-
-[dependencies]
-
-[dev-dependencies]
-assert_approx_eq = "1.1.0"
-divan = "0.1.17"
-
-[[bench]]
-name = "leetcode"
-harness = false
-
-[[test]]
-name = "leetcode"

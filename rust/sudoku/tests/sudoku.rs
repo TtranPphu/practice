@@ -1,6 +1,6 @@
 #[test]
 fn solve() {
-    let tests = vec![
+    let tests = [
         (
             vec![
                 vec![9, 0, 0, 0, 7, 0, 0, 2, 0],

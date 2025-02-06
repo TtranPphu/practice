@@ -23,7 +23,7 @@ fn can_be_valid() {
 // #[test]
 fn count_non_decreasing_subarrays() {
     use leetcode::cnds::Solution;
-    let cases = vec![
+    let cases = [
         (vec![6, 3, 1, 2, 4, 4], 7, 17),
         (vec![6, 3, 1, 3, 6], 4, 12),
     ];
@@ -36,9 +36,17 @@ fn count_non_decreasing_subarrays() {
 #[test]
 fn median_sliding_window() {
     use leetcode::median_sliding_window::Solution;
-    let cases = vec![
-        (vec![1, 3, -1, -3, 5, 3, 6, 7], 3, vec![1.0, -1.0, -1.0, 3.0, 5.0, 6.0]),
-        (vec![1, 2, 3, 4, 2, 3, 1, 4, 2], 3, vec![2.0, 3.0, 3.0, 3.0, 2.0, 3.0, 2.0]),
+    let cases = [
+        (
+            vec![1, 3, -1, -3, 5, 3, 6, 7],
+            3,
+            vec![1.0, -1.0, -1.0, 3.0, 5.0, 6.0],
+        ),
+        (
+            vec![1, 2, 3, 4, 2, 3, 1, 4, 2],
+            3,
+            vec![2.0, 3.0, 3.0, 3.0, 2.0, 3.0, 2.0],
+        ),
     ];
     for (nums, k, expected) in cases {
         let result = Solution::median_sliding_window(nums, k);
@@ -73,7 +81,7 @@ fn monkey_move() {
 #[test]
 fn my_atoi() {
     use leetcode::my_atoi::Solution;
-    let cases = vec![
+    let cases = [
         ("42", 42),
         ("   -42", -42),
         ("4193 with words", 4193),
@@ -92,7 +100,7 @@ fn my_atoi() {
 fn my_pow() {
     use assert_approx_eq::assert_approx_eq;
     use leetcode::my_pow::Solution;
-    let cases = vec![
+    let cases = [
         (2.0, 10, 1024.0),
         (2.1, 3, 9.261),
         (2.0, -2, 0.25),
@@ -119,7 +127,7 @@ fn reverse() {
 #[test]
 fn solve_n_queens() {
     use leetcode::solve_n_queens::Solution;
-    let cases = vec![
+    let cases = [
         (
             4,
             vec![
@@ -138,7 +146,7 @@ fn solve_n_queens() {
 #[test]
 fn two_sum() {
     use leetcode::two_sum::Solution;
-    let cases = vec![
+    let cases = [
         (vec![2, 7, 11, 15], 9, vec![0, 1]),
         (vec![3, 2, 4], 6, vec![1, 2]),
         (vec![3, 3], 6, vec![0, 1]),
@@ -152,7 +160,7 @@ fn two_sum() {
 #[test]
 fn minimize_xor() {
     use leetcode::xor::minimize_xor::Solution;
-    let cases: Vec<(i32, i32, i32)> = vec![(3, 5, 3), (1, 12, 3), (25, 72, 24)];
+    let cases = [(3, 5, 3), (1, 12, 3), (25, 72, 24)];
     for (num1, num2, expected) in cases {
         let result = Solution::minimize_xor(num1, num2);
         assert_eq!(result, expected);
@@ -162,7 +170,7 @@ fn minimize_xor() {
 #[test]
 fn xor_all_nums() {
     use leetcode::xor::xor_all_nums::Solution;
-    let cases = vec![
+    let cases = [
         (vec![2, 1, 3], vec![10, 2, 5, 0], 13),
         (vec![1, 2], vec![3, 4], 0),
         (
@@ -192,7 +200,7 @@ fn xor_all_nums() {
 #[test]
 fn does_valid_array_exist() {
     use leetcode::xor::does_valid_array_exist::Solution;
-    let cases = vec![
+    let cases = [
         (vec![1, 1, 0], true),
         (vec![1, 1], true),
         (vec![1, 0], false),

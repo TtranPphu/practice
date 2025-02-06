@@ -8,3 +8,33 @@ leetcode = { version = "0.1.0", path = "leetcode" }
 logger = { version = "0.1.0", path = "logger" }
 macros = { version = "0.1.0", path = "macros" }
 sudoku = { version = "0.1.0", path = "sudoku" }
+
+[dev-dependencies]
+assert_approx_eq = "1.1.0"
+divan = "0.1.17"
+
+[[test]]
+name = "leetcode"
+path = "leetcode/tests/leetcode.rs"
+
+[[test]]
+name = "sudoku"
+path = "sudoku/tests/sudoku.rs"
+
+[[test]]
+name = "sudoku-pz6"
+path = "sudoku/tests/pz6.rs"
+
+[[bench]]
+name = "leetcode"
+path = "leetcode/benches/leetcode.rs"
+harness = false
+
+[[bench]]
+name = "sudoku"
+path = "sudoku/benches/sudoku.rs"
+harness = false
+
+[[bench]]
+name = "sudoku-pz6"
+path = "sudoku/benches/pz6.rs"
