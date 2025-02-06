@@ -11,6 +11,13 @@ pub fn solve(problem: Vec<Vec<u8>>) -> Result<Vec<Vec<u8>>, ()> {
     Ok(board.state().clone())
 }
 
+pub fn solve_str(problem: &str) -> Result<String, ()> {
+    let mut board = Board::new();
+    board.from_str(problem);
+    board.solve()?;
+    Ok(board.state_str())
+}
+
 pub fn demo() {
     let mut board = Board::new();
     board.init(vec![
@@ -28,5 +35,32 @@ pub fn demo() {
     match board.solve() {
         Ok(_) => println!("Solved!\n{}", board),
         Err(_) => println!("No solution found!\n{}", board),
+    }
+
+    let mut board = Board::new();
+    board.from_str(
+        "........2..8..91..5......4....9.7.....7.3.8.....8.1.3..4..6...5..97..3..2........",
+    );
+    print!("Solving...\n{}", board);
+    match board.solve() {
+        Ok(_) => println!("Solved!\n{}", board),
+        Err(_) => println!("No solution found!\n{}", board),
+    }
+}
+
+pub fn gen() {
+    let problems =
+        vec!["........8..3...4...9..2..6.....79.......612...6.5.2.7...8...5...1.....2.4.5.....3"];
+    for problem in problems {
+        let mut board = Board::new();
+        board.from_str(problem);
+        match board.solve() {
+            Ok(_) => {
+                println!("{}", board.state_str());
+            }
+            Err(_) => {
+                println!("Unsolvable");
+            }
+        }
     }
 }

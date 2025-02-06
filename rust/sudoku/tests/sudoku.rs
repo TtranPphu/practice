@@ -75,7 +75,13 @@ fn solve() {
         ),
     ];
     for (problem, expected) in tests {
-        assert_eq!(sudoku::solve(problem).unwrap(), expected)
+        assert_eq!(
+            sudoku::solve(problem.clone()).unwrap(),
+            expected,
+            "Problem:\n{:?} Expected:\n{:?}",
+            problem,
+            expected
+        );
     }
 }
 

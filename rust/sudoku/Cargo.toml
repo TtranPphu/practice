@@ -12,3 +12,13 @@ divan = "0.1.17"
 [[bench]]
 name = "sudoku"
 harness = false
+
+[[bench]]
+name = "pz6"
+harness = false
+
+[[test]]
+name = "sudoku"
+
+[[test]]
+name = "pz6"

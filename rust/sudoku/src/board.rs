@@ -25,6 +25,21 @@ impl Board {
         self
     }
 
+    pub fn from_str(&mut self, problem: &str) -> &mut Self {
+        for (i, j, c) in problem
+            .chars()
+            .enumerate()
+            .map(|(ij, c)| (ij / 9, ij % 9, c))
+        {
+            match c {
+                '1'..='9' => self.set_value(i, j, c as u8 - b'0'),
+                '.' => (),
+                _ => panic!("Invalid character: {}", c),
+            }
+        }
+        self
+    }
+
     pub fn solve(&mut self) -> Result<(), ()> {
         while self.basic_strategies() {}
         if !self.solved() {
@@ -120,6 +135,13 @@ impl Board {
 
     pub fn state(&self) -> &Vec<Vec<u8>> {
         self.cells.as_ref()
+    }
+
+    pub fn state_str(&self) -> String {
+        self.cells
+            .iter()
+            .map(|row: &Vec<u8>| row.iter().map(|&v| v.to_string()).collect::<String>())
+            .collect::<String>()
     }
 
     /// Convert (i, j) to (s, p) where:

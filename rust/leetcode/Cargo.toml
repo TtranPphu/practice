@@ -12,3 +12,6 @@ divan = "0.1.17"
 [[bench]]
 name = "leetcode"
 harness = false
+
+[[test]]
+name = "leetcode"
