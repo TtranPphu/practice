@@ -14,5 +14,3 @@ impl Solution {
         r as i32
     }
 }
-
-

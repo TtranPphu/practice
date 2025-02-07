@@ -4,9 +4,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build (Asm)",
+            "label": "Assemble (Asm)",
             "type": "shell",
-            "group": "build",
             "command": "nasm",
             "args": [
                 "-f",
@@ -18,11 +17,12 @@
             "options": {
                 "cwd": "${workspaceFolder}/assembly"
             },
+            "hide": true,
+            "problemMatcher": [],
         },
         {
             "label": "Link (Asm)",
             "type": "shell",
-            "group": "build",
             "command": "ld",
             "args": [
                 "-o",
@@ -32,22 +32,22 @@
             "options": {
                 "cwd": "${workspaceFolder}/assembly"
             },
-            "dependsOn": [
-                "Build (Asm)"
-            ],
-            "dependsOrder": "sequence",
+            "hide": true,
+            "problemMatcher": []
         },
         {
             "label": "Run (Asm)",
             "type": "shell",
-            "group": "build",
             "command": "./main",
             "dependsOn": [
+                "Assemble (Asm)",
                 "Link (Asm)"
             ],
+            "dependsOrder": "sequence",
             "options": {
                 "cwd": "${workspaceFolder}/assembly"
             },
+            "problemMatcher": []
         },
         {
             "label": "Build (C++)",
@@ -63,7 +63,8 @@
             },
             "problemMatcher": [
                 "$gcc",
-            ]
+            ],
+            "hide": true
         },
         {
             "label": "Test (C++)",
@@ -80,7 +81,7 @@
                 "Build (C++)"
             ],
             "dependsOrder": "sequence",
-            "problemMatcher": []
+            "problemMatcher": [],
         },
         {
             "label": "Test (Python)",
@@ -109,7 +110,7 @@
             "options": {
                 "cwd": "${workspaceFolder}/python"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
         },
         {
             "label": "Build (Rust)",
@@ -124,7 +125,7 @@
             },
             "problemMatcher": [
                 "$rustc"
-            ]
+            ],
         },
         {
             "label": "Test (Rust)",
@@ -199,7 +200,7 @@
                 "reveal": "never",
                 "focus": false,
             },
-            "problemMatcher": []
+            "problemMatcher": [],
         },
     ],
     "inputs": [

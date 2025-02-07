@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{char, collections::HashSet};
 
 #[derive(Clone)]
 pub struct Board {
@@ -6,38 +6,54 @@ pub struct Board {
     candidates: Vec<Vec<HashSet<u8>>>,
 }
 
-impl Board {
-    pub fn new() -> Self {
+impl Default for Board {
+    fn default() -> Self {
         Self {
             cells: vec![vec![0; 9]; 9],
             candidates: vec![vec![(1..=9).collect(); 9]; 9],
         }
     }
+}
 
-    pub fn init(&mut self, problem: Vec<Vec<u8>>) -> &mut Self {
-        for (i, row) in problem.iter().enumerate() {
-            for (j, &value) in row.iter().enumerate() {
-                if value != 0 {
-                    self.set_value(i, j, value);
-                }
-            }
+pub enum Problem {
+    Vector(Vec<Vec<u8>>),
+    String(String),
+}
+
+impl Board {
+    pub fn new(problem: Problem) -> Self {
+        match problem {
+            Problem::Vector(v) => Self::from_vec(v),
+            Problem::String(s) => Self::from_str(s),
         }
-        self
     }
 
-    pub fn from_str(&mut self, problem: &str) -> &mut Self {
+    pub fn from_vec(problem: Vec<Vec<u8>>) -> Self {
+        let mut r = Board::default();
+        problem.into_iter().enumerate().for_each(|(i, row)| {
+            row.into_iter()
+                .enumerate()
+                .filter(|(_, v)| *v != 0)
+                .for_each(|(j, v)| r.set_value(i, j, v))
+        });
+        r
+    }
+
+    pub fn from_str(problem: String) -> Self {
+        let mut r = Board::default();
         for (i, j, c) in problem
-            .chars()
+            .into_bytes()
+            .iter()
             .enumerate()
             .map(|(ij, c)| (ij / 9, ij % 9, c))
         {
             match c {
-                '1'..='9' => self.set_value(i, j, c as u8 - b'0'),
-                '.' => (),
-                _ => panic!("Invalid character: {}", c),
+                b'0'..=b'9' => r.set_value(i, j, c - b'0'),
+                b'.' => (),
+                _ => panic!("Invalid character: {}", char::from(*c)),
             }
         }
-        self
+        r
     }
 
     pub fn solve(&mut self) -> Result<(), ()> {

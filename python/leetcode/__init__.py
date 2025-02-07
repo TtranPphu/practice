@@ -10,3 +10,4 @@ from .my_pow import Solution as MyPow
 from .solve_n_queens import Solution as SolveNQueens
 from .total_n_queens import Solution as TotalNQueens
 from .two_sum import Solution as TwoSum
+from .merge_two_lists import Solution as MergeTwoLists, ListNode

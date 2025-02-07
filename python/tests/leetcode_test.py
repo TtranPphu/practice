@@ -101,6 +101,22 @@ def test_length_of_longest_substring():
         solution=LengthOfLongestSubstring().lengthOfLongestSubstring,
     )
 
+def test_merge_two_lists():
+    test_equal(
+        cases=[
+            {
+                "list1": ListNode(1, ListNode(2, ListNode(4))),
+                "list2": ListNode(1, ListNode(3, ListNode(4))),
+                "expect": ListNode(
+                    1, ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(4)))))
+                ),
+            },
+            {"list1": None, "list2": None, "expect": None},
+            {"list1": None, "list2": ListNode(0), "expect": ListNode(0)},
+        ],
+        solution=MergeTwoLists().mergeTwoLists,
+    )
+
 
 def test_min_difference():
     test_equal(
