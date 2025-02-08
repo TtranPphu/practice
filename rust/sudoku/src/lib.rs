@@ -3,66 +3,60 @@
 pub mod board;
 
 use board::{
-    Board,
-    Problem::{String as PS, Vector as PV},
+  Board,
+  From::{Array as BfA, String as BfS},
 };
 
-pub fn solve(problem: Vec<Vec<u8>>) -> Result<Vec<Vec<u8>>, ()> {
-    let mut board = Board::new(PV(problem));
-    // board.init(problem);
-    board.solve()?;
-    Ok(board.state().clone())
+pub fn solve(problem: [[u8; 9]; 9]) -> Result<[[u8; 9]; 9], (&'static str, [[u8; 9]; 9])> {
+  match Board::new(BfA(problem)) {
+    Ok(mut board) => match board.solve() {
+      Ok(state) => Ok(*state),
+      Err((err, state)) => Err((err, *state)),
+    },
+    Err(err) => Err((err, problem)),
+  }
 }
 
-pub fn solve_str(problem: &str) -> Result<String, ()> {
-    let mut board = Board::new(PS(String::from(problem)));
-    // board.from_str(problem);
-    board.solve()?;
-    Ok(board.state_str())
+pub fn solve_str(problem: &str) -> Result<String, (&'static str, String)> {
+  match Board::new(BfS(String::from(problem))) {
+    Ok(mut board) => match board.solve() {
+      Ok(_) => Ok(board.state_str()),
+      Err((err, _)) => Err((err, board.state_str())),
+    },
+    Err(err) => Err((err, problem.to_string())),
+  }
 }
 
 pub fn demo() {
-    let mut board = Board::new(PV(vec![
-        vec![0, 6, 0, 0, 0, 3, 0, 0, 7],
-        vec![3, 0, 0, 6, 8, 0, 0, 1, 0],
-        vec![1, 9, 0, 2, 0, 0, 0, 0, 0],
-        vec![6, 8, 5, 0, 0, 0, 1, 3, 0],
-        vec![0, 0, 0, 0, 0, 0, 0, 0, 0],
-        vec![2, 1, 0, 0, 0, 0, 0, 0, 0],
-        vec![4, 0, 3, 0, 0, 0, 0, 0, 6],
-        vec![0, 0, 0, 0, 2, 0, 0, 0, 9],
-        vec![0, 0, 0, 0, 4, 0, 8, 7, 0],
-    ]));
+  if let Ok(mut board) = Board::new(BfA([
+    [0, 6, 0, 0, 0, 3, 0, 0, 7],
+    [3, 0, 0, 6, 8, 0, 0, 1, 0],
+    [1, 9, 0, 2, 0, 0, 0, 0, 0],
+    [6, 8, 5, 0, 0, 0, 1, 3, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [2, 1, 0, 0, 0, 0, 0, 0, 0],
+    [4, 0, 3, 0, 0, 0, 0, 0, 6],
+    [0, 0, 0, 0, 2, 0, 0, 0, 9],
+    [0, 0, 0, 0, 4, 0, 8, 7, 0],
+  ])) {
     print!("Solving...\n{}", board);
     match board.solve() {
-        Ok(_) => println!("Solved!\n{}", board),
-        Err(_) => println!("No solution found!\n{}", board),
+      Ok(_) => println!("Solved!\n{}", board),
+      Err(_) => println!("No solution found!\n{}", board),
     }
-}
+  } else {
+    println!("Invalid board!");
+  }
 
-pub fn demo_str() {
-    let mut board = Board::new(PS(String::from(
-        "........2..8..91..5......4....9.7.....7.3.8.....8.1.3..4..6...5..97..3..2........",
-    )));
+  if let Ok(mut board) = Board::new(BfS(String::from(
+    "........2..8..91..5......4....9.7.....7.3.8.....8.1.3..4..6...5..97..3..2........",
+  ))) {
     print!("Solving...\n{}", board);
     match board.solve() {
-        Ok(_) => println!("Solved!\n{}", board),
-        Err(_) => println!("No solution found!\n{}", board),
+      Ok(_) => println!("Solved!\n{}", board),
+      Err(_) => println!("No solution found!\n{}", board),
     }
-}
-
-pub fn gen() {
-    let problems =
-        vec!["........8..3...4...9..2..6.....79.......612...6.5.2.7...8...5...1.....2.4.5.....3"];
-    for problem in problems {
-        let mut board = Board::new(PS(String::from(problem)));
-        match board.solve() {
-            Ok(_) => {
-                println!("{}", board.state_str());
-            }
-            Err(_) => {
-                println!("Unsolvable");
-            }
-        }
-    }
+  } else {
+    println!("Invalid board!");
+  }
 }
