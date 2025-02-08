@@ -31,6 +31,7 @@
             "extensions": [
                 "chekweitan.compare-view",
                 "eriklynd.json-tools",
+                "helgardrichard.helium-icon-theme",
                 "mechatroner.rainbow-csv",
                 "medo64.render-crlf",
                 "ms-azuretools.vscode-docker",
@@ -40,8 +41,6 @@
                 "ms-toolsai.jupyter",
                 "ms-vscode.cmake-tools",
                 "ms-vscode.cpptools",
-                "PKief.material-icon-theme",
-                "PKief.material-product-icons",
                 "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
