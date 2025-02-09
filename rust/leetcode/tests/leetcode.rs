@@ -47,6 +47,7 @@ fn median_sliding_window() {
       3,
       vec![2.0, 3.0, 3.0, 3.0, 2.0, 3.0, 2.0],
     ),
+    (vec![2147483647, 2147483647], 2, vec![2147483647.0]),
   ];
   for (nums, k, expected) in cases {
     let result = Solution::median_sliding_window(nums, k);

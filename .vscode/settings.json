@@ -130,5 +130,6 @@
     "cmake.sourceDirectory": "/workspaces/practice/cpp",
     "cmake.buildDirectory": "${workspaceFolder}/cpp/build",
     "cmake.configureOnEdit": false,
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "rust-analyzer.inlayHints.parameterHints.enable": false
 }
