@@ -2,21 +2,23 @@ use std::cmp::Ordering;
 use std::collections::btree_map::BTreeMap;
 use std::hash::{Hash, Hasher};
 
+/// Incomplete implementation of multiset collection using BtreeMap.
+/// To be refined along the way.
 pub struct BTreeMultiSet<T> {
   map: BTreeMap<T, usize>,
-  lenght: usize,
+  length: usize,
 }
 
 impl<T> BTreeMultiSet<T> {
   pub const fn new() -> Self {
     BTreeMultiSet {
       map: BTreeMap::new(),
-      lenght: 0,
+      length: 0,
     }
   }
 
   pub const fn len(&self) -> usize {
-    self.lenght
+    self.length
   }
 
   pub fn insert(&mut self, value: T)
@@ -28,7 +30,7 @@ impl<T> BTreeMultiSet<T> {
       .entry(value)
       .and_modify(|count| *count += 1)
       .or_insert(1);
-    self.lenght += 1;
+    self.length += 1;
   }
 
   pub fn remove(&mut self, value: &T) -> bool
@@ -37,7 +39,7 @@ impl<T> BTreeMultiSet<T> {
   {
     if let Some(count) = self.map.get_mut(value) {
       *count -= 1;
-      self.lenght -= 1;
+      self.length -= 1;
       if *count == 0 {
         self.map.remove(value);
       }
@@ -54,23 +56,6 @@ impl<T> BTreeMultiSet<T> {
     self.map.first_key_value().map(|(value, _)| value)
   }
 
-  pub fn pop_first(&mut self) -> Option<T>
-  where
-    T: Clone + Ord,
-  {
-    let first = self.map.pop_first();
-    match first {
-      Some((value, count)) => {
-        if count > 1 {
-          self.map.insert(value.clone(), count - 1);
-        }
-        self.lenght -= 1;
-        Some(value)
-      }
-      None => None,
-    }
-  }
-
   pub fn last(&self) -> Option<&T>
   where
     T: Ord,
@@ -78,21 +63,64 @@ impl<T> BTreeMultiSet<T> {
     self.map.last_key_value().map(|(value, _)| value)
   }
 
+  pub fn pop_first(&mut self) -> Option<T>
+  where
+    T: Clone + Ord,
+  {
+    if let Some(mut first) = self.map.first_entry() {
+      *first.get_mut() -= 1;
+      let value = first.key().clone();
+      if *first.get() == 0 {
+        first.remove();
+      }
+      self.length -= 1;
+      Some(value)
+    } else {
+      None
+    }
+  }
+
   pub fn pop_last(&mut self) -> Option<T>
   where
     T: Clone + Ord,
   {
-    let last = self.map.pop_last();
-    match last {
-      Some((value, count)) => {
-        if count > 1 {
-          self.map.insert(value.clone(), count - 1);
-        }
-        self.lenght -= 1;
-        Some(value)
+    if let Some(mut last) = self.map.last_entry() {
+      *last.get_mut() -= 1;
+      let value = last.key().clone();
+      if *last.get() == 0 {
+        last.remove();
       }
-      None => None,
+      self.length -= 1;
+      Some(value)
+    } else {
+      None
     }
+  }
+
+  pub fn iter(&self) -> impl Iterator<Item = &T>
+  where
+    T: Ord,
+  {
+    self
+      .map
+      .iter()
+      .flat_map(|(value, &count)| std::iter::repeat(value).take(count))
+  }
+
+  pub fn clear(&mut self) {
+    self.map.clear();
+    self.length = 0;
+  }
+
+  pub fn is_empty(&self) -> bool {
+    self.length == 0
+  }
+
+  pub fn contains(&self, value: &T) -> bool
+  where
+    T: Ord,
+  {
+    self.map.contains_key(value)
   }
 }
 
@@ -126,7 +154,7 @@ impl<T: Clone> Clone for BTreeMultiSet<T> {
   fn clone(&self) -> Self {
     BTreeMultiSet {
       map: self.map.clone(),
-      lenght: self.lenght,
+      length: self.length,
     }
   }
 

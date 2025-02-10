@@ -1,6 +1,11 @@
 use core::array::from_fn;
 use std::{char, collections::HashSet};
 
+pub enum From {
+  Array([[u8; 9]; 9]),
+  String(String),
+}
+
 #[derive(Clone)]
 pub struct Board {
   cells: [[u8; 9]; 9],
@@ -14,11 +19,6 @@ impl Default for Board {
       candidates: from_fn(|_| from_fn(|_| (1..=9).collect())),
     }
   }
-}
-
-pub enum From {
-  Array([[u8; 9]; 9]),
-  String(String),
 }
 
 impl Board {
