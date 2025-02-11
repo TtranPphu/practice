@@ -4,3 +4,5 @@ db/**
 
 **/cpp/build/
 **/rust/**/target/
+
+.zsh_history

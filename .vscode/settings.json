@@ -143,6 +143,7 @@
         "python/**/*.lock": true,
         "python/build": true,
         "rust/**/*.lock": true,
-        "rust/**/target": true
+        "rust/**/target": true,
+        ".zsh_history": true,
     },
 }
