@@ -1,3 +1,4 @@
+pub mod archive;
 pub mod can_be_valid;
 pub mod cnds;
 pub mod median_sliding_window;

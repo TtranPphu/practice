@@ -72,14 +72,8 @@ impl Solution {
   }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, PartialOrd)]
 pub struct Ri32(i32);
-
-impl PartialOrd for Ri32 {
-  fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-    Some(self.cmp(other))
-  }
-}
 
 impl Ord for Ri32 {
   fn cmp(&self, other: &Self) -> std::cmp::Ordering {
