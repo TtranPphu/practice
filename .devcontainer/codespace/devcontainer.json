@@ -15,18 +15,7 @@
             "settings": {
                 "terminal.integrated.fontFamily": "MesloLGS NF",
                 "workbench.colorTheme": "Default Dark Modern",
-                "workbench.iconTheme": "material-icon-theme",
-                "workbench.productIconTheme": "material-product-icons",
-                "[python]": {
-                    "editor.rulers": [
-                        88
-                    ]
-                },
-                "[cpp]": {
-                    "editor.rulers": [
-                        80
-                    ]
-                }
+                "workbench.iconTheme": "material-icon-theme"
             },
             "extensions": [
                 "chekweitan.compare-view",

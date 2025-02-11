@@ -1,5 +1,4 @@
 {
-    "editor.autoIndent": "advanced",
     "files.associations": {
         "*.json": "jsonc",
         "array": "cpp",
@@ -108,6 +107,8 @@
         "syncstream": "cpp",
         "valarray": "cpp"
     },
+    "editor.autoIndent": "advanced",
+    "editor.formatOnSave": true,
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.rulers": [
@@ -131,6 +132,17 @@
     "cmake.buildDirectory": "${workspaceFolder}/cpp/build",
     "cmake.configureOnEdit": false,
     "cmake.configureOnOpen": false,
+    "python.defaultInterpreterPath": "./python/.venv/bin/python",
     "rust-analyzer.inlayHints.parameterHints.enable": true,
-    "editor.formatOnSave": true
+    "files.exclude": {
+        "cpp/**/build": true,
+        "db": true,
+        "python/**/__pycache__": true,
+        "python/**/.pytest_cache": true,
+        "python/**/.venv": true,
+        "python/**/*.lock": true,
+        "python/build": true,
+        "rust/**/*.lock": true,
+        "rust/**/target": true
+    },
 }
