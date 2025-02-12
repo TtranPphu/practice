@@ -4,5 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-collections = { version = "0.1.0", path = "../collections" }
-multi_containers = "0.2.1"
+multi_containers = { version = "0.2.1", path = "../multi_containers" }

@@ -105,7 +105,7 @@
         "scoped_allocator": "cpp",
         "shared_mutex": "cpp",
         "syncstream": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
     },
     "editor.autoIndent": "advanced",
     "editor.formatOnSave": true,

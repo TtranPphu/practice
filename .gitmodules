@@ -1,3 +1,6 @@
 [submodule "cpp/3rd_party/spdlog"]
 	path = cpp/3rd_party/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "rust/multi_containers"]
+	path = rust/multi_containers
+	url = https://github.com/TtranPphu/multi_containers.git

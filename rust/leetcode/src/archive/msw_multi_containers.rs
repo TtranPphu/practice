@@ -1,54 +1,5 @@
 use multi_containers::BTreeMultiSet;
 
-pub trait FrontBackAccess<T> {
-  fn first(&self) -> Option<T>;
-  fn last(&self) -> Option<T>;
-  fn pop_first(&mut self) -> Option<T>;
-  fn pop_last(&mut self) -> Option<T>;
-}
-
-pub trait RemoveOne<T> {
-  fn remove_one(&mut self, value: &T) -> bool;
-}
-
-impl<T: Ord + Clone> FrontBackAccess<T> for BTreeMultiSet<T> {
-  fn first(&self) -> Option<T> {
-    self.counts().next().map(|(value, _)| value).cloned()
-  }
-  fn last(&self) -> Option<T> {
-    self.counts().next_back().map(|(value, _)| value).cloned()
-  }
-  fn pop_first(&mut self) -> Option<T> {
-    if let Some(first) = self.first() {
-      self.remove_one(&first);
-      Some(first)
-    } else {
-      None
-    }
-  }
-  fn pop_last(&mut self) -> Option<T> {
-    if let Some(last) = self.last() {
-      self.remove_one(&last);
-      Some(last)
-    } else {
-      None
-    }
-  }
-}
-
-impl<T: Ord + Clone> RemoveOne<T> for BTreeMultiSet<T> {
-  fn remove_one(&mut self, value: &T) -> bool {
-    match self.remove(value) {
-      0 => false,
-      1 => true,
-      n => {
-        self.insert_some(value.clone(), n - 1);
-        true
-      }
-    }
-  }
-}
-
 pub struct Solution;
 
 impl Solution {
@@ -66,7 +17,7 @@ impl Solution {
     }
 
     fn insert(low: &mut BTMSi32, high: &mut BTMSi32, value: i32) {
-      if low.len() == 0 || value <= low.last().unwrap() {
+      if low.len() == 0 || value <= *low.last().unwrap() {
         low.insert(value);
       } else {
         high.insert(value);
@@ -75,18 +26,18 @@ impl Solution {
     }
 
     fn remove(low: &mut BTMSi32, high: &mut BTMSi32, value: i32) {
-      if low.remove_one(&value) {
+      if low.remove(&value) > 0 {
         rebalance(low, high);
-      } else if high.remove_one(&value) {
+      } else if high.remove(&value) > 0 {
         rebalance(low, high);
       }
     }
 
     fn median(low: &BTMSi32, high: &BTMSi32) -> f64 {
       if low.len() == high.len() {
-        (low.last().unwrap() as f64 + high.first().unwrap() as f64) / 2.0
+        (*low.last().unwrap() as f64 + *high.first().unwrap() as f64) / 2.0
       } else {
-        low.last().unwrap() as f64
+        *low.last().unwrap() as f64
       }
     }
 

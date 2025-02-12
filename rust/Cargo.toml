@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-collections = { version = "0.1.0", path = "collections" }
 leetcode = { version = "0.1.0", path = "leetcode" }
 logger = { version = "0.1.0", path = "logger" }
 macros = { version = "0.1.0", path = "macros" }
