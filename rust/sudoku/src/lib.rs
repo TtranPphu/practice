@@ -47,7 +47,9 @@ pub fn demo() {
   } else {
     println!("Invalid board!");
   }
+}
 
+pub fn demo_str() {
   if let Ok(mut board) = Board::new(BfS(String::from(
     "........2..8..91..5......4....9.7.....7.3.8.....8.1.3..4..6...5..97..3..2........",
   ))) {

@@ -3,4 +3,8 @@
 mod prelude;
 use crate::prelude::*;
 
-fn main() {}
+use sudoku;
+
+fn main() {
+  sudoku::demo();
+}
