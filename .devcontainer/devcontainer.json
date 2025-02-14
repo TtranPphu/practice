@@ -14,13 +14,11 @@
         "vscode": {
             "settings": {
                 "terminal.integrated.fontFamily": "MesloLGS NF",
-                "workbench.colorTheme": "Default Dark Modern",
-                "workbench.iconTheme": "helium-icon-theme"
+                "workbench.colorTheme": "Default Dark Modern"
             },
             "extensions": [
                 "chekweitan.compare-view",
                 "eriklynd.json-tools",
-                "helgardrichard.helium-icon-theme",
                 "mechatroner.rainbow-csv",
                 "medo64.render-crlf",
                 "ms-azuretools.vscode-docker",
@@ -33,6 +31,7 @@
                 "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
+                "usernamehw.errorlens",
                 "vadimcn.vscode-lldb"
             ]
         }

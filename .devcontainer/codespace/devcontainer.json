@@ -15,7 +15,7 @@
             "settings": {
                 "terminal.integrated.fontFamily": "MesloLGS NF",
                 "workbench.colorTheme": "Default Dark Modern",
-                "workbench.iconTheme": "material-icon-theme"
+                "workbench.iconTheme": "helium-icon-theme"
             },
             "extensions": [
                 "chekweitan.compare-view",
@@ -33,6 +33,7 @@
                 "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
+                "usernamehw.errorlens",
                 "vadimcn.vscode-lldb"
             ]
         }
