@@ -1,5 +1,5 @@
 {
-    "name": "practice-compose-devcontainer",
+    "name": "practice-compose",
     "postCreateCommand": "sh .devcontainer/post-create-default.sh",
     "dockerComposeFile": "docker-compose.yml",
     "service": "devcontainer",
@@ -15,19 +15,20 @@
                 "eriklynd.json-tools",
                 "mechatroner.rainbow-csv",
                 "medo64.render-crlf",
-                "mongodb.mongodb-vscode",
                 "ms-azuretools.vscode-docker",
                 "ms-python.black-formatter",
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
-                "ms-vscode.cmake-tools",
                 "ms-vscode.cpptools",
                 "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
+                "twxs.cmake",
                 "usernamehw.errorlens",
-                "vadimcn.vscode-lldb"
+                "vadimcn.vscode-lldb",
+                // Only for compose-devcontainer
+                "mongodb.mongodb-vscode"
             ]
         }
     }

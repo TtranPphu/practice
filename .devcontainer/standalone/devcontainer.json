@@ -1,7 +1,7 @@
 {
-    "name": "practice-devcontainer",
+    "name": "practice-standalone",
     "build": {
-        "dockerfile": "Dockerfile"
+        "dockerfile": "../Dockerfile"
     },
     "mounts": [
         "source=/home/ttranpphu/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
@@ -9,7 +9,7 @@
     "containerEnv": {
         "UV_LINK_MODE": "copy"
     },
-    "postCreateCommand": "sh .devcontainer/post-create-default.sh",
+    "postCreateCommand": "sh .devcontainer/standalone/post-create-standalone.sh",
     "customizations": {
         "vscode": {
             "settings": {
@@ -26,11 +26,11 @@
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
-                "ms-vscode.cmake-tools",
                 "ms-vscode.cpptools",
                 "rioj7.command-variable",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
+                "twxs.cmake",
                 "usernamehw.errorlens",
                 "vadimcn.vscode-lldb"
             ]
