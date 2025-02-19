@@ -1,3 +1,3 @@
 fn main() {
-  divan::main();
+    divan::main();
 }
