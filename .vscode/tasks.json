@@ -137,6 +137,8 @@
                 "${input:rust_target}",
                 "${input:rust_test_case_or_bench}",
                 "${input:verbosity}",
+                "--jobs",
+                "8",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/rust"
@@ -155,6 +157,8 @@
                 "${input:rust_target}",
                 "${input:rust_test_case_or_bench}",
                 "${input:verbosity}",
+                "--jobs",
+                "8",
             ],
             "options": {
                 "cwd": "${workspaceFolder}/rust"
@@ -216,7 +220,7 @@
             "options": [
                 "leetcode",
                 "sudoku",
-                "sudoku-pz6"
+                "pz6"
             ],
         },
         {

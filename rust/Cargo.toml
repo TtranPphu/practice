@@ -22,7 +22,7 @@ name = "sudoku"
 path = "sudoku/tests/sudoku.rs"
 
 [[test]]
-name = "sudoku-pz6"
+name = "pz6"
 path = "sudoku/tests/pz6.rs"
 
 [[bench]]
@@ -36,5 +36,6 @@ path = "sudoku/benches/sudoku.rs"
 harness = false
 
 [[bench]]
-name = "sudoku-pz6"
+name = "pz6"
 path = "sudoku/benches/pz6.rs"
+harness = false

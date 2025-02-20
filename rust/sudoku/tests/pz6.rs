@@ -1,7 +1,7 @@
 use sudoku::solve_str;
 
 #[test]
-fn group_0() {
+fn group_00() {
     let tests = [
         (
             "........8..3...4...9..2..6.....79.......612...6.5.2.7...8...5...1.....2.4.5.....3",
@@ -109,8 +109,9 @@ fn group_0() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_1() {
+fn group_01() {
     let tests = [
         (
             "........6..9...4...1..7..8....7.1.3.1.8.3.5...3...2....8..2..1...6...9..4..3.....",
@@ -218,8 +219,9 @@ fn group_1() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_2() {
+fn group_02() {
     let tests = [
         (
             "1.......9.4...3.8...2...6...7..58.......2.......7.4.5...6...2...3.8...7.9.......1",
@@ -327,8 +329,9 @@ fn group_2() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_3() {
+fn group_03() {
     let tests = [
         (
             ".......89.....1.35..3.5......5.6...8.7...2...1..4.......6.9..5..2.7..6..4........",
@@ -436,8 +439,9 @@ fn group_3() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_4() {
+fn group_04() {
     let tests = [
         (
             "1...5...9..7...2...69..3.4....8........91..7.9....5..83..5....1..2...6...4.......",
@@ -545,8 +549,9 @@ fn group_4() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_5() {
+fn group_05() {
     let tests = [
         (
             ".......35.....2.6...3.5..8...5.9...6.7....9..1..4.......6.8..9..2.1.....4....7...",
@@ -654,8 +659,9 @@ fn group_5() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_6() {
+fn group_06() {
     let tests = [
         (
             "1...567.....1....6..9....1...5..83..7..5...9..3...........4...25..6...7...4.2.8..",
@@ -763,8 +769,9 @@ fn group_6() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_7() {
+fn group_07() {
     let tests = [
         (
             "...4.......7.8...66..7...5...1.6.3.839.........6.7...1........271..2......26.8...",
@@ -872,8 +879,9 @@ fn group_7() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_8() {
+fn group_08() {
     let tests = [
         (
             "1....6..9..67...2..8..3.5.....5..3...1...8..6....2......1..4..884.......9......7.",
@@ -981,8 +989,9 @@ fn group_8() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
-fn group_9() {
+fn group_09() {
     let tests = [
         (
             ".2....7..4....9.3.6..2.3.4.....1......85.....9....4.6..94....5.5.....6.3.....5...",
@@ -1090,6 +1099,7 @@ fn group_9() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
 fn group_10() {
     let tests = [
@@ -1199,6 +1209,7 @@ fn group_10() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
 fn group_11() {
     let tests = [
@@ -1308,6 +1319,7 @@ fn group_11() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
 fn group_12() {
     let tests = [
@@ -1417,6 +1429,7 @@ fn group_12() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
 fn group_13() {
     let tests = [
@@ -1526,6 +1539,7 @@ fn group_13() {
         assert_eq!(r, expected, "problem: {:?}", problem);
     }
 }
+
 #[test]
 fn group_14() {
     let tests = [

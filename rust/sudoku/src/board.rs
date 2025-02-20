@@ -1,197 +1,309 @@
-use core::array::from_fn;
-use std::{char, collections::HashSet};
+use std::num::NonZero;
 
-pub enum From {
-    Array([[u8; 9]; 9]),
-    String(String),
+#[derive(Clone, Debug)]
+pub struct Board {
+    cells: [Cell; 81],
+    candidateses: [Candidates; 81],
+    unsets: u8,
 }
 
-#[derive(Clone)]
-pub struct Board {
-    cells: [[u8; 9]; 9],
-    candidates: [[HashSet<u8>; 9]; 9],
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct Candidates(u16);
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct Cell(Option<NonZero<u8>>);
+
+impl Board {
+    pub fn new(problem: [u8; 81]) -> Self {
+        let mut board = Self::default();
+        for (i, &v) in problem.iter().enumerate() {
+            if let Some(value) = NonZero::new(v) {
+                board.set(i, value);
+            }
+        }
+        board
+    }
+
+    pub fn solve(&mut self) -> bool {
+        while self.basic_strategies() {}
+        if !self.solved() {
+            if let Some(board) = self.brute_force() {
+                *self = board;
+            }
+        }
+        self.solved()
+    }
+
+    pub fn solved(&self) -> bool {
+        self.unsets == 0
+    }
+
+    fn brute_force(&self) -> Option<Self> {
+        if let Some((index, candidate)) = self
+            .candidateses
+            .iter()
+            .enumerate()
+            .filter(|(_, &c)| c.count() > 1)
+            .min_by_key(|&(_, c)| c.count())
+        {
+            for value in candidate.iter() {
+                let mut board = self.clone();
+                board.set(index, value);
+                if board.solve() {
+                    return Some(board);
+                }
+            }
+            None
+        } else {
+            None
+        }
+    }
+
+    fn basic_strategies(&mut self) -> bool {
+        let mut changed = false;
+        for i in 0..81 {
+            if let Some(value) = self.naked_single(i) {
+                self.set(i, value);
+                changed = true;
+            } else if let Some(value) = self.hidden_single(i) {
+                self.set(i, value);
+                changed = true;
+            }
+        }
+        changed
+    }
+
+    fn naked_single(&self, index: usize) -> Option<NonZero<u8>> {
+        self.candidateses[index].single_or_none()
+    }
+
+    fn hidden_single(&self, index: usize) -> Option<NonZero<u8>> {
+        Self::neighbors(index)
+            .into_iter()
+            .filter(|&n| n != index)
+            .filter(|&n| self.cells[n].value().is_none())
+            .fold(self.candidateses[index], |c, n| {
+                c.exclude(&self.candidateses[n])
+            })
+            .single_or_none()
+    }
+
+    fn set(&mut self, index: usize, value: NonZero<u8>) {
+        let v = value.get();
+        self.unsets -= 1;
+        self.cells[index] = Cell(Some(value));
+        self.candidateses[index] = Candidates::NONE;
+        for &neighbor in &Self::neighbors(index) {
+            self.candidateses[neighbor].remove(&v);
+        }
+    }
+
+    fn neighbors(index: usize) -> [usize; 27] {
+        let (i, j) = (index / 9, index % 9);
+        let (s, p) = (i / 3 * 3, j / 3 * 3);
+        let mut neighbors = [0; 27];
+        for k in 0..9 {
+            neighbors[k] = i * 9 + k;
+            neighbors[9 + k] = k * 9 + j;
+            let (si, sj) = (s + k / 3, p + k % 3);
+            neighbors[18 + k] = si * 9 + sj;
+        }
+        neighbors
+    }
 }
 
 impl Default for Board {
     fn default() -> Self {
         Self {
-            cells: [[0; 9]; 9],
-            candidates: from_fn(|_| from_fn(|_| (1..=9).collect())),
+            cells: [Cell::EMPTY; 81],
+            candidateses: [Candidates::ALL; 81],
+            unsets: 81,
         }
-    }
-}
-
-impl Board {
-    pub fn new(problem: From) -> Result<Self, &'static str> {
-        match problem {
-            From::Array(a) => Self::from_array(a),
-            From::String(s) => Self::from_str(s),
-        }
-    }
-
-    fn from_array(problem: [[u8; 9]; 9]) -> Result<Self, &'static str> {
-        let mut r = Board::default();
-        for (i, row) in problem.iter().enumerate() {
-            for (j, &v) in row.iter().enumerate() {
-                match v {
-                    0 => (),
-                    1..=9 => r.set_value(i, j, v),
-                    _ => return Err("Invalid value"),
-                }
-            }
-        }
-        Ok(r)
-    }
-
-    fn from_str(problem: String) -> Result<Self, &'static str> {
-        let mut r = Board::default();
-        for (i, j, c) in problem
-            .into_bytes()
-            .iter()
-            .enumerate()
-            .map(|(ij, c)| (ij / 9, ij % 9, c))
-        {
-            match c {
-                b'0'..=b'9' => r.set_value(i, j, c - b'0'),
-                b'.' => (),
-                _ => return Err("Invalid value"),
-            }
-        }
-        Ok(r)
-    }
-
-    pub fn solve(&mut self) -> Result<&[[u8; 9]; 9], (&'static str, &[[u8; 9]; 9])> {
-        while self.basic_strategies() {}
-        if !self.solved() {
-            return self.brute_force();
-        } else {
-            Ok(&self.cells)
-        }
-    }
-
-    fn solved(&self) -> bool {
-        self.cells.iter().all(|row| row.iter().all(|&v| v != 0))
-    }
-
-    fn basic_strategies(&mut self) -> bool {
-        let mut updated = false;
-
-        for i in 0..9 {
-            for j in 0..9 {
-                if self.cells[i][j] == 0 {
-                    if self.candidates[i][j].len() == 1 {
-                        let v = *self.candidates[i][j].iter().next().unwrap();
-                        self.set_value(i, j, v);
-                        updated = true;
-                    } else {
-                        for v in self.candidates[i][j].iter() {
-                            if self.unique_candidate(i, j, *v) {
-                                self.set_value(i, j, *v);
-                                updated = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        updated
-    }
-
-    fn unique_candidate(&self, i: usize, j: usize, v: u8) -> bool {
-        let (s, p) = Self::convert(i, j);
-        for k in 0..9 {
-            if k != j && self.candidates[i][k].contains(&v) {
-                return false;
-            }
-            if k != i && self.candidates[k][j].contains(&v) {
-                return false;
-            }
-            let (si, sj) = Self::convert(s, k);
-            if k != p && self.candidates[si][sj].contains(&v) {
-                return false;
-            }
-        }
-        true
-    }
-
-    fn brute_force(&mut self) -> Result<&[[u8; 9]; 9], (&'static str, &[[u8; 9]; 9])> {
-        if let Some((i, j)) = self.first_empty() {
-            for &v in self.candidates[i][j].iter() {
-                let mut grid_clone = self.clone();
-                grid_clone.set_value(i, j, v);
-                if grid_clone.solve().is_ok() {
-                    *self = grid_clone;
-                    return Ok(&self.cells);
-                }
-            }
-        }
-        Err(("No solution found!", &self.cells))
-    }
-
-    fn first_empty(&self) -> Option<(usize, usize)> {
-        self.cells.iter().enumerate().find_map(|(i, row)| {
-            row.iter()
-                .enumerate()
-                .find_map(|(j, &v)| if v == 0 { Some((i, j)) } else { None })
-        })
-    }
-
-    fn set_value(&mut self, i: usize, j: usize, v: u8) {
-        self.cells[i][j] = v;
-        self.invalidate(i, j, v);
-    }
-
-    /// Remove v from the candidates of the cells in the same row, column, and subgrid.
-    fn invalidate(&mut self, i: usize, j: usize, v: u8) {
-        self.candidates[i][j].clear();
-        let (s, _) = Self::convert(i, j);
-        for (k, (si, sj)) in (0..9).map(|k| (k, Self::convert(s, k))) {
-            self.candidates[i][k].remove(&v);
-            self.candidates[k][j].remove(&v);
-            self.candidates[si][sj].remove(&v);
-        }
-    }
-
-    pub fn state_str(&self) -> String {
-        self.cells
-            .iter()
-            .map(|row| {
-                row.iter()
-                    .map(|&v| if v == 0 { '.' } else { char::from(b'0' + v) })
-            })
-            .flatten()
-            .collect()
-    }
-
-    /// Convert (i, j) to (s, p) where:
-    /// - s: index of the 3x3 subgrid and
-    /// - p: index within the subgrid.
-    fn convert(i: usize, j: usize) -> (usize, usize) {
-        (i / 3 * 3 + j / 3, i % 3 * 3 + j % 3)
     }
 }
 
 impl std::fmt::Display for Board {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "╔═══════╤═══════╤═══════╗")?;
-        for (i, row) in self.cells.iter().enumerate() {
-            if i == 3 || i == 6 {
+        for i in 0..9 {
+            write!(f, "║")?;
+            for j in 0..9 {
+                if let Some(value) = self.cells[i * 9 + j].value() {
+                    write!(f, " {}", value)?;
+                } else {
+                    write!(f, " .")?;
+                }
+                if j == 2 || j == 5 {
+                    write!(f, " │")?;
+                } else if j == 8 {
+                    write!(f, " ║")?;
+                }
+            }
+            writeln!(f)?;
+            if i == 2 || i == 5 {
                 writeln!(f, "╟───────┼───────┼───────╢")?;
             }
-            write!(f, "║")?;
-            for (j, cell) in row.iter().enumerate() {
-                if j == 3 || j == 6 {
-                    write!(f, " │")?;
-                }
-                match cell {
-                    0 => write!(f, " .")?,
-                    v => write!(f, " {}", v)?,
-                };
-            }
-            writeln!(f, " ║")?;
         }
         writeln!(f, "╚═══════╧═══════╧═══════╝")
+    }
+}
+
+impl TryFrom<[u8; 81]> for Board {
+    type Error = &'static str;
+
+    fn try_from(value: [u8; 81]) -> Result<Self, Self::Error> {
+        Ok(Self::new(value))
+    }
+}
+
+impl TryInto<[[u8; 9]; 9]> for Board {
+    type Error = &'static str;
+
+    fn try_into(self) -> Result<[[u8; 9]; 9], Self::Error> {
+        let mut problem = [[0; 9]; 9];
+        for (i, row) in problem.iter_mut().enumerate() {
+            for (j, cell) in row.iter_mut().enumerate() {
+                if let Some(value) = self.cells[i * 9 + j].value() {
+                    *cell = value;
+                }
+            }
+        }
+        Ok(problem)
+    }
+}
+
+impl TryFrom<[[u8; 9]; 9]> for Board {
+    type Error = &'static str;
+
+    fn try_from(value: [[u8; 9]; 9]) -> Result<Self, Self::Error> {
+        let mut problem = [0; 81];
+        for (i, row) in value.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                problem[i * 9 + j] = v;
+            }
+        }
+        Ok(Self::new(problem))
+    }
+}
+
+impl TryInto<String> for Board {
+    type Error = &'static str;
+
+    fn try_into(self) -> Result<String, Self::Error> {
+        Ok(self
+            .cells
+            .iter()
+            .map(|c| {
+                match c.value() {
+                    Some(v) => (v + b'0') as char,
+                    None => '.',
+                }
+            })
+            .collect())
+    }
+}
+
+impl TryFrom<&str> for Board {
+    type Error = &'static str;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        if value.len() == 81 {
+            let mut problem = [0; 81];
+            for (i, c) in value.chars().enumerate() {
+                if let Some(d) = c.to_digit(10) {
+                    problem[i] = d as u8;
+                } else if c != '.' {
+                    return Err("Invalid character");
+                }
+            }
+            Ok(Self::new(problem))
+        } else {
+            Err("Invalid length")
+        }
+    }
+}
+
+impl Candidates {
+    const NONE: Self = Self(0);
+    const ALL: Self = Self(0b111_111_111);
+
+    fn insert(&mut self, value: &u8) {
+        self.0 |= 1 << value - 1;
+    }
+
+    fn insert_some(&mut self, others: &Candidates) {
+        self.0 |= others.0;
+    }
+
+    fn merge(&self, others: &Candidates) -> Candidates {
+        Self(self.0 | others.0)
+    }
+
+    fn remove(&mut self, value: &u8) {
+        self.0 &= !(1 << value - 1);
+    }
+
+    fn remove_some(&mut self, others: &Candidates) {
+        self.0 &= !others.0;
+    }
+
+    fn exclude(&self, others: &Candidates) -> Candidates {
+        Self(self.0 & !others.0)
+    }
+
+    fn single_or_none(&self) -> Option<NonZero<u8>> {
+        if self.0 > 0 && self.0 & (self.0 - 1) == 0 {
+            if let Some(value) = NonZero::new(self.0.trailing_zeros() as u8 + 1) {
+                return Some(value);
+            }
+        }
+        None
+    }
+
+    fn contains(&self, value: &u8) -> bool {
+        self.0 & (1 << value - 1) != 0
+    }
+
+    fn count(&self) -> usize {
+        self.0.count_ones() as usize
+    }
+
+    fn iter(self) -> impl Iterator<Item = NonZero<u8>> {
+        (1..=9)
+            .filter(move |v| self.contains(v))
+            .map(|v| NonZero::new(v).expect("Cannot be zero"))
+    }
+}
+
+impl TryFrom<u16> for Candidates {
+    type Error = &'static str;
+
+    fn try_from(value: u16) -> Result<Self, Self::Error> {
+        if value < 0b111_111_111 {
+            return Ok(Self(value));
+        }
+        Err("Only 9 bits are allowed")
+    }
+}
+
+impl Cell {
+    const EMPTY: Self = Self(None);
+
+    fn value(self) -> Option<u8> {
+        self.0.map(|v| v.get())
+    }
+}
+
+impl TryFrom<u8> for Cell {
+    type Error = &'static str;
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        if value < 10 {
+            if let Some(v) = NonZero::new(value) {
+                return Ok(Self(Some(v)));
+            }
+            return Ok(Self(None));
+        }
+        Err("Value must be between 0 and 9")
     }
 }
