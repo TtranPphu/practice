@@ -1,10 +1,14 @@
 #![allow(dead_code)]
 
 pub mod board;
+pub mod board_v3;
 
-pub fn solve(problem: [[u8; 9]; 9]) -> Result<[[u8; 9]; 9], (&'static str, [[u8; 9]; 9])> {
-    use board::Board;
-    match Board::try_from(problem) {
+pub fn solve<T>(problem: T) -> Result<T, (&'static str, T)>
+where
+    T: Clone,
+    board::Board: TryFrom<T, Error = &'static str> + TryInto<T, Error = &'static str>,
+{
+    match board::Board::try_from(problem.clone()) {
         Ok(mut board) => {
             if board.solve() {
                 Ok(board.try_into().unwrap())
@@ -13,20 +17,6 @@ pub fn solve(problem: [[u8; 9]; 9]) -> Result<[[u8; 9]; 9], (&'static str, [[u8;
             }
         }
         Err(err) => Err((err, problem)),
-    }
-}
-
-pub fn solve_str(problem: &str) -> Result<String, (&'static str, String)> {
-    use board::Board;
-    match Board::try_from(problem) {
-        Ok(mut board) => {
-            if board.solve() {
-                Ok(board.try_into().unwrap())
-            } else {
-                Err(("No solution found!", board.try_into().unwrap()))
-            }
-        }
-        Err(err) => Err((err, problem.to_string())),
     }
 }
 

@@ -11,6 +11,7 @@
                 "workbench.colorTheme": "Default Dark Modern"
             },
             "extensions": [
+                "albymor.increment-selection",
                 "chekweitan.compare-view",
                 "eriklynd.json-tools",
                 "mechatroner.rainbow-csv",

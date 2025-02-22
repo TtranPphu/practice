@@ -13,8 +13,6 @@ pub struct Candidates(u16);
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Cell(Option<NonZero<u8>>);
 
-pub struct Row([Cell; 9]);
-
 impl Board {
     pub fn new(problem: [u8; 81]) -> Self {
         let mut board = Self::default();
@@ -144,6 +142,8 @@ impl std::fmt::Display for Board {
     }
 }
 
+pub struct Row([Cell; 9]);
+
 impl Row {
     fn new(cells: [Cell; 9]) -> Self {
         Self(cells)
@@ -214,6 +214,26 @@ impl TryInto<String> for Board {
                 None => '.',
             })
             .collect())
+    }
+}
+
+impl TryFrom<String> for Board {
+    type Error = &'static str;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        if value.len() == 81 {
+            let mut problem = [0; 81];
+            for (i, c) in value.chars().enumerate() {
+                if let Some(d) = c.to_digit(10) {
+                    problem[i] = d as u8;
+                } else if c != '.' {
+                    return Err("Invalid character");
+                }
+            }
+            Ok(Self::new(problem))
+        } else {
+            Err("Invalid length")
+        }
     }
 }
 
