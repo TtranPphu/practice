@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt update && apt upgrade -y && apt install sudo zsh git vim zip build-essential nasm gdb cmake python3-pip wget curl software-properties-common bpytop cloc -y
+RUN apt update && apt upgrade -y && apt install sudo zsh wget curl git vim zip gdb nasm build-essential cmake clisp python3-pip software-properties-common bpytop cloc -y
 
 # powerlevel10k
 RUN mkdir /usr/share/fonts/truetype/meslo
@@ -14,7 +14,9 @@ RUN wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF
     -O /usr/share/fonts/truetype/meslo/MesloLGSNFBoldItalic.ttf
 
 # user
-RUN adduser --shell /usr/bin/zsh --gecos '' --ingroup sudo --disabled-password practice
+RUN groupadd practice
+RUN adduser --shell /usr/bin/zsh --gecos '' --ingroup practice --disabled-password practice
+RUN usermod -aG sudo practice
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER practice
 

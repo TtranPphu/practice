@@ -43,7 +43,7 @@ pub fn demo() {
         [0, 0, 0, 0, 4, 0, 8, 7, 0],
     ])
     .unwrap();
-    println!("{}", board);
+    println!("{:#}", board);
     board.solve();
-    println!("{}", board);
+    println!("{:#}", board);
 }

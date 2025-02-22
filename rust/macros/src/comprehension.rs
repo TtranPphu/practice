@@ -6,12 +6,12 @@ use syn::{
 };
 
 pub struct Comprehension {
-    map: Map,
+    mapper: Mapper,
     iterator_filter: IteratorFilter,
     more_iterator_filters: Vec<IteratorFilter>,
 }
 
-struct Map(syn::Expr);
+struct Mapper(syn::Expr);
 
 pub struct IteratorFilter {
     iterator: Iterator,
@@ -33,7 +33,7 @@ pub fn parse_some<T: Parse>(input: ParseStream) -> Vec<T> {
 impl Parse for Comprehension {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         Ok(Self {
-            map: input.parse()?,
+            mapper: input.parse()?,
             iterator_filter: input.parse()?,
             more_iterator_filters: parse_some(input),
         })
@@ -47,7 +47,7 @@ impl ToTokens for Comprehension {
             .rev();
 
         let mut output = {
-            let Map(mapper) = &self.map;
+            let Mapper(mapper) = &self.mapper;
 
             let IteratorFilter {
                 iterator,
@@ -79,13 +79,13 @@ impl ToTokens for Comprehension {
     }
 }
 
-impl Parse for Map {
+impl Parse for Mapper {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         input.parse().map(Self)
     }
 }
 
-impl ToTokens for Map {
+impl ToTokens for Mapper {
     fn to_tokens(&self, tokens: &mut TokenStream2) {
         self.0.to_tokens(tokens)
     }
@@ -118,7 +118,7 @@ impl ToTokens for Iterator {
 
 impl Parse for Filter {
     fn parse(input: ParseStream) -> syn::Result<Self> {
-        let _: Token![if] = input.parse()?; // consume and discard the `if` token
+        let _: Token![if] = input.parse()?;
         input.parse().map(Self)
     }
 }

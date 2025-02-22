@@ -13,6 +13,8 @@ pub struct Candidates(u16);
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct Cell(Option<NonZero<u8>>);
 
+pub struct Row([Cell; 9]);
+
 impl Board {
     pub fn new(problem: [u8; 81]) -> Self {
         let mut board = Self::default();
@@ -124,27 +126,41 @@ impl Default for Board {
 
 impl std::fmt::Display for Board {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        let line = |i: usize| {
+            if let Ok(row) = self.cells[i * 9..i * 9 + 9].try_into() {
+                Ok(Row::new(row))
+            } else {
+                Err(std::fmt::Error)
+            }
+        };
         writeln!(f, "╔═══════╤═══════╤═══════╗")?;
         for i in 0..9 {
-            write!(f, "║")?;
-            for j in 0..9 {
-                if let Some(value) = self.cells[i * 9 + j].value() {
-                    write!(f, " {}", value)?;
-                } else {
-                    write!(f, " .")?;
-                }
-                if j == 2 || j == 5 {
-                    write!(f, " │")?;
-                } else if j == 8 {
-                    write!(f, " ║")?;
-                }
-            }
-            writeln!(f)?;
+            writeln!(f, "{}", line(i)?)?;
             if i == 2 || i == 5 {
                 writeln!(f, "╟───────┼───────┼───────╢")?;
             }
         }
         writeln!(f, "╚═══════╧═══════╧═══════╝")
+    }
+}
+
+impl Row {
+    fn new(cells: [Cell; 9]) -> Self {
+        Self(cells)
+    }
+}
+
+impl std::fmt::Display for Row {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        let cell = |i: usize| self.0[i].value().map_or('.', |v| (v + b'0') as char);
+        write!(f, "║")?;
+        for i in 0..9 {
+            write!(f, " {}", cell(i))?;
+            if i == 2 || i == 5 {
+                write!(f, " │")?;
+            }
+        }
+        write!(f, " ║")
     }
 }
 
@@ -193,11 +209,9 @@ impl TryInto<String> for Board {
         Ok(self
             .cells
             .iter()
-            .map(|c| {
-                match c.value() {
-                    Some(v) => (v + b'0') as char,
-                    None => '.',
-                }
+            .map(|c| match c.value() {
+                Some(v) => (v + b'0') as char,
+                None => '.',
             })
             .collect())
     }
