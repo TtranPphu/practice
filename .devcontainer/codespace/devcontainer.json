@@ -3,9 +3,6 @@
     "build": {
         "dockerfile": "../Dockerfile"
     },
-    "mounts": [
-        "source=/home/ttranpphu/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
-    ],
     "containerEnv": {
         "UV_LINK_MODE": "copy"
     },
@@ -20,6 +17,7 @@
                 "albymor.increment-selection",
                 "chekweitan.compare-view",
                 "eriklynd.json-tools",
+                "github.copilot",
                 "mechatroner.rainbow-csv",
                 "medo64.render-crlf",
                 "ms-azuretools.vscode-docker",

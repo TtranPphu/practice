@@ -6,3 +6,6 @@ db/**
 **/rust/**/target/
 
 .zsh_history
+
+.devcontainer/compose/docker-compose.yml
+.devcontainer/standalone/devcontainer.json
