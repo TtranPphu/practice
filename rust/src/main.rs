@@ -6,5 +6,5 @@ use crate::prelude::*;
 use sudoku;
 
 fn main() {
-    sudoku::demo();
+    sudoku::demo_v3();
 }
