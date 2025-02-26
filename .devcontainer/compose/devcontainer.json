@@ -1,6 +1,6 @@
 {
     "name": "practice-compose",
-    "postCreateCommand": "sh .devcontainer/post-create-default.sh",
+    "postCreateCommand": "sh .devcontainer/standalone/post-create-standalone.sh",
     "dockerComposeFile": "docker-compose.yml",
     "service": "devcontainer",
     "workspaceFolder": "/workspaces/practice",
