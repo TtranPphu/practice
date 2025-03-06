@@ -34,6 +34,32 @@ fn count_non_decreasing_subarrays() {
 }
 
 #[test]
+fn colored_cells() {
+    use leetcode::colored_cells::Solution;
+    let cases = [(1, 1), (2, 5), (3, 13), (4, 25)];
+    for (n, expected) in cases {
+        let result = Solution::colored_cells(n);
+        assert_eq!(result, expected);
+    }
+}
+
+#[test]
+fn find_missing_and_repeated_values() {
+    use leetcode::find_missing_and_repeated_values::Solution;
+    let cases = [
+        (vec![vec![1, 3], vec![2, 2]], vec![2, 4]),
+        (
+            vec![vec![9, 1, 7], vec![8, 9, 2], vec![3, 4, 6]],
+            vec![9, 5],
+        ),
+    ];
+    for (grid, expected) in cases {
+        let result = Solution::find_missing_and_repeated_values(grid);
+        assert_eq!(result, expected);
+    }
+}
+
+#[test]
 fn median_sliding_window() {
     use leetcode::median_sliding_window::Solution;
     let cases = [

@@ -128,10 +128,6 @@
     },
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_style": "Google",
-    "cmake.sourceDirectory": "/workspaces/practice/cpp",
-    "cmake.buildDirectory": "${workspaceFolder}/cpp/build",
-    "cmake.configureOnEdit": false,
-    "cmake.configureOnOpen": false,
     "python.defaultInterpreterPath": "./python/.venv/bin/python",
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "files.exclude": {

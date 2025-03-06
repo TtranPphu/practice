@@ -1,10 +1,9 @@
+.zsh_history
+.devcontainer/compose/docker-compose.yml
+.devcontainer/standalone/devcontainer.json
+
 **/__pycache__
 *.lock
 db/**
 
 **/rust/**/target/
-
-.zsh_history
-
-.devcontainer/compose/docker-compose.yml
-.devcontainer/standalone/devcontainer.json

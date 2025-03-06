@@ -39,7 +39,6 @@ target_include_directories(
 )
 target_link_libraries(interview_test GTest::gtest_main)
 
-
 include(GoogleTest)
 gtest_discover_tests(leetcode_test)
 gtest_discover_tests(interview_test)

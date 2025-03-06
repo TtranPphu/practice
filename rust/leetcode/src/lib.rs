@@ -1,6 +1,8 @@
 pub mod archive;
 pub mod can_be_valid;
 pub mod cnds;
+pub mod colored_cells;
+pub mod find_missing_and_repeated_values;
 pub mod median_sliding_window;
 pub mod merge_two_lists;
 pub mod monkey_move;

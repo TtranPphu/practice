@@ -50,6 +50,21 @@
             "problemMatcher": []
         },
         {
+            "label": "Config (C++)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cpp/build"
+            },
+            "problemMatcher": [
+                "$gcc",
+            ],
+            "hide": true
+        },
+        {
             "label": "Build (C++)",
             "type": "shell",
             "group": "build",
@@ -61,6 +76,10 @@
             "options": {
                 "cwd": "${workspaceFolder}/cpp/build"
             },
+            "dependsOn": [
+                "Config (C++)"
+            ],
+            "dependsOrder": "sequence",
             "problemMatcher": [
                 "$gcc",
             ],
@@ -200,11 +219,8 @@
             "options": {
                 "cwd": "${workspaceFolder}/cpp/build"
             },
-            "presentation": {
-                "reveal": "never",
-                "focus": false,
-            },
             "problemMatcher": [],
+            "hide": true
         },
     ],
     "inputs": [
