@@ -1,3 +1,4 @@
+name: practice
 services:
   devcontainer:
     build:
@@ -9,6 +10,10 @@ services:
     environment:
       - UV_LINK_MODE=copy
     command: sleep infinity
+    devices:
+      # - /dev/kfd
+      - /dev/dxg
+      - /dev/dri
     network_mode: "service:mongo"
 
   mongo:
