@@ -1,4 +1,39 @@
 {
+    "editor.autoIndent": "advanced",
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.rulers": [
+            88
+        ]
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.rulers": [
+            80
+        ]
+    },
+    "[rust]": {
+        "editor.rulers": [
+            100
+        ]
+    },
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "C_Cpp.clang_format_style": "Google",
+    "python.defaultInterpreterPath": "./python/.venv/bin/python",
+    "rust-analyzer.inlayHints.parameterHints.enable": true,
+    "files.exclude": {
+        "cpp/**/build": true,
+        "db": true,
+        "python/**/__pycache__": true,
+        "python/**/.pytest_cache": true,
+        "python/**/.venv": true,
+        "python/**/*.lock": true,
+        "python/build": true,
+        "rust/**/*.lock": true,
+        "rust/**/target": true,
+        ".zsh_history": true,
+    },
     "files.associations": {
         "*.json": "jsonc",
         "array": "cpp",
@@ -106,40 +141,5 @@
         "shared_mutex": "cpp",
         "syncstream": "cpp",
         "valarray": "cpp",
-    },
-    "editor.autoIndent": "advanced",
-    "editor.formatOnSave": true,
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.rulers": [
-            88
-        ]
-    },
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools",
-        "editor.rulers": [
-            80
-        ]
-    },
-    "[rust]": {
-        "editor.rulers": [
-            100
-        ]
-    },
-    "C_Cpp.clang_format_fallbackStyle": "Google",
-    "C_Cpp.clang_format_style": "Google",
-    "python.defaultInterpreterPath": "./python/.venv/bin/python",
-    "rust-analyzer.inlayHints.parameterHints.enable": true,
-    "files.exclude": {
-        "cpp/**/build": true,
-        "db": true,
-        "python/**/__pycache__": true,
-        "python/**/.pytest_cache": true,
-        "python/**/.venv": true,
-        "python/**/*.lock": true,
-        "python/build": true,
-        "rust/**/*.lock": true,
-        "rust/**/target": true,
-        ".zsh_history": true,
     },
 }

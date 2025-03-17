@@ -26,7 +26,7 @@ RUN git clone --depth=1 \
 # meslo font for powerlevel10k
 ARG MESLO_URL="https://github.com/romkatv/powerlevel10k-media/raw/master"
 ARG MESLO_DIR="/usr/share/fonts/truetype/meslo"
-RUN sudo mkdir ${MESLO_DIR}
+RUN sudo mkdir -p ${MESLO_DIR}
 RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Regular.ttf -O ${MESLO_DIR}/MesloLGSNFRegular.ttf
 RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Bold.ttf -O ${MESLO_DIR}/MesloLGSNFBold.ttf
 RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Italic.ttf -O ${MESLO_DIR}/MesloLGSNFItalic.ttf
