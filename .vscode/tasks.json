@@ -233,6 +233,17 @@
     ],
     "inputs": [
         {
+            "id": "verbosity",
+            "description": "Set the verbosity level",
+            "type": "pickString",
+            "options": [
+                "",
+                "-v",
+                "-vv"
+            ],
+            "default": ""
+        },
+        {
             "id": "cpp_test_cases",
             "description": "Test case(s)",
             "type": "promptString",
@@ -251,17 +262,6 @@
             "id": "rust_test_case_or_bench",
             "description": "Test case(s) or bench(es)",
             "type": "promptString",
-        },
-        {
-            "id": "verbosity",
-            "description": "Set the verbosity level",
-            "type": "pickString",
-            "options": [
-                "",
-                "-v",
-                "-vv"
-            ],
-            "default": ""
         },
         {
             "id": "python_test_cases",

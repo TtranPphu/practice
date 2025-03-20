@@ -3,9 +3,9 @@
     "build": {
         "dockerfile": "../Dockerfile"
     },
-    "mounts": [
-        "source=/home/<host-user-name>/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
-    ],
+    // "mounts": [
+    //     "source=/home/<host-user-name>/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
+    // ],
     "containerEnv": {
         "UV_LINK_MODE": "copy"
     },

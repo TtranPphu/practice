@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces/practice:cached
-      - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
+      # - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
     environment:
       - UV_LINK_MODE=copy
     command: sleep infinity
