@@ -4,12 +4,15 @@ version = "0.1.0"
 description = "My practice project"
 requires-python = ">=3.12"
 dependencies = [
+    "colorama>=0.4.6",
+    "gersemi>=0.19.2",
+    "ipykernel>=6.29.5",
     "json5>=0.10.0",
+    "nbconvert>=7.16.6",
+    "pip>=24.3.1",
+    "pygbag>=0.8.7",
+    "pylance>=0.24.1",
+    "pytest>=8.3.4",
     "raylib==5.5.0.0",
     "setuptools",
-    "pygbag>=0.8.7",
-    "pytest>=8.3.4",
-    "colorama>=0.4.6",
-    "ipykernel>=6.29.5",
-    "pip>=24.3.1",
 ]

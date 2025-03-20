@@ -20,10 +20,12 @@
     },
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "C_Cpp.clang_format_style": "Google",
+    "cmake.sourceDirectory": "/workspaces/practice/cpp",
     "python.defaultInterpreterPath": "./python/.venv/bin/python",
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "files.exclude": {
         "cpp/**/build": true,
+        "cpp/3rd_party": true,
         "db": true,
         "python/**/__pycache__": true,
         "python/**/.pytest_cache": true,
