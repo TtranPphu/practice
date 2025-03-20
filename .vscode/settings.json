@@ -28,9 +28,10 @@
     "python.defaultInterpreterPath": "./python/.venv/bin/python",
     "rust-analyzer.inlayHints.parameterHints.enable": true,
     "files.exclude": {
+        ".zsh_history": true,
         "cpp/**/build": true,
         "cpp/3rd_party": true,
-        "db": true,
+        "db-*": true,
         "python/**/__pycache__": true,
         "python/**/.pytest_cache": true,
         "python/**/.venv": true,
@@ -38,7 +39,6 @@
         "python/build": true,
         "rust/**/*.lock": true,
         "rust/**/target": true,
-        ".zsh_history": true,
     },
     "files.associations": {
         "*.json": "jsonc",
@@ -148,4 +148,5 @@
         "syncstream": "cpp",
         "valarray": "cpp",
     },
+    "editor.inlayHints.enabled": "offUnlessPressed",
 }

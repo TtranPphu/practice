@@ -30,6 +30,7 @@ RUN git clone --depth=1 \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 COPY .zshrc /home/${USER_NAME}/.zshrc
+COPY .p10k.zsh /home/${USER_NAME}/.p10k.zsh
 
 # neo-vim and dependencies
 ARG GITHUB_USER=TtranPphu
@@ -47,3 +48,10 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
 # uv for python
 ARG PYTHON_VERSION=3.12
 RUN curl --proto '=https' --tlsv1.2 -LsSf https://astral.sh/uv/install.sh | sh -s --
+RUN . /home/${USER_NAME}/.local/bin/env && uv python install ${PYTHON_VERSION}
+
+# mongodbcli
+RUN sudo apt-get install -y gnupg
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+RUN sudo apt-get update && sudo apt-get install -y mongodb-mongosh

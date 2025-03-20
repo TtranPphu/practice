@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/cpp/**",
-                "${workspaceFolder}/cpp//build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/cpp/build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/cpp/3rd_party/spdlog/include",
                 "/usr/include",
                 "/usr/include/c++/**",
                 "/usr/include/x86_64-linux-gnu/**"

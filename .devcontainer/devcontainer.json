@@ -1,15 +1,9 @@
 {
-    "name": "practice-standalone",
-    "build": {
-        "dockerfile": "../Dockerfile"
-    },
-    // "mounts": [
-    //     "source=/home/<host-user-name>/.ssh,target=/home/practice/.ssh,type=bind,consistency=cached"
-    // ],
-    "containerEnv": {
-        "UV_LINK_MODE": "copy"
-    },
-    "postCreateCommand": "sh .devcontainer/standalone/post-create-standalone.sh",
+    "name": "practice-compose",
+    "postCreateCommand": "sh .devcontainer/post-create.sh",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/practice",
     "customizations": {
         "vscode": {
             "settings": {
@@ -19,6 +13,7 @@
             "extensions": [
                 "albymor.increment-selection",
                 "chekweitan.compare-view",
+                "cweijan.vscode-mysql-client2",
                 "eriklynd.json-tools",
                 "github.copilot",
                 "github.vscode-pull-request-github",
