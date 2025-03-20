@@ -2,8 +2,10 @@ FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y && apt install \
     sudo zsh wget curl git vim zip \
-    gdb nasm build-essential cmake clisp python3-pip software-properties-common \
-    bpytop cloc \
+    build-essential cmake gdb \
+    nasm clisp \
+    python3-pip software-properties-common \
+    bpytop cloc ncdu \
     -y
 
 # user
@@ -28,7 +30,6 @@ RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 RUN git clone --depth=1 \
     https://github.com/romkatv/powerlevel10k.git \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-
 COPY .zshrc /home/${USER_NAME}/.zshrc
 COPY .p10k.zsh /home/${USER_NAME}/.p10k.zsh
 
