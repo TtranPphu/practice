@@ -10,16 +10,11 @@ services:
     environment:
       - UV_LINK_MODE=copy
     command: sleep infinity
-    devices:
-      # - /dev/kfd
-      - /dev/dxg
-      - /dev/dri
-    network_mode: "service:mongo"
 
   mongo:
     image: mongo:latest
-    ports:
-      - 27017:27017
+    # ports:
+    #   - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
