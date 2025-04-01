@@ -1,22 +1,22 @@
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/cpp/**",
-                "${workspaceFolder}/cpp/build/_deps/googletest-src/googletest/include",
-                "${workspaceFolder}/cpp/3rd_party/spdlog/include",
-                "/usr/include",
-                "/usr/include/c++/**",
-                "/usr/include/x86_64-linux-gnu/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/g++",
-            "cStandard": "c11",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "linux-gcc-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+        "${workspaceFolder}/cpp/**",
+        "${workspaceFolder}/cpp/build/_deps/googletest-src/googletest/include",
+        "${workspaceFolder}/cpp/3rd_party/spdlog/include",
+        "/usr/include",
+        "/usr/include/c++/**",
+        "/usr/include/x86_64-linux-gnu/**"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c11",
+      "cppStandard": "c++20",
+      "intelliSenseMode": "linux-gcc-x64",
+      "configurationProvider": "ms-vscode.cmake-tools"
+    }
+  ],
+  "version": 4
 }

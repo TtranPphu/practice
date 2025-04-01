@@ -1,273 +1,212 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Assemble (Asm)",
-            "type": "shell",
-            "command": "nasm",
-            "args": [
-                "-f",
-                "elf64",
-                "-o",
-                "main.o",
-                "main.s"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/assembly"
-            },
-            "hide": true,
-            "problemMatcher": [],
-        },
-        {
-            "label": "Link (Asm)",
-            "type": "shell",
-            "command": "ld",
-            "args": [
-                "-o",
-                "main",
-                "main.o"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/assembly"
-            },
-            "hide": true,
-            "problemMatcher": []
-        },
-        {
-            "label": "Run (Asm)",
-            "type": "shell",
-            "command": "./main",
-            "dependsOn": [
-                "Assemble (Asm)",
-                "Link (Asm)"
-            ],
-            "dependsOrder": "sequence",
-            "options": {
-                "cwd": "${workspaceFolder}/assembly"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Config (C++)",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                ".."
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": [
-                "$gcc",
-            ],
-            "hide": true
-        },
-        {
-            "label": "Build (C++)",
-            "type": "shell",
-            "group": "build",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "."
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "dependsOn": [
-                "Config (C++)"
-            ],
-            "dependsOrder": "sequence",
-            "problemMatcher": [
-                "$gcc",
-            ],
-            "hide": true
-        },
-        {
-            "label": "Test (C++)",
-            "type": "shell",
-            "command": "ctest",
-            "args": [
-                "-R",
-                "${input:cpp_test_cases}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "dependsOn": [
-                "Build (C++)"
-            ],
-            "dependsOrder": "sequence",
-            "problemMatcher": [],
-        },
-        {
-            "label": "Test (Python)",
-            "group": "test",
-            "type": "shell",
-            "command": "uv",
-            "args": [
-                "run",
-                "pytest",
-                "${input:verbosity}",
-                "${input:python_test_cases}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/python"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "Run (Python)",
-            "type": "shell",
-            "command": "uv",
-            "args": [
-                "run",
-                "main.py",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/python"
-            },
-            "problemMatcher": [],
-        },
-        {
-            "label": "Build (Rust)",
-            "type": "shell",
-            "group": "build",
-            "command": "cargo",
-            "args": [
-                "build"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/rust"
-            },
-            "problemMatcher": [
-                "$rustc"
-            ],
-        },
-        {
-            "label": "Test (Rust)",
-            "type": "shell",
-            "command": "cargo",
-            "args": [
-                "test",
-                "--test",
-                "${input:rust_target}",
-                "${input:rust_test_case_or_bench}",
-                "${input:verbosity}",
-                "--jobs",
-                "8",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/rust"
-            },
-            "problemMatcher": [
-                "$rustc"
-            ]
-        },
-        {
-            "label": "Benchmark (Rust)",
-            "type": "shell",
-            "command": "cargo",
-            "args": [
-                "bench",
-                "--bench",
-                "${input:rust_target}",
-                "${input:rust_test_case_or_bench}",
-                "${input:verbosity}",
-                "--jobs",
-                "8",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/rust"
-            },
-            "dependsOn": [
-                "Build (Rust)"
-            ],
-            "dependsOrder": "sequence",
-            "problemMatcher": [
-                "$rustc"
-            ]
-        },
-        {
-            "label": "Run (Rust)",
-            "type": "shell",
-            "command": "cargo",
-            "args": [
-                "run",
-                "--package",
-                "practice",
-                "--bin",
-                "practice",
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/rust/target/debug"
-            },
-            "problemMatcher": [
-                "$rustc"
-            ]
-        },
-        {
-            "label": "Format (CMake)",
-            "type": "process",
-            "command": "gersemi",
-            "args": [
-                "-i",
-                "${file}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/cpp/build"
-            },
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "never",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            },
-            "hide": true
-        },
-    ],
-    "inputs": [
-        {
-            "id": "verbosity",
-            "description": "Set the verbosity level",
-            "type": "pickString",
-            "options": [
-                "",
-                "-v",
-                "-vv"
-            ],
-            "default": ""
-        },
-        {
-            "id": "cpp_test_cases",
-            "description": "Test case(s)",
-            "type": "promptString",
-        },
-        {
-            "id": "rust_target",
-            "description": "Test target",
-            "type": "pickString",
-            "options": [
-                "leetcode",
-                "sudoku",
-                "pz6"
-            ],
-        },
-        {
-            "id": "rust_test_case_or_bench",
-            "description": "Test case(s) or bench(es)",
-            "type": "promptString",
-        },
-        {
-            "id": "python_test_cases",
-            "description": "Test case(s)",
-            "type": "promptString",
-            "default": ""
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Assemble (Asm)",
+      "type": "shell",
+      "command": "nasm",
+      "args": ["-f", "elf64", "-o", "main.o", "main.s"],
+      "options": {
+        "cwd": "${workspaceFolder}/assembly"
+      },
+      "hide": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Link (Asm)",
+      "type": "shell",
+      "command": "ld",
+      "args": ["-o", "main", "main.o"],
+      "options": {
+        "cwd": "${workspaceFolder}/assembly"
+      },
+      "hide": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Run (Asm)",
+      "type": "shell",
+      "command": "./main",
+      "dependsOn": ["Assemble (Asm)", "Link (Asm)"],
+      "dependsOrder": "sequence",
+      "options": {
+        "cwd": "${workspaceFolder}/assembly"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Config (C++)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [".."],
+      "options": {
+        "cwd": "${workspaceFolder}/cpp/build"
+      },
+      "problemMatcher": ["$gcc"],
+      "hide": true
+    },
+    {
+      "label": "Build (C++)",
+      "type": "shell",
+      "group": "build",
+      "command": "cmake",
+      "args": ["--build", "."],
+      "options": {
+        "cwd": "${workspaceFolder}/cpp/build"
+      },
+      "dependsOn": ["Config (C++)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": ["$gcc"],
+      "hide": true
+    },
+    {
+      "label": "Test (C++)",
+      "type": "shell",
+      "command": "ctest",
+      "args": ["-R", "${input:cpp_test_cases}"],
+      "options": {
+        "cwd": "${workspaceFolder}/cpp/build"
+      },
+      "dependsOn": ["Build (C++)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    },
+    {
+      "label": "Test (Python)",
+      "group": "test",
+      "type": "shell",
+      "command": "uv",
+      "args": [
+        "run",
+        "pytest",
+        "${input:verbosity}",
+        "${input:python_test_cases}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/python"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run (Python)",
+      "type": "shell",
+      "command": "uv",
+      "args": ["run", "main.py"],
+      "options": {
+        "cwd": "${workspaceFolder}/python"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build (Rust)",
+      "type": "shell",
+      "group": "build",
+      "command": "cargo",
+      "args": ["build"],
+      "options": {
+        "cwd": "${workspaceFolder}/rust"
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Test (Rust)",
+      "type": "shell",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--test",
+        "${input:rust_target}",
+        "${input:rust_test_case_or_bench}",
+        "${input:verbosity}",
+        "--jobs",
+        "8"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/rust"
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Benchmark (Rust)",
+      "type": "shell",
+      "command": "cargo",
+      "args": [
+        "bench",
+        "--bench",
+        "${input:rust_target}",
+        "${input:rust_test_case_or_bench}",
+        "${input:verbosity}",
+        "--jobs",
+        "8"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/rust"
+      },
+      "dependsOn": ["Build (Rust)"],
+      "dependsOrder": "sequence",
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Run (Rust)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["run", "--package", "practice", "--bin", "practice"],
+      "options": {
+        "cwd": "${workspaceFolder}/rust/target/debug"
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "Format (CMake)",
+      "type": "process",
+      "command": "gersemi",
+      "args": ["-i", "${file}"],
+      "options": {
+        "cwd": "${workspaceFolder}/cpp/build"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "hide": true
+    }
+  ],
+  "inputs": [
+    {
+      "id": "verbosity",
+      "description": "Set the verbosity level",
+      "type": "pickString",
+      "options": ["", "-v", "-vv"],
+      "default": ""
+    },
+    {
+      "id": "cpp_test_cases",
+      "description": "Test case(s)",
+      "type": "promptString"
+    },
+    {
+      "id": "rust_target",
+      "description": "Test target",
+      "type": "pickString",
+      "options": ["leetcode", "sudoku", "pz6"]
+    },
+    {
+      "id": "rust_test_case_or_bench",
+      "description": "Test case(s) or bench(es)",
+      "type": "promptString"
+    },
+    {
+      "id": "python_test_cases",
+      "description": "Test case(s)",
+      "type": "promptString",
+      "default": ""
+    }
+  ]
 }

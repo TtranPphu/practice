@@ -1,90 +1,82 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C++: Main",
-            "type": "cppdbg",
-            "request": "launch",
-            "preLaunchTask": "Build (C++)",
-            "program": "${workspaceFolder}/cpp/build/practice",
-            "args": [],
-            "environment": [],
-            "cwd": "${workspaceFolder}/cpp",
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-        },
-        {
-            "name": "C++: Test",
-            "type": "cppdbg",
-            "request": "launch",
-            "preLaunchTask": "Build (C++)",
-            "program": "${workspaceFolder}/cpp/build/leetcode_test",
-            // "program": "${workspaceFolder}/cpp/build/interview_test",
-            "args": [
-                "-R",
-                "${input:cpp_test_cases}"
-            ],
-            "environment": [],
-            "cwd": "${workspaceFolder}/cpp",
-            "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb",
-        },
-        {
-            "name": "Python: Main",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "main.py",
-            "cwd": "${workspaceFolder}/python",
-            "console": "internalConsole",
-            "justMyCode": false
-        },
-        {
-            "name": "Python: Test",
-            "type": "debugpy",
-            "request": "launch",
-            "program": ".venv/bin/pytest",
-            "args": [
-                "--pdb",
-                "${input:python_test_cases}"
-            ],
-            "cwd": "${workspaceFolder}/python",
-            "console": "internalConsole",
-            "justMyCode": false
-        },
-        {
-            "name": "Python: File",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${file}",
-            "cwd": "${workspaceFolder}/python",
-            "console": "internalConsole",
-            "justMyCode": false
-        },
-        {
-            "name": "Rust: Main",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceFolder}/rust/target/debug/practice",
-            "args": [],
-            "cwd": "${workspaceFolder}/rust",
-            "preLaunchTask": "Build (Rust)",
-            "sourceLanguages": [
-                "rust"
-            ]
-        }
-    ],
-    "inputs": [
-        {
-            "id": "cpp_test_cases",
-            "description": "Test case(s)",
-            "type": "promptString",
-            "default": ""
-        },
-        {
-            "id": "python_test_cases",
-            "description": "Test case(s)",
-            "type": "promptString",
-            "default": ""
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C++: Main",
+      "type": "cppdbg",
+      "request": "launch",
+      "preLaunchTask": "Build (C++)",
+      "program": "${workspaceFolder}/cpp/build/practice",
+      "args": [],
+      "environment": [],
+      "cwd": "${workspaceFolder}/cpp",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb"
+    },
+    {
+      "name": "C++: Test",
+      "type": "cppdbg",
+      "request": "launch",
+      "preLaunchTask": "Build (C++)",
+      "program": "${workspaceFolder}/cpp/build/leetcode_test",
+      // "program": "${workspaceFolder}/cpp/build/interview_test",
+      "args": ["-R", "${input:cpp_test_cases}"],
+      "environment": [],
+      "cwd": "${workspaceFolder}/cpp",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/usr/bin/gdb"
+    },
+    {
+      "name": "Python: Main",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "main.py",
+      "cwd": "${workspaceFolder}/python",
+      "console": "internalConsole",
+      "justMyCode": false
+    },
+    {
+      "name": "Python: Test",
+      "type": "debugpy",
+      "request": "launch",
+      "program": ".venv/bin/pytest",
+      "args": ["--pdb", "${input:python_test_cases}"],
+      "cwd": "${workspaceFolder}/python",
+      "console": "internalConsole",
+      "justMyCode": false
+    },
+    {
+      "name": "Python: File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${workspaceFolder}/python",
+      "console": "internalConsole",
+      "justMyCode": false
+    },
+    {
+      "name": "Rust: Main",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/rust/target/debug/practice",
+      "args": [],
+      "cwd": "${workspaceFolder}/rust",
+      "preLaunchTask": "Build (Rust)",
+      "sourceLanguages": ["rust"]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "cpp_test_cases",
+      "description": "Test case(s)",
+      "type": "promptString",
+      "default": ""
+    },
+    {
+      "id": "python_test_cases",
+      "description": "Test case(s)",
+      "type": "promptString",
+      "default": ""
+    }
+  ]
 }
