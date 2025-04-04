@@ -14,5 +14,4 @@ dependencies = [
     "pylance>=0.24.1",
     "pytest>=8.3.4",
     "raylib==5.5.0.0",
-    "setuptools",
 ]

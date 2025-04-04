@@ -2,10 +2,10 @@ name: practice
 services:
   devcontainer:
     build:
-      context: ..
+      context: .
       dockerfile: Dockerfile
     volumes:
-      - ../..:/workspaces/practice:cached
+      - ..:/workspaces/practice:cached
       # - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
     environment:
       - UV_LINK_MODE=copy
