@@ -2,10 +2,10 @@ FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y && apt install \
     sudo zsh wget curl git vim zip \
+    python3-pip software-properties-common \
+    bpytop tree ncdu cloc neofetch \
     build-essential cmake gdb \
     nasm clisp \
-    python3-pip software-properties-common \
-    bpytop cloc ncdu \
     -y
 
 # user
@@ -16,14 +16,19 @@ RUN usermod -aG sudo ${USER_NAME}
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ${USER_NAME}
 
-# meslo nerd font for powerlevel10k and neo-vim
-ARG MESLO_URL="https://github.com/romkatv/powerlevel10k-media/raw/master"
-ARG MESLO_DIR="/usr/share/fonts/truetype/meslo"
-RUN sudo mkdir -p ${MESLO_DIR}
-RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Regular.ttf -O ${MESLO_DIR}/MesloLGSNFRegular.ttf
-RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Bold.ttf -O ${MESLO_DIR}/MesloLGSNFBold.ttf
-RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Italic.ttf -O ${MESLO_DIR}/MesloLGSNFItalic.ttf
-RUN sudo wget ${MESLO_URL}/MesloLGS%20NF%20Bold%20Italic.ttf -O ${MESLO_DIR}/MesloLGSNFBoldItalic.ttf
+# set zsh as default shell
+ENV SHELL=/usr/bin/zsh
+
+# caskaydia cove nerd font for neo-vim
+ARG CASKAYDIACOVE_URL="https://github.com/eliheuer/caskaydia-cove/raw/master/fonts/ttf"
+ARG CASKAYDIACOVE_DIR="/usr/share/fonts/truetype/caskaydia_cove"
+RUN sudo mkdir -p ${CASKAYDIACOVE_DIR}
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Bold.ttf
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-ExtraLight.ttf
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Light.ttf
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Medium.ttf
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Regular.ttf
+RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-SemiBold.ttf
 
 # oh-my-zsh & powerlevel10k
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"

@@ -150,5 +150,6 @@
     "shared_mutex": "cpp",
     "syncstream": "cpp",
     "valarray": "cpp"
-  }
+  },
+  "editor.fontFamily": "Consolas, 'Courier New', monospace, 'CaskaydiaCove Nerd Font'"
 }

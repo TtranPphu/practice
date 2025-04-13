@@ -5,18 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/workspaces/practice:cached
-      # - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
+      - ..:/workspaces/practice
+      - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
     environment:
       - UV_LINK_MODE=copy
     command: sleep infinity
-
-  mongo:
-    image: mongo:latest
-    # ports:
-    #   - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-    volumes:
-      - ../../db:/data/db:cached

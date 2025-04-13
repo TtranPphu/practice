@@ -34,6 +34,10 @@
       "options": {
         "cwd": "${workspaceFolder}/assembly"
       },
+      "presentation": {
+        "reveal": "always",
+        "focus": true
+      },
       "problemMatcher": []
     },
     {
@@ -97,6 +101,10 @@
       "options": {
         "cwd": "${workspaceFolder}/python"
       },
+      "presentation": {
+        "reveal": "always",
+        "focus": true
+      },
       "problemMatcher": []
     },
     {
@@ -155,6 +163,10 @@
       "args": ["run", "--package", "practice", "--bin", "practice"],
       "options": {
         "cwd": "${workspaceFolder}/rust/target/debug"
+      },
+      "presentation": {
+        "reveal": "always",
+        "focus": true
       },
       "problemMatcher": ["$rustc"]
     },
