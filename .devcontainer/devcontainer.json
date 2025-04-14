@@ -1,8 +1,8 @@
 {
-  "name": "practice-compose",
-  "initializeCommand": "sh .devcontainer/initialize.sh",
+  "name": "practice",
+  "initializeCommand": "sh initialize.sh",
   "postCreateCommand": "sh .devcontainer/post-create.sh",
-  "dockerComposeFile": "docker-compose.yml",
+  "dockerComposeFile": "../docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/practice",
   "customizations": {

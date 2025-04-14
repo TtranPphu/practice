@@ -30,6 +30,7 @@
   "editor.inlayHints.enabled": "offUnlessPressed",
   "python.defaultInterpreterPath": "./python/.venv/bin/python",
   "rust-analyzer.inlayHints.parameterHints.enable": true,
+  "editor.fontFamily": "Consolas, 'Courier New', monospace, 'CaskaydiaCove Nerd Font'",
   "files.exclude": {
     ".zsh_history": true,
     "cpp/**/build": true,
@@ -150,6 +151,5 @@
     "shared_mutex": "cpp",
     "syncstream": "cpp",
     "valarray": "cpp"
-  },
-  "editor.fontFamily": "Consolas, 'Courier New', monospace, 'CaskaydiaCove Nerd Font'"
+  }
 }

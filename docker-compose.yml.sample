@@ -2,11 +2,12 @@ name: practice
 services:
   devcontainer:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .devcontainer
+      dockerfile: ../Dockerfile
     volumes:
-      - ..:/workspaces/practice
+      - .:/workspaces/practice
       - /home/<host-user-name>/.ssh:/home/practice/.ssh:cached
+      - /home/<host-user-name>/.config/nvim:/home/practice/.config/nvim:cached
     environment:
       - UV_LINK_MODE=copy
     command: sleep infinity

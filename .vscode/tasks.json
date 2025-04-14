@@ -212,7 +212,8 @@
     {
       "id": "rust_test_case_or_bench",
       "description": "Test case(s) or bench(es)",
-      "type": "promptString"
+      "type": "promptString",
+      "default": ""
     },
     {
       "id": "python_test_cases",
