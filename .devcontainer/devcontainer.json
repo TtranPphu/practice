@@ -4,6 +4,7 @@
   "postCreateCommand": "sh .devcontainer/post-create.sh",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "devcontainer",
+  "runServices": ["devcontainer"],
   "workspaceFolder": "/workspaces/practice",
   "customizations": {
     "vscode": {
