@@ -1,12 +1,12 @@
 FROM ubuntu:22.04
 
-RUN apt update && apt upgrade -y && apt install \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     sudo zsh wget curl git vim zip \
-    python3-pip software-properties-common \
+    software-properties-common \
     bpytop tree ncdu cloc neofetch \
     build-essential cmake gdb \
     nasm clisp \
-    -y
+    python3-pip bpytop tree ncdu cloc neofetch
 
 # user
 ARG USER_NAME=practice
@@ -19,30 +19,22 @@ USER ${USER_NAME}
 # set zsh as default shell
 ENV SHELL=/usr/bin/zsh
 
-# caskaydia cove nerd font for neo-vim
-ARG CASKAYDIACOVE_URL="https://github.com/eliheuer/caskaydia-cove/raw/master/fonts/ttf"
-ARG CASKAYDIACOVE_DIR="/usr/share/fonts/truetype/caskaydia_cove"
-RUN sudo mkdir -p ${CASKAYDIACOVE_DIR}
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Bold.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-ExtraLight.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Light.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Medium.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Regular.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-SemiBold.ttf
-
 # oh-my-zsh & powerlevel10k
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 RUN git clone --depth=1 \
     https://github.com/romkatv/powerlevel10k.git \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-COPY .zshrc /home/${USER_NAME}/.zshrc
-COPY .p10k.zsh /home/${USER_NAME}/.p10k.zsh
+COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
+COPY --chown=${USER_NAME}:${USER_NAME} .p10k.zsh /home/${USER_NAME}/.p10k.zsh
+COPY --chown=${USER_NAME}:${USER_NAME} gitstatusd-linux-x86_64 \
+    /home/${USER_NAME}/.cache/gitstatus/gitstatusd-linux-x86_64
 
 # neo-vim and dependencies
 ARG GITHUB_USER=TtranPphu
 ARG GIT_BRANCH=TtranPphu-patch-1
 RUN sudo add-apt-repository ppa:neovim-ppa/unstable -y
-RUN sudo apt-get update && sudo apt-get install make gcc ripgrep unzip git xclip neovim fonts-noto-color-emoji -y
+RUN sudo apt-get update && sudo apt-get install -y \
+    make gcc ripgrep unzip git xclip neovim fonts-noto-color-emoji
 RUN git clone https://github.com/${GITHUB_USER}/kickstart.nvim \
     --branch ${GIT_BRANCH} "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
