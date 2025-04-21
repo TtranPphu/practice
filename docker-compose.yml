@@ -3,11 +3,20 @@ services:
   devcontainer:
     build:
       context: .devcontainer
+<<<<<<< HEAD
       dockerfile: Dockerfile
+=======
+      dockerfile: ../Dockerfile
+>>>>>>> origin/master
     volumes:
       - .:/workspaces/practice
       - /home/<host-username>/.ssh:/home/practice/.ssh:cached
       - /home/<host-username>/.config/nvim:/home/practice/.config/nvim:cached
+<<<<<<< HEAD
+=======
+      - /home/<host-username>/.local/share/nvim:/home/practice/.local/share/nvim:cached
+      - /home/<host-username>/.local/state/nvim:/home/practice/.local/state/nvim:cached
+>>>>>>> origin/master
     environment:
       - HOST_USERNAME=<host-username>
       - UV_LINK_MODE=copy

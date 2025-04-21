@@ -1,12 +1,12 @@
 FROM ubuntu:22.04
 
-RUN apt update && apt upgrade -y && apt install \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     sudo zsh wget curl git vim zip \
-    python3-pip software-properties-common \
+    software-properties-common \
     bpytop tree ncdu cloc neofetch \
     build-essential cmake gdb \
     nasm clisp \
-    -y
+    python3-pip bpytop tree ncdu cloc neofetch
 
 # user
 ARG USER_NAME=practice
@@ -24,14 +24,17 @@ RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 RUN git clone --depth=1 \
     https://github.com/romkatv/powerlevel10k.git \
     ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-COPY .zshrc /home/${USER_NAME}/.zshrc
-COPY .p10k.zsh /home/${USER_NAME}/.p10k.zsh
+COPY --chown=${USER_NAME}:${USER_NAME} .zshrc /home/${USER_NAME}/.zshrc
+COPY --chown=${USER_NAME}:${USER_NAME} .p10k.zsh /home/${USER_NAME}/.p10k.zsh
+COPY --chown=${USER_NAME}:${USER_NAME} gitstatusd-linux-x86_64 \
+    /home/${USER_NAME}/.cache/gitstatus/gitstatusd-linux-x86_64
 
 # neo-vim and dependencies
 ARG GITHUB_USER=TtranPphu
 ARG GIT_BRANCH=TtranPphu-patch-1
 RUN sudo add-apt-repository ppa:neovim-ppa/unstable -y
-RUN sudo apt-get update && sudo apt-get install make gcc ripgrep unzip git xclip neovim fonts-noto-color-emoji -y
+RUN sudo apt-get update && sudo apt-get install -y \
+    make gcc ripgrep unzip git xclip neovim fonts-noto-color-emoji
 RUN git clone https://github.com/${GITHUB_USER}/kickstart.nvim \
     --branch ${GIT_BRANCH} "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
