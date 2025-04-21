@@ -7,7 +7,6 @@ services:
     volumes:
       - .:/workspaces/practice
       - /home/<host-username>/.ssh:/home/practice/.ssh:cached
-      # - /home/<host-username>/.cache/gitstatus:/home/practice/.cache/gitstatus:cached
       - /home/<host-username>/.config/nvim:/home/practice/.config/nvim:cached
       - /home/<host-username>/.local/share/nvim:/home/practice/.local/share/nvim:cached
       - /home/<host-username>/.local/state/nvim:/home/practice/.local/state/nvim:cached
