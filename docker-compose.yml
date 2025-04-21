@@ -1,0 +1,14 @@
+name: practice
+services:
+  devcontainer:
+    build:
+      context: .devcontainer
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspaces/practice
+      - /home/<host-username>/.ssh:/home/practice/.ssh:cached
+      - /home/<host-username>/.config/nvim:/home/practice/.config/nvim:cached
+    environment:
+      - HOST_USERNAME=<host-username>
+      - UV_LINK_MODE=copy
+    command: sleep infinity

@@ -9,9 +9,9 @@
   "customizations": {
     "vscode": {
       "settings": {
-        // https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/CascadiaCode.zip
-        "editor.fontFamily": "Consolas, 'Courier New', monospace, 'CaskaydiaCove Nerd Font'",
-        "terminal.integrated.fontFamily": "CaskaydiaCove Nerd Font",
+        // https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hermit.zip
+        "editor.fontFamily": "Consolas, 'Courier New', monospace, 'Hurmit Nerd Font'",
+        "terminal.integrated.fontFamily": "Hurmit Nerd Font",
         "workbench.colorTheme": "Default Dark Modern"
       },
       "extensions": [

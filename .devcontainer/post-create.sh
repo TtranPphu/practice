@@ -2,4 +2,4 @@
 
 cp .devcontainer/pre-commit .git/hooks/pre-commit
 
-(cd python; uv sync)
+(cd python; . $HOME/.local/bin/env && uv sync)

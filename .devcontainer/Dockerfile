@@ -19,17 +19,6 @@ USER ${USER_NAME}
 # set zsh as default shell
 ENV SHELL=/usr/bin/zsh
 
-# caskaydia cove nerd font for neo-vim
-ARG CASKAYDIACOVE_URL="https://github.com/eliheuer/caskaydia-cove/raw/master/fonts/ttf"
-ARG CASKAYDIACOVE_DIR="/usr/share/fonts/truetype/caskaydia_cove"
-RUN sudo mkdir -p ${CASKAYDIACOVE_DIR}
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Bold.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-ExtraLight.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Light.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Medium.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-Regular.ttf
-RUN sudo wget -P ${CASKAYDIACOVE_DIR}/ ${CASKAYDIACOVE_URL}/CaskaydiaCove-SemiBold.ttf
-
 # oh-my-zsh & powerlevel10k
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 RUN git clone --depth=1 \
@@ -61,3 +50,4 @@ RUN sudo apt-get install -y gnupg
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
 RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 RUN sudo apt-get update && sudo apt-get install -y mongodb-mongosh
+

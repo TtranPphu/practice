@@ -1,25 +1,40 @@
+#include <chrono>
+#include <fstream>
+#include <iostream>
+#include <thread>
+
 #include "log_util.hpp"
 
-int main() {
-  spdlog::info("Welcome to spdlog!");
-  spdlog::error("Some error message with arg: {}", 1);
+int main(int argc, char* argv[]) {
+  using namespace std;
+  int iter = 1e8;
 
-  spdlog::warn("Easy padding in numbers like {:08d}", 12);
-  spdlog::critical("Support for int: {0:d}; hex: {0:x}; oct: {0:o}; bin: {0:b}",
-                   42);
-  spdlog::info("Support for floats {:03.2f}", 1.23456);
-  spdlog::info("Positional args are {1} {0}..", "too", "supported");
-  spdlog::info("{:<30}", "left aligned");
+  fstream cpp_file("cpp_log.txt", ios::out);
+  auto c_file = fopen("c_log.txt", "w");
 
-  spdlog::set_level(spdlog::level::debug);  // Set global log level to debug
-  spdlog::debug("This message should be displayed..");
+  std::ios::sync_with_stdio(false);
 
-  // change log pattern
-  spdlog::set_pattern("[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v");
+  cpp_file.rdbuf()->pubsetbuf(nullptr, 0);  // Disable buffering for fstream
+  setvbuf(c_file, nullptr, _IONBF, 0);      // Disable buffering for stdio
 
-  // Compile time log levels
-  // Note that this does not change the current log level, it will only
-  // remove (depending on SPDLOG_ACTIVE_LEVEL) the call on the release code.
-  SPDLOG_TRACE("Some trace message with param {}", 42);
-  SPDLOG_DEBUG("Some debug message");
+  auto cpp_start = chrono::high_resolution_clock::now();
+  for (int i = 0; i < iter; ++i) {
+    cpp_file << i;
+  }
+  auto cpp_time = chrono::high_resolution_clock::now() - cpp_start;
+
+  auto c_start = chrono::high_resolution_clock::now();
+  for (int i = 0; i < iter; ++i) {
+    fprintf(c_file, "%d", i);
+  }
+  auto c_time = chrono::high_resolution_clock::now() - c_start;
+
+  const auto ns = 1e9;
+
+  cout << "cpp time: " << (float)cpp_time.count() / ns << endl;
+  cout << "c time: " << (float)c_time.count() / ns << endl;
+  cout << (float)cpp_time.count() / c_time.count() << endl;
+
+  cpp_file.close();
+  fclose(c_file);
 }
