@@ -6,11 +6,11 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/workspaces/practice
-      - /home/<host-username>/.ssh:/home/practice/.ssh:cached
-      - /home/<host-username>/.config/nvim:/home/practice/.config/nvim:cached
-      - /home/<host-username>/.local/share/nvim:/home/practice/.local/share/nvim:cached
-      - /home/<host-username>/.local/state/nvim:/home/practice/.local/state/nvim:cached
+      - /home/ttranpphu/.ssh:/home/practice/.ssh:cached
+      - /home/ttranpphu/.config/nvim:/home/practice/.config/nvim:cached
+      - /home/ttranpphu/.local/share/nvim:/home/practice/.local/share/nvim:cached
+      - /home/ttranpphu/.local/state/nvim:/home/practice/.local/state/nvim:cached
     environment:
-      - HOST_USERNAME=<host-username>
+      - HOST_USERNAME=ttranpphu
       - UV_LINK_MODE=copy
     command: sleep infinity
